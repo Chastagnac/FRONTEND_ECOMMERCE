@@ -1,86 +1,81 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar" role="navigation" aria-label="dropdown navigation">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <router-link to="/"
-            ><img
-              style="height: 130px"
-              :src="require(`@/assets/logoblack.png`)"
-          /></router-link>
-        </div>
-        <div class="auto">
-          <div class="column">
-            <router-link to="/Boutique" class="navbar-item"
-              >Boutique</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Services" class="navbar-item"
-              >Services</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Contact" class="navbar-item"
-              >Contactez-nous</router-link
-            >
-          </div>
-        </div>
-        <div class="navbar-end">
-          <router-link to="/MyAccount" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-address-book fa-2x" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/log-in" v-else>
-            <i class="fa fa-address-book fa-2x" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/cart" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-            <span>({{ cartTotalLenght }})</span>
-          </router-link>
-        </div>
-      </div>
-    </nav>
-    <!-- <nav class="navbar">
-      <div class="columns is-full">
-        <div class="column is-three-fifths">
-          <router-link to="/"
-            ><img
-              style="height: 130px"
-              :src="require(`@/assets/logoblack.png`)"
-          /></router-link>
-        </div>
-        <div class="column is-three-fifths">
-          <div class="column">
-            <router-link to="/Boutique" class="navbar-item"
-              >Boutique</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Services" class="navbar-item"
-              >Services</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Contact" class="navbar-item"
-              >Contactez-nous</router-link
-            >
-          </div>
-        </div>
+<nav
+  class="navbar"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="navbar-brand">
+       <router-link to="/"
+          ><img style="height: 150px" :src="require(`@/assets/logoblack.png`)"
+        /></router-link>
 
-        <div class="column is-three-fifths">
-          <router-link to="/MyAccount" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-address-book" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/log-in" v-else>
-            <i class="fa fa-address-book" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/cart" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            <span>({{ cartTotalLenght }})</span>
-          </router-link>
-        </div>
-      </div>
-    </nav> -->
+    <a
+      role="button"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div
+      class="navbar-start"
+      style="flex-grow: 1; justify-content: center;"
+    >
+    <div class="navbar-item has-dropdown is-hoverable">
+          <a
+            class="navbar-link"
+            href="https://bulma.io/documentation/overview/start/"
+          >
+            Boutiques
+          </a>
+          <div class="navbar-dropdown is-boxed">
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/overview/start/"
+            >
+              Alimentaires
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/overview/modifiers/"
+            >
+              Maison
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/columns/basics/"
+            >
+              Jouets
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/layout/container/"
+            >
+              Electronique
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/form/general/"
+            >
+              Textiles
+            </a>
+          </div>
+    </div>
+      <a class="navbar-item">link 1</a>
+      <a class="navbar-item">link 2</a>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item">shopping cart</a>
+    </div>
+  </div>
+</nav>
+
+
     <div
       class="is-loading-bar has-text-centered"
       v-bind:class="{ 'is-loading': $store.state.isLoading }"
