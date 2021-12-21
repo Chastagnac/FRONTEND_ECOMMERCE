@@ -2,8 +2,13 @@
     <div class="home">
         <section class="hero is-medium is-dark mb-6">
             <div class="hero-body has-text-centered">
-                <p class="title mb-4">Organisez votre départ</p>
-                <p class="subtitle">avec Ilios</p>
+                <div class="col-size">
+                    
+                    <p class="title mb-4">Eco Services</p>
+                    <p class="subtitle"></p>
+                    <button class="button is-success" name="valider">Découvrez nos services</button>
+                </div>      
+
             </div>
         </section>
         <div class="columns is-multiline">
