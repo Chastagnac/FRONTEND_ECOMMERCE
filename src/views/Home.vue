@@ -59,4 +59,9 @@ export default {
 };
 </script>
 
-
+<style>
+.hero-body.has-text-centered {
+    background-color: aqua;
+    background-image: url("../assets/environnement-urbain.png");
+}
+</style>
