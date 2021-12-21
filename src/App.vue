@@ -1,92 +1,84 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar" role="navigation" aria-label="dropdown navigation">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <router-link to="/"
-            ><img
-              style="height: 130px"
-              :src="require(`@/assets/logoblack.png`)"
-          /></router-link>
-        </div>
-        <div class="auto">
-          <div class="column">
-            <router-link to="/Boutique" class="navbar-item"
-              >Boutique</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Services" class="navbar-item"
-              >Services</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Contact" class="navbar-item"
-              >Contactez-nous</router-link
-            >
-          </div>
-        </div>
-        <div class="navbar-end">
-          <router-link to="/MyAccount" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-address-book fa-2x" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/log-in" v-else>
-            <i class="fa fa-address-book fa-2x" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/cart" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-            <span>({{ cartTotalLenght }})</span>
-          </router-link>
-        </div>
-      </div>
-    </nav>
-    <!-- <nav class="navbar">
-      <div class="columns is-full">
-        <div class="column is-three-fifths">
-          <router-link to="/"
-            ><img
-              style="height: 130px"
-              :src="require(`@/assets/logoblack.png`)"
-          /></router-link>
-        </div>
-        <div class="column is-three-fifths">
-          <div class="column">
-            <router-link to="/Boutique" class="navbar-item"
-              >Boutique</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Services" class="navbar-item"
-              >Services</router-link
-            >
-          </div>
-          <div class="column">
-            <router-link to="/Contact" class="navbar-item"
-              >Contactez-nous</router-link
-            >
-          </div>
-        </div>
+<nav
+  class="navbar"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="navbar-brand">
+       <router-link to="/"
+          ><img style="height: 150px" :src="require(`@/assets/logoblack.png`)"
+        /></router-link>
 
-        <div class="column is-three-fifths">
-          <router-link to="/MyAccount" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-address-book" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/log-in" v-else>
-            <i class="fa fa-address-book" aria-hidden="true"></i
-          ></router-link>
-          <router-link to="/cart" v-if="$store.state.isAuthenticated"
-            ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            <span>({{ cartTotalLenght }})</span>
-          </router-link>
-        </div>
-      </div>
-    </nav> -->
-    <div
-      class="is-loading-bar has-text-centered"
-      v-bind:class="{ 'is-loading': $store.state.isLoading }"
+    <a
+      role="button"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
     >
-      <div class="lds-dual-ring"></div>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div
+      class="navbar-start"
+      style="flex-grow: 1; justify-content: center;"
+    >
+    <div class="navbar-item has-dropdown is-hoverable">
+          <a
+            class="navbar-link"
+            href="https://bulma.io/documentation/overview/start/"
+          >
+            Catégories
+          </a>
+          <div class="navbar-dropdown is-boxed">
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/overview/start/"
+            >
+              Alimentaires
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/overview/modifiers/"
+            >
+              Maison
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/columns/basics/"
+            >
+              Jouets
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/layout/container/"
+            >
+              Electronique
+            </a>
+            <a
+              class="navbar-item"
+              href="https://bulma.io/documentation/form/general/"
+            >
+              Textiles
+            </a>
+          </div>
     </div>
+      <a class="navbar-item">Services</a>
+      <a class="navbar-item">Commandes</a>
+    </div>
+    <div class="navbar-end">
+      
+      <li></li><a class="far fa-user" href="https://www.facebook.com/profile.php?id=100074600241159" role="button" data-mdb-ripple-color="dark"></a>
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+  </div>
+</nav>
+
+
+   
 
     <section class="section">
       <router-view />
@@ -177,5 +169,75 @@ export default {
   &.is-loading {
     height: 80px;
   }
+}
+
+.navbar {
+    min-height: 0rem;
+    border-bottom-style: solid;
+    border-bottom-width: 1PX;
+    height: 150px;
+    margin-top: -22px;
+    border-color: #49ae25;
+}
+
+.svg-inline--fa {
+    display: inline-block;
+    font-size: inherit;
+    height: auto;
+    overflow: visible;
+    vertical-align: -.125em;
+}
+
+svg:not(:root).svg-inline--fa {
+    overflow: visible;
+    margin-right: 30px;
+}
+
+.navbar-start, .navbar-end {
+    align-items: stretch;
+    display: flex;
+    margin-right: 99px;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    margin-left: 45px;
+}
+a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
+    background-color: #fafafa;
+    color: #49ae25;
+}
+
+.hero.is-dark {
+    background-image: url(/img/environnement-urbain.2d3a105e.png);
+    color: #fff;
+    height: 1171px;
+}
+.col-size {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    background-color: rgba(182, 182, 182, 0.3);
+    margin: auto;
+        margin-top: auto;
+        margin-left: auto;
+    max-width: 61%;
+    height: 22em;
+    margin-top: 258px;
+    margin-left: 400px;
+}
+.hero.is-dark .title {
+    color: #151515;
+    margin-top: 47px;
+    padding-top: 189px;
+    font-family: inherit;
+}
+
+.tabs:not(:last-child), .pagination:not(:last-child), .message:not(:last-child), .level:not(:last-child), .breadcrumb:not(:last-child), .block:not(:last-child), .title:not(:last-child), .subtitle:not(:last-child), .table-container:not(:last-child), .table:not(:last-child), .progress:not(:last-child), .notification:not(:last-child), .content:not(:last-child), .box:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+    margin-bottom: 3rem !important;
 }
 </style>
