@@ -6,7 +6,7 @@
         <div class="column is-9">
           <section class="gridcontainer">
             <ProductsBox
-              v-for="product in category.products"
+              v-for="product in products"
               v-bind:key="product.id"
               v-bind:product="product"
             />
@@ -18,67 +18,69 @@
   </div>
 </template>
 
+
 <script>
 import axios from "axios";
-import { toast } from "bulma-toast";
 // @ = racourcie pour les components
-import SideShop from "@/components/SideShop";
 import ProductsBox from "@/components/ProductsBox";
+import SideShop from "@/components/SideShop";
 
 export default {
-  name: "Category",
+  name: "Shop",
   data() {
     return {
-      category: {
-        products: [],
-      },
+      isActive: true,
+      isActive2: false,
+      isActive3: false,
+      isActive4: false,
+      isActive5: false,
+      isActive6: false,
+      products: [],
+      price: 4000,
     };
   },
   components: {
     ProductsBox,
     SideShop,
   },
-  watch: {
-    $route(to, from) {
-      if (to.name === "Category") {
-        this.getCategory();
-      }
-    },
+
+  mounted() {
+    this.getLastedProducts();
+    document.title = "Se-digitaliser";
   },
   methods: {
-    async getCategory() {
-      const categorySlug = this.$route.params.category_slug;
-
-      this.$store.commit("setIsLoading", true);
-
+    getLastedProducts() {
       axios
-        .get(`/api/v1/products/${categorySlug}/`)
+        .get("/api/v1/latest-products/")
         .then((response) => {
-          this.category = response.data;
-
-          document.title = this.category.name + " | Ilios Shop";
+          this.products = response.data;
         })
         .catch((error) => {
           console.log(error);
-
-          toast({
-            message: `Quelque chose ne s'est pas passé correctement, essayez à nouveau`,
-            type: "is-danger",
-            dismissible: true,
-            pauseOnHover: true,
-            duration: 2000,
-            position: "bottom-right",
-          });
         });
-
-      this.$store.commit("setIsLoading", false);
+    },
+    async getCategory() {
+      this.products = [];
+      const categorySlug = this.$route.params.category_slug;
+      axios
+        .get(`/api/v1/products/${categorySlug}/`)
+        .then((response) => {
+          this.products = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
 </script>
 
 <style>
-.columns.is-multiline {
-  justify-content: center;
+.gridcontainer {
+  display: grid;
+  text-align-last: center;
+  margin: 20px;
+  grid-template-columns: 33% 33% 33%;
+  height: 600px;
 }
-</style>  
+</style>
