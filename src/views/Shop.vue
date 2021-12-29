@@ -29,12 +29,6 @@ export default {
   name: "Shop",
   data() {
     return {
-      isActive: true,
-      isActive2: false,
-      isActive3: false,
-      isActive4: false,
-      isActive5: false,
-      isActive6: false,
       products: [],
       price: 4000,
     };

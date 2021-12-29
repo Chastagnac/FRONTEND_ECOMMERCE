@@ -7,7 +7,7 @@
           <router-link to="/shop">Tout</router-link>
         </li>
         <li>
-          <router-link to="/shop/alimentation">Alimentations</router-link>
+          <router-link to="/shop/alimentation">Alimentation</router-link>
         </li>
         <li>
           <router-link to="/shop/electronique">Electronique</router-link>
@@ -16,7 +16,7 @@
           <router-link to="/shop/maison">Maison</router-link>
         </li>
         <li>
-          <router-link to="/shop/jouets">Jouets</router-link>
+          <router-link to="/shop/jouets">Jouet</router-link>
         </li>
         <li>
           <router-link to="/shop/textile">Textile</router-link>

@@ -4,6 +4,16 @@
       <div class="columns">
         <SideShop></SideShop>
         <div class="column is-9">
+          <div class="columns">
+            <div class="column is-four-fifths">
+              <h1 class="title">Catégorie {{ getCategorySlug }}</h1>
+            </div>
+            <div class="column">
+              <p class="hover-text">{{ category.products.length }} <i class="fas fa-tags"></i></p>
+              
+            </div>
+          </div>
+
           <section class="gridcontainer">
             <ProductsBox
               v-for="product in category.products"
@@ -32,6 +42,7 @@ export default {
       category: {
         products: [],
       },
+      categorySlug: "",
     };
   },
   components: {
@@ -43,6 +54,11 @@ export default {
       if (to.name === "Category") {
         this.getCategory();
       }
+    },
+  },
+  computed: {
+    getCategorySlug() {
+      return this.$route.params.category_slug;
     },
   },
   methods: {
@@ -80,5 +96,13 @@ export default {
 <style>
 .columns.is-multiline {
   justify-content: center;
+}
+.hover-text {
+  background-color: #c2c2c2;
+  border-radius: 5px;
+  margin: 15px;
+  color: green;
+  width: 70px;
+  text-align: center;
 }
 </style>  
