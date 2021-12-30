@@ -23,7 +23,6 @@
           <router-link to="/shop" class="navbar-item"
             >Boutique</router-link
           >
-
           <a class="navbar-item">Services</a>
           <a class="navbar-item">Commandes</a>
         </div>
