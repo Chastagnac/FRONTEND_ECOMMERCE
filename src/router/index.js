@@ -7,6 +7,7 @@ import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
+import Shop from '../views/Shop.vue'
 import store from '../store'
 
 const routes = [
@@ -44,7 +45,7 @@ const routes = [
         component : LogIn
     },
     {
-        path: '/:category_slug',
+        path: '/shop/:category_slug',
         name: 'Category',
         component: Category
     },
@@ -52,6 +53,11 @@ const routes = [
         path: '/:category_slug/:product_slug',
         name: 'Product',
         component : Product
+    },
+    {
+        path: '/shop',
+        name: 'Shop',
+        component : Shop
     }
 ]
 
