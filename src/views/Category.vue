@@ -102,7 +102,7 @@ export default {
   border-radius: 5px;
   margin: 15px;
   color: green;
-  width: 70px;
+  width: 80px;
   text-align: center;
 }
 </style>  
