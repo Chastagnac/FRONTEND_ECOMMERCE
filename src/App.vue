@@ -20,9 +20,7 @@
       <div class="navbar-menu">
         <div class="navbar-start" style="flex-grow: 1; justify-content: center">
           <div class="navbar-item has-dropdown is-hoverable"></div>
-          <router-link to="/shop" class="navbar-item"
-            >Boutique</router-link
-          >
+          <router-link to="/shop" class="navbar-item">Boutique</router-link>
           <a class="navbar-item">Services</a>
           <a class="navbar-item">Commandes</a>
         </div>
@@ -34,7 +32,11 @@
             role="button"
             data-mdb-ripple-color="dark"
           ></a>
-          <i class="fas fa-shopping-cart"></i>
+          <router-link to="/cart" class="navbar-item">
+            <i class="fas fa-shopping-cart"></i
+          ></router-link>
+
+          FACEBOOK
         </div>
       </div>
     </nav>
@@ -47,6 +49,7 @@
 
 <script>
 import axios from "axios";
+
 
 export default {
   data() {
@@ -156,7 +159,6 @@ svg:not(:root).svg-inline--fa {
 .navbar-end {
   align-items: stretch;
   display: flex;
-  margin-right: 99px;
 }
 
 img {
@@ -181,18 +183,7 @@ a.navbar-item.is-active,
   color: #fff;
   height: 1171px;
 }
-.col-size {
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
-  background-color: rgba(182, 182, 182, 0.3);
-  margin: auto;
-  margin-top: auto;
-  margin-left: auto;
-  max-width: 61%;
-  height: 22em;
-  margin-top: 258px;
-  margin-left: 400px;
-}
+
 .hero.is-dark .title {
   color: #151515;
   margin-top: 47px;
@@ -219,5 +210,132 @@ a.navbar-item.is-active,
 
 .mb-4 {
   margin-bottom: 3rem !important;
+}
+
+html,
+body {
+  margin: 0;
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.container {
+  height: auto;
+}
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.logofooter {
+  margin-left: 30px;
+}
+.footer {
+  width: 100%;
+  position: relative;
+  height: 30em;
+  background-color: #272727;
+  margin-top: 6%;
+}
+.footer .col {
+  width: 190px;
+  height: auto;
+  float: left;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0px 20px 20px 20px;
+}
+.footer .col h1 {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 17px;
+  padding: 20px 0px 5px 0px;
+  color: rgba(255, 255, 255, 0.2);
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+.footer .col ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.footer .col ul li {
+  color: #999999;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: bold;
+  padding: 5px 0px 5px 0px;
+  cursor: pointer;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+}
+.social ul li {
+  display: inline-block;
+  padding-right: 5px !important;
+}
+
+.footer .col ul li:hover {
+  color: #ffffff;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+}
+.clearfix {
+  clear: both;
+}
+
+.contenue {
+  margin-left: 52%;
+}
+
+@media only screen and (min-width: 1280px) {
+  .contain {
+    width: 1200px;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 1139px) {
+  .contain .social {
+    width: 1000px;
+    display: block;
+  }
+  .social h1 {
+    margin: 0px;
+  }
+}
+@media only screen and (max-width: 950px) {
+  .footer .col {
+    width: 33%;
+  }
+  .footer .col h1 {
+    font-size: 14px;
+  }
+  .footer .col ul li {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .footer .col {
+    width: 50%;
+  }
+  .footer .col h1 {
+    font-size: 14px;
+  }
+  .footer .col ul li {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 340px) {
+  .footer .col {
+    width: 100%;
+  }
 }
 </style>
