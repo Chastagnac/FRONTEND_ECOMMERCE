@@ -21,8 +21,7 @@
         <div class="navbar-start" style="flex-grow: 1; justify-content: center">
           <div class="navbar-item has-dropdown is-hoverable"></div>
           <router-link to="/shop" class="navbar-item">Boutique</router-link>
-          <a class="navbar-item">Services</a>
-          <a class="navbar-item">Commandes</a>
+          <router-link to="/service" class="navbar-item">Service</router-link>
         </div>
         <div class="navbar-end">
           <li></li>

@@ -4,6 +4,17 @@
       <div class="columns">
         <SideShop></SideShop>
         <div class="column is-9">
+          <div class="columns">
+            <div class="column is-four-fifths">
+              <h1 class="title">Nos produits</h1>
+            </div>
+            <div class="column">
+              <p class="hover-text">
+                {{ products.length }} <i class="fas fa-tags"></i>
+              </p>
+            </div>
+          </div>
+
           <section class="gridcontainer">
             <ProductsBox
               v-for="product in products"
