@@ -9,7 +9,7 @@
       </div>
 
       <section class="section has-background-primary">
-        <div class="container">
+        <div class="container" style="margin: 24px">
           <div class="is-vcentered columns is-multiline">
             <div class="column is-6 is-5-desktop mb-4">
               <h2
@@ -34,15 +34,15 @@
                 <p class="has-text-grey-dark mb-2">
                   <img
                     src="../assets/devisgratuit.png"
-                    style="height: 100px; margin-right: 40px"
+                    style="height: 100px;"
                     alt=""
                   />
                 </p>
-
-                <router-link
-                  class="button is-primary is-fullwidth"
-                  to="/service/devis"
-                >Commencer le devis</router-link>
+                <div class="card">
+                  <router-link class="is-primary" to="/service/devis"
+                    >Commencer le devis</router-link
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -60,8 +60,7 @@ export default {
   name: "Service",
   data() {
     return {
-      data: {
-      },
+      data: {},
     };
   },
   components: { ServiceDesign },

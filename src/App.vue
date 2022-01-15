@@ -163,7 +163,6 @@ svg:not(:root).svg-inline--fa {
 img {
   height: auto;
   max-width: 100%;
-  margin-left: 45px;
 }
 a.navbar-item:focus,
 a.navbar-item:focus-within,

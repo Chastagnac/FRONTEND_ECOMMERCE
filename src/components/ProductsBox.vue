@@ -1,12 +1,8 @@
 <template>
   <div>
-    <div class="box" style="margin: 10px; height: 460px">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image mb-4 is-128x128">
-            <img :src="product.get_thumbnail" />
-          </figure>
-        </div>
+    <div class="box" style="margin: 30px; height: 370px">
+      <article class="media" style="background-color: black">
+        <img :src="product.get_thumbnail" />
       </article>
       <div class="media-content">
         <div class="content">
@@ -15,12 +11,15 @@
             <br />
           </p>
         </div>
+      </div>
+
+      <div class="container">
+        {{ product.price }} €
         <router-link
           v-bind:to="product.get_absolute_url"
           class="button is-dark mt-4"
           >Voir détails</router-link
         >
-        <div>{{ product.price }} €</div>
       </div>
     </div>
   </div>
@@ -37,9 +36,10 @@ export default {
 
 <style scoped>
 .image {
-  margin-top: -1.25rem;
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .column.is-narrow {
