@@ -34,8 +34,6 @@
           <router-link to="/cart" class="navbar-item">
             <i class="fas fa-shopping-cart"></i
           ></router-link>
-
-          FACEBOOK
         </div>
       </div>
     </nav>
@@ -46,7 +44,7 @@
   </div>
 </template>
 
-<script>
+   <script>
 import axios from "axios";
 
 export default {

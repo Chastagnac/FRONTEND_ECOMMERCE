@@ -106,6 +106,9 @@ export default {
   mounted() {
     this.getLastedProducts();
     document.title = "Se-digitaliser";
+    let recaptchaScript = document.createElement("script");
+    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492643.js");
+    document.head.appendChild(recaptchaScript);
   },
   methods: {
     getLastedProducts() {
