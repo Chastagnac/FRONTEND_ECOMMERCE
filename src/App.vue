@@ -34,8 +34,6 @@
           <router-link to="/cart" class="navbar-item">
             <i class="fas fa-shopping-cart"></i
           ></router-link>
-
-          FACEBOOK
         </div>
       </div>
     </nav>
@@ -46,9 +44,8 @@
   </div>
 </template>
 
-<script>
+   <script>
 import axios from "axios";
-
 
 export default {
   data() {
@@ -163,7 +160,6 @@ svg:not(:root).svg-inline--fa {
 img {
   height: auto;
   max-width: 100%;
-  margin-left: 45px;
 }
 a.navbar-item:focus,
 a.navbar-item:focus-within,
