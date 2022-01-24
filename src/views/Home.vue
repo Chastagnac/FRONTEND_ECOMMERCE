@@ -15,7 +15,9 @@
         </h2>
 
         <div class="boxeInto">
-          <button class="button2">Découvrez nos services</button>
+          <router-link to="/service">
+            <button class="button2">Découvrez nos services</button></router-link
+          >
         </div>
       </div>
     </section>
@@ -60,23 +62,24 @@
             class="column is-one-third"
           >
             <div class="card">
-              <div class="card-image"></div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-left">
-                    <figure class="image mb-6 is-128x128">
-                      <img :src="product.get_image" />
-                    </figure>
+              <div class="card-image">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image mb-6 is-128x128">
+                        <img :src="product.get_image" />
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <router-link
+                        v-bind:to="product.get_absolute_url"
+                        class="button is-dark mt-4"
+                        >Voir détails</router-link
+                      >
+                    </div>
                   </div>
-                  <div class="media-content">
-                    <router-link
-                      v-bind:to="product.get_absolute_url"
-                      class="button is-dark mt-4"
-                      >Voir détails</router-link
-                    >
-                  </div>
+                  <p>{{ product.name }}</p>
                 </div>
-                <p>{{ product.name }}</p>
               </div>
             </div>
           </div>
@@ -107,7 +110,7 @@ export default {
     this.getLastedProducts();
     document.title = "Se-digitaliser";
     let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492643.js");
+    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
     document.head.appendChild(recaptchaScript);
   },
   methods: {
@@ -133,8 +136,7 @@ export default {
   background-image: url("../assets/environnement-urbain.jpg");
   height: 45em;
   padding: 0;
-  background-image: url("../assets/environnement-urbain.jpg");
-  background-position: center center;
+
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -211,5 +213,9 @@ export default {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.card-image {
+  height: 300px;
 }
 </style>
