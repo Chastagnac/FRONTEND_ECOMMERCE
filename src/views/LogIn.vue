@@ -1,32 +1,31 @@
 <template>
     <div class="page-log-in">
         <div class="columns">
-            <div class="column is-4 is-offset-4">
-                <h1 class="title">Se connecter</h1>
+            <div v-if="isconnection" class="column is-4 is-offset-4">
+               <h2>
+                    <a class="tab-link active"  data-ref="connexion"  href="javascript:void(0)"><router-link id="abcde" to="/log-in">Connexion </router-link></a>
+                      <a class="tab-link active"  data-ref="inscription" href="javascript:void(0)"><router-link id="inscription" to="sign-up">Inscription </router-link></a>
+                </h2>
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
                         <label>Nom d'utilisateur</label>
                         <div class="control">
-                            <input type="text" class="input" v-model="username">
+                            <input type="text"  id="holderi" placeholder="Nom d'utilisateur" class="input" v-model="username">
                         </div>
                     </div>
                     <div class="field">
                         <label>Mot de passe</label>
                         <div class="control">
-                            <input type="password" class="input" v-model="password">
+                            <input type="password"  id="holderi" placeholder="Mot de Passe" class="input"  v-model="password">
                         </div>
                     </div>
                     <div class="field">
                         <div class="control">
-                            <button class="button is-dark">Connection</button>
+                            <button class="button is-dark">Connexion</button>
                         </div>
                     </div>
-                    <div class="notification is-danger" v-if="errors.length">
-                        <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-                    </div>
-                    <hr>
-                    Ou <router-link to="/sign-up">Cliquez ici</router-link> pour s'inscrire !
+                    
                 </form>
             </div>
         </div>
@@ -43,7 +42,8 @@ export default {
         return {
             username: '',
             password: '',
-            errors: []
+            errors: [],
+            isconnection: true
         }
     },
     mounted() {
@@ -88,3 +88,24 @@ export default {
     }
 }
 </script>
+
+
+<style lang="scss">
+
+.page-log-in{
+   
+ 
+  padding: 0;
+  background-image: url("../assets/environnement-urbain.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  height: 44em;
+}
+
+
+
+
+</style>
