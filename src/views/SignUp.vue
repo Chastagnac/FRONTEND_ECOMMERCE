@@ -226,8 +226,6 @@ label {
     color: #333333;
     left: 30%;
     maring-left: 30%;
-    text-align: end;
-    padding-left: 25%;
     font-size: 19px;
 }
 .textarea, .input {
