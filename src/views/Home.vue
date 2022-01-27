@@ -233,4 +233,40 @@ p {
     width: 96%;
   }
 }
+@media screen and (min-width: 1015px) and (max-width: 1420px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 23%;
+  }
+}
+@media screen and (min-width: 900px) and (max-width: 1015px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 33%;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 917px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 53%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 800px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 53%;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 600px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 83%;
+  }
+  .section.is-medium {
+    padding: 9rem 4.5rem;
+    background: #fff;
+    height: 46em;
+    margin-top: 31%;
+  }
+}
 </style>
