@@ -1,5 +1,4 @@
 <template>
-    <transition-group name="bounce" appear>
         <tr v-if="visible" v-bind:class="{ isBG: has-background-light }">
             <td><router-link :to="item.product.get_absolute_url">{{ item.product.name }}</router-link></td>
             <td>${{ item.product.price }}</td>
@@ -11,7 +10,6 @@
             <td>${{ getItemTotal(item).toFixed(2) }}</td> 
             <td><button class="delete" @click="removeFromCart(item)"></button></td>
         </tr>
-    </transition-group>
 </template>
 
 <script>
@@ -57,16 +55,4 @@ export default {
 }
 </script>
 
-<style>
-    .bounce-leave-active {
-        animation: bounce-in 1s;
-    }
 
-    @keyframes bounce-in {
-    0% {
-        
-    }
-    100% {
-    }
-}
-</style>
