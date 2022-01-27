@@ -2,31 +2,38 @@
     <div class="page-sign-up">
         <div class="columns">
             <div class="column is-4 is-offset-4">
-                <h1 class="title">S'incrire</h1>
+                <h2>
+                    <a class="tab-link active"  data-ref="connexion"  href="javascript:void(0)"><router-link id="abcde" to="/log-in">Connexion </router-link></a>
+                      <a class="tab-link active"  data-ref="inscription" href="javascript:void(0)"><router-link id="inscription" to="sign-up">Inscription </router-link></a>
+                </h2>
+                
+    
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
-                        <label>Nom d'utilisateur</label>
-                        <div class="control">
-                            <input type="text" class="input" v-model="username">
+                        <label for ="nomuse">Nom d'utilisateur</label>
+                        <div class="control" >
+                            <input type="text" id="holderi" class="input"  placeholder="Nom d'utilisateur" v-model="username">
+                           
+
                         </div>
                     </div>
                     <div class="field">
                         <label>E-mail</label>
                         <div class="control">
-                            <input type="email" class="input" v-model="email">
+                            <input type="email" class="input"  id="holderi" placeholder="Adresse email" v-model="email">
                         </div>
                     </div>
                     <div class="field">
                         <label>Mot de passe</label>
                         <div class="control">
-                            <input type="password" class="input" v-model="password">
+                            <input type="password" class="input" id="holderi" placeholder="Mot de Passe" v-model="password">
                         </div>
                     </div>
                     <div class="field">
                         <label>Répéter mot de passe</label>
                         <div class="control">
-                            <input type="password" class="input" v-model="password2">
+                            <input type="password" class="input"  id="holderi" placeholder="Mot de Passe" v-model="password2" >
                         </div>
                     </div>
                     <div class="field">
@@ -34,16 +41,14 @@
                             <button class="button is-dark">S'inscrire</button>
                         </div>
                     </div>
-                    <div class="notification is-danger" v-if="errors.length">
-                        <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-                    </div>
-                    <hr>
-                    Ou <router-link to="/log-in">Cliquez ici</router-link> pour se connecter !
+                    
                 </form>
             </div>
         </div>
     </div>
 </template>
+
+
 
 <script>
 import axios from 'axios'
@@ -118,3 +123,128 @@ export default {
     }
 }
 </script>
+
+
+<style lang="scss">
+
+
+.page-sign-up{
+   
+ 
+  padding: 0;
+  background-image: url("../assets/environnement-urbain.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  height: 44em;
+}
+
+.column.is-offset-4, .column.is-offset-4-tablet {
+    margin-left: 33.33333337%;
+    background-color: rgba(182, 182, 182, 0.6);
+    margin-top: 9%;
+    border-radius: 30px;
+}
+.tab-link {
+    text-decoration: none;
+    color: #141414;
+    margin: 0px 5%;
+    font-size: 26px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tab-link.active {
+  font-weight: bold;
+}
+
+h2{
+    font-size: 100%;
+    font-weight: normal;
+    text-align: center;
+}
+
+#inscription {
+    color: #6E934C;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#abcde{
+    color:#141414;
+}
+
+.button {
+    background-color: #517D2A;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: #363636;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    align-content: center;
+    text-align: center;
+    left: 0%;
+    border-radius: 14px;
+}
+.button.is-dark {
+    background-color: #517D2A;
+    border-color: transparent;
+    color: #fff;
+}
+.textarea, .input {
+    box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+    max-width: 100%;
+    width: 50%;
+}
+
+#holderi::placeholder{
+    color:gray;
+    text-align: left;
+}
+.select select, .textarea, .input {
+    background-color: white;
+    border-color: #dbdbdb;
+    border-radius: 4px;
+    color: black;
+    text-align: left;
+}
+.control {
+    box-sizing: border-box;
+    clear: both;
+    font-size: 1rem;
+    position: relative;
+    text-align: center;
+}
+label {
+    text-align: center;
+    color: #333333;
+    left: 30%;
+    maring-left: 30%;
+    text-align: end;
+    padding-left: 25%;
+    font-size: 19px;
+}
+.textarea, .input {
+    box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+    max-width: 100%;
+    width: 50%;
+    background: white;
+    background-color: white;
+    border-radius: 10px;
+        
+}
+.input{
+    
+}
+
+
+
+</style>
+
+
