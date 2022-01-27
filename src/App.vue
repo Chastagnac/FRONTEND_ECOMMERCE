@@ -1,52 +1,73 @@
 <template>
-  <div id="wrapper">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <router-link to="/"
-          ><img style="height: 150px" :src="require(`@/assets/logoblack.png`)"
-        /></router-link>
+  <div>
+    <div id="wrapper">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <router-link to="/"
+            ><img
+              style="height: 150px"
+              :src="require(`@/assets/logoblack.png`)"
+          /></router-link>
 
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-start" style="flex-grow: 1; justify-content: center">
-          <div class="navbar-item has-dropdown is-hoverable"></div>
-          <router-link to="/shop" class="navbar-item">Boutique</router-link>
-          <router-link to="/service" class="navbar-item">Service</router-link>
-        </div>
-        <div class="navbar-end">
-          <li></li>
           <a
-            class="far fa-user"
-            href="https://www.facebook.com/profile.php?id=100074600241159"
             role="button"
-            data-mdb-ripple-color="dark"
-          ></a>
-          <router-link to="/cart" class="navbar-item">
-            <i class="fas fa-shopping-cart"></i
-          ></router-link>
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-      </div>
-    </nav>
+        <div class="navbar-menu">
+          <div
+            class="navbar-start"
+            style="flex-grow: 1; justify-content: center"
+          >
+            <div class="navbar-item has-dropdown is-hoverable"></div>
+            <router-link to="/shop" class="navbar-item">Boutique</router-link>
+            <router-link to="/service" class="navbar-item">Service</router-link>
+             <router-link to="/contact" class="navbar-item">Contact</router-link>
+          </div>
+          <div class="navbar-end">
+            <router-link
+              v-if="$store.state.isAuthenticated"
+              to="my-account"
+              class="navbar-item"
+            >
+              <i
+                class="far fa-user"
+                href="https://www.facebook.com/profile.php?id=100074600241159"
+                data-mdb-ripple-color="dark"
+              ></i>
+            </router-link>
+            <router-link v-else to="/log-in" class="navbar-item">
+              <i
+                class="far fa-user"
+                href="https://www.facebook.com/profile.php?id=100074600241159"
+                data-mdb-ripple-color="dark"
+              ></i>
+            </router-link>
+            <router-link to="/cart" class="navbar-item">
+              <i class="fas fa-shopping-cart"></i
+            ></router-link>
+          </div>
+        </div>
+      </nav>
 
-    <section class="section">
-      <router-view />
-    </section>
+      <section class="section">
+        <router-view />
+      </section>
+    </div>
+    
+    <Footer></Footer>
   </div>
 </template>
 
    <script>
 import axios from "axios";
-
+import Footer from "@/components/Footer";
 export default {
   data() {
     return {
@@ -55,6 +76,9 @@ export default {
         items: [],
       },
     };
+  },
+  components: {
+    Footer,
   },
   // On initialize le localstorage avant les injections
   beforeCreate() {

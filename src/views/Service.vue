@@ -34,7 +34,7 @@
                 <p class="has-text-grey-dark mb-2">
                   <img
                     src="../assets/devisgratuit.png"
-                    style="height: 100px;"
+                    style="height: 100px"
                     alt=""
                   />
                 </p>
@@ -55,7 +55,6 @@
 <script>
 import axios from "axios";
 import ServiceDesign from "@/components/service/ServiceDesign";
-
 export default {
   name: "Service",
   data() {

@@ -35,7 +35,6 @@ import axios from "axios";
 // @ = racourcie pour les components
 import ProductsBox from "@/components/ProductsBox";
 import SideShop from "@/components/SideShop";
-
 export default {
   name: "Shop",
   data() {
@@ -46,7 +45,7 @@ export default {
   },
   components: {
     ProductsBox,
-    SideShop,
+    SideShop
   },
 
   mounted() {
@@ -86,6 +85,5 @@ export default {
   text-align-last: center;
   margin: 20px;
   grid-template-columns: 33% 33% 33%;
-  height: 600px;
 }
 </style>
