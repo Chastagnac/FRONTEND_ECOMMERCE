@@ -18,6 +18,7 @@
             </router-link></a
           >
         </h2>
+        <br />
 
         <form @submit.prevent="submitForm">
           <div class="field">
@@ -50,6 +51,9 @@
             </div>
           </div>
         </form>
+        <div class="notification is-danger" v-if="errors.length">
+          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+        </div>
       </div>
     </div>
   </div>

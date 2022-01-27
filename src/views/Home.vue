@@ -4,14 +4,16 @@
       <br />
       <br />
       <div class="boxe">
-        <h1 class="title">Large section</h1>
+        <h1 class="title">
+          <strong> La démarche zéro déchet, zéro gaspillage </strong
+          ><br /><br />
+        </h1>
         <h2 class="subtitle">
-          A simple container to divide your page into <strong>sections</strong>,
-          like the one you're currently reading.
-        </h2>
-        <h2 class="subtitle">
-          A simple container to divide your page into <strong>sections</strong>,
-          like the one you're currently reading.
+          Le “zéro déchet, zéro gaspillage” est une démarche pour réduire notre
+          impact sur l’environnement, en diminuant la quantité de déchets que
+          nous produisons et leurs impacts négatifs sur la planète.<br />Le zéro
+          déchet est une démarche progressive et positive, qu’on peut suivre à
+          titre individuel et collectif.
         </h2>
 
         <div class="boxeInto">
@@ -25,22 +27,20 @@
       <div class="cont">
         <div class="columns">
           <div class="column">
-            <h1 class="title">Large section</h1>
-            <h2 class="subtitle">
-              A simple container to divide your page into
-              <strong>sections</strong>, like the one you're currently reading.
-            </h2>
+            <h1 class="title">Présentation</h1>
             <p>
-              Lorem ipsum dolor sit amet. Et corrupti adipisci quo excepturi
-              aperiam sed fugiat eaque eos voluptas autem ut natus voluptates et
-              suscipit minima. Et eius minima ut ullam fugiat et similique
-              voluptatem. Ut repudiandae voluptatem qui provident similique ut
-              laborum obcaecati et dolorum maxime ad voluptatum qui alias
-              tenetur. Est veniam nemo ut suscipit veritatis et voluptate
-              repudiandae! Cum exercitationem sequi ex recusandae magni
-              voluptatem architecto. Aut doloremque maxime est voluptatem dolor
-              Quis animi vel doloremque enim. Quo quam expedita eum error
-              tempore vel dignissimos nemo qui praesentiu
+              Les déchets sont partout et leur quantité a doublé en 40 ans.
+              D’ailleurs, 97% des français considèrent que la société dans son
+              ensemble produit trop de déchets. Bonne nouvelle ! De simples
+              gestes existent pour réduire ses déchets et éviter le gaspillage
+              comme acheter moins emballé et en vrac, composter, acheter
+              uniquement ce dont on a besoin.<br />
+              <br />580 Kg : de déchets jetés par an par personne en France
+              <br /><br />326 Millions de tonnes : de déchets produits par an en
+              France (dont 32 millions de tonnes pour les ménages)
+              <br /><br />1175000 Tonnes d'emballages plastique mis sur le
+              marché par an en France.<br /><br />
+              <br /><br />
             </p>
           </div>
           <div class="column" id="droite"></div>
@@ -49,10 +49,9 @@
     </section>
 
     <div class="section" id="sect">
-      <h1 class="title">Large section</h1>
+      <h1 class="title">Découvrez nos derniers produits !</h1>
       <h2 class="subtitle">
-        A simple container to divide your page into <strong>sections</strong>,
-        like the one you're currently reading.
+        Retrouvez les produits <strong>tendance</strong>, du moment
       </h2>
       <div class="containeuri">
         <div class="columns is-multiline">
@@ -86,25 +85,17 @@
         </div>
       </div>
     </div>
-
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-// @ = racourcie pour les components
-// import ProductsBox from "@/components/ProductsBox";
-import Footer from "@/components/Footer";
 export default {
   name: "Home",
   data() {
     return {
       lastestProducts: [],
     };
-  },
-  components: {
-    Footer,
   },
   mounted() {
     this.getLastedProducts();
@@ -151,7 +142,7 @@ export default {
   text-align: center;
 }
 .subtitle {
-  color: #4a4a4a;
+  color: #000000;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 3.25;
@@ -198,12 +189,13 @@ export default {
   background-color: #f5f5f6;
 }
 #sect {
+  margin-top: 100px;
   background: #f5f5f6;
 }
 
 .boxe {
   background-color: rgba(182, 182, 182, 0.6);
-  height: 26em;
+  height: 27em;
   width: 48%;
   margin: 7px auto;
 }
@@ -211,11 +203,34 @@ export default {
 .boxeInto {
   display: grid;
   width: 50%;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
-
+p {
+  width: 90%;
+  text-align: justify;
+}
 .card-image {
   height: 300px;
+}
+
+.input {
+  width: 300px !important;
+}
+@media only screen and (max-width: 1280px) {
+  .boxe {
+    width: 100%;
+    height: 35em;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .boxe {
+    width: 100%;
+    height: 45em;
+  }
+  .title p {
+    width: 96%;
+  }
 }
 </style>
