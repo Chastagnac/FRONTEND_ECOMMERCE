@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Product from '../views/Product.vue'
+import Service from '../views/Service.vue'
+import Devis from '../views/Devis.vue'
 import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
+import Conditions from '../views/Conditions.vue'
+import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Shop from '../views/Shop.vue'
@@ -48,6 +52,26 @@ const routes = [
         path: '/shop/:category_slug',
         name: 'Category',
         component: Category
+    },
+    {
+        path: '/service',
+        name: 'Service',
+        component: Service
+    },
+    {
+        path: '/contact',
+        name: 'Contact',
+        component: Contact
+    },
+    {
+        path: '/conditions-generales',
+        name: 'Conditions',
+        component: Conditions
+    },
+    {
+        path: '/service/devis',
+        name: 'Devis',
+        component: Devis
     },
     {
         path: '/:category_slug/:product_slug',

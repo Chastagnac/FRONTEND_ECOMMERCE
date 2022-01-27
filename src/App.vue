@@ -1,223 +1,236 @@
 <template>
-  <div id="wrapper">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <router-link to="/"
-          ><img style="height: 150px" :src="require(`@/assets/logoblack.png`)"
-        /></router-link>
+  <div>
+    <section class="section is-large">
+      <br />
+      <br />
+      <div class="boxe">
+        <h1 class="title">
+          <strong> La démarche zéro déchet, zéro gaspillage </strong
+          ><br /><br />
+        </h1>
+        <h2 class="subtitle">
+          Le “zéro déchet, zéro gaspillage” est une démarche pour réduire notre
+          impact sur l’environnement, en diminuant la quantité de déchets que
+          nous produisons et leurs impacts négatifs sur la planète.<br />Le zéro
+          déchet est une démarche progressive et positive, qu’on peut suivre à
+          titre individuel et collectif.
+        </h2>
 
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-start" style="flex-grow: 1; justify-content: center">
-          <div class="navbar-item has-dropdown is-hoverable"></div>
-          <router-link to="/shop" class="navbar-item"
-            >Boutique</router-link
+        <div class="boxeInto">
+          <router-link to="/service">
+            <button class="button2">Découvrez nos services</button></router-link
           >
-          <a class="navbar-item">Services</a>
-          <a class="navbar-item">Commandes</a>
-        </div>
-        <div class="navbar-end">
-          <li></li>
-          <a
-            class="far fa-user"
-            href="https://www.facebook.com/profile.php?id=100074600241159"
-            role="button"
-            data-mdb-ripple-color="dark"
-          ></a>
-          <i class="fas fa-shopping-cart"></i>
         </div>
       </div>
-    </nav>
-
-    <section class="section">
-      <router-view />
     </section>
+    <section class="section is-medium">
+      <div class="cont">
+        <div class="columns">
+          <div class="column">
+            <h1 class="title">Présentation</h1>
+            <p>
+              Les déchets sont partout et leur quantité a doublé en 40 ans.
+              D’ailleurs, 97% des français considèrent que la société dans son
+              ensemble produit trop de déchets. Bonne nouvelle ! De simples
+              gestes existent pour réduire ses déchets et éviter le gaspillage
+              comme acheter moins emballé et en vrac, composter, acheter
+              uniquement ce dont on a besoin.<br />
+              <br />580 Kg : de déchets jetés par an par personne en France
+              <br /><br />326 Millions de tonnes : de déchets produits par an en
+              France (dont 32 millions de tonnes pour les ménages)
+              <br /><br />1175000 Tonnes d'emballages plastique mis sur le
+              marché par an en France.<br /><br />
+              <br /><br />
+            </p>
+          </div>
+          <div class="column" id="droite"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section" id="sect">
+      <h1 class="title">Découvrez nos derniers produits !</h1>
+      <h2 class="subtitle">
+        Retrouvez les produits <strong>tendance</strong>, du moment
+      </h2>
+      <div class="containeuri">
+        <div class="columns is-multiline">
+          <div
+            v-for="product in lastestProducts"
+            :key="product.value"
+            class="column is-one-third"
+          >
+            <div class="card">
+              <div class="card-image">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image mb-6 is-128x128">
+                        <img :src="product.get_image" />
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      <router-link
+                        v-bind:to="product.get_absolute_url"
+                        class="button is-dark mt-4"
+                        >Voir détails</router-link
+                      >
+                    </div>
+                  </div>
+                  <p>{{ product.name }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
+  name: "Home",
   data() {
     return {
-      showMobileMenu: false,
-      cart: {
-        items: [],
-      },
+      lastestProducts: [],
     };
   },
-  // On initialize le localstorage avant les injections
-  beforeCreate() {
-    this.$store.commit("initializeStore");
-
-    const token = this.$store.token;
-
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = "Token " + token;
-    } else {
-      axios.defaults.headers.common["Authorization"] = "";
-    }
-  },
-  // Quand l'app est "montée" on recupère $cart du store dans this.cart
   mounted() {
-    this.cart = this.$store.state.cart;
+    this.getLastedProducts();
+    document.title = "Se-digitaliser";
+    let recaptchaScript = document.createElement("script");
+    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
+    document.head.appendChild(recaptchaScript);
   },
-  // Lorsque l'app tourne, si un produit viens s'add au panier,
-  //  il incrémente et retoure le total
-  computed: {
-    cartTotalLenght() {
-      let totalLenght = 0;
-
-      for (let i = 0; i < this.cart.items.length; i++) {
-        totalLenght += this.cart.items[i].quantity;
-      }
-      return totalLenght;
+  methods: {
+    getLastedProducts() {
+      axios
+        .get("/api/v1/latest-products/")
+        .then((response) => {
+          for (let i = 0; i < 3; i++) {
+            this.lastestProducts.push(response.data[i]);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
 </script>
 
+<style>
+.section.is-large {
+  background: #d0ebdc;
+  background-image: url("../assets/environnement-urbain.jpg");
+  height: 45em;
+  padding: 0;
 
-
-<style lang="scss">
-@import "../node_modules/bulma";
-
-.lds-dual-ring {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
 }
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #ccc;
-  border-color: #ccc transparent #ccc transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+.title {
+  color: #363636;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.125;
+  padding-top: 7%;
+  text-align: center;
 }
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.subtitle {
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 3.25;
+  text-align: center;
 }
-
-.is-loading-bar {
-  height: 0;
-  overflow: hidden;
-
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-
-  &.is-loading {
-    height: 80px;
-  }
+.section {
+  padding: 0;
+}
+.section.is-medium {
+  padding: 9rem 4.5rem;
+  background: #fff;
+  height: 46em;
 }
 
-.navbar {
-  min-height: 0rem;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  height: 150px;
-  margin-top: -22px;
-  border-color: #49ae25;
+.cont {
+  background: #fff;
 }
 
-.svg-inline--fa {
-  display: inline-block;
-  font-size: inherit;
-  height: auto;
-  overflow: visible;
-  vertical-align: -0.125em;
+#droite {
+  background: #d0ebdc;
 }
-
-svg:not(:root).svg-inline--fa {
-  overflow: visible;
-  margin-right: 30px;
+.button2 {
+  margin-top: 33px;
+  background-color: #418014;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  color: whitesmoke;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 20px;
 }
-
-.navbar-start,
-.navbar-end {
-  align-items: stretch;
-  display: flex;
-  margin-right: 99px;
-}
-
-img {
-  height: auto;
-  max-width: 100%;
-  margin-left: 45px;
-}
-a.navbar-item:focus,
-a.navbar-item:focus-within,
-a.navbar-item:hover,
-a.navbar-item.is-active,
-.navbar-link:focus,
-.navbar-link:focus-within,
-.navbar-link:hover,
-.navbar-link.is-active {
-  background-color: #fafafa;
-  color: #49ae25;
-}
-
-.hero.is-dark {
-  background-image: url(/img/environnement-urbain.2d3a105e.png);
-  color: #fff;
-  height: 1171px;
-}
-.col-size {
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
-  background-color: rgba(182, 182, 182, 0.3);
+.containeuri {
+  width: 80%;
   margin: auto;
-  margin-top: auto;
+  background-color: #f5f5f6;
+}
+#sect {
+  margin-top: 100px;
+  background: #f5f5f6;
+}
+
+.boxe {
+  background-color: rgba(182, 182, 182, 0.6);
+  height: 27em;
+  width: 48%;
+  margin: 7px auto;
+}
+
+.boxeInto {
+  display: grid;
+  width: 50%;
+  text-align: center;
   margin-left: auto;
-  max-width: 61%;
-  height: 22em;
-  margin-top: 258px;
-  margin-left: 400px;
+  margin-right: auto;
 }
-.hero.is-dark .title {
-  color: #151515;
-  margin-top: 47px;
-  padding-top: 189px;
-  font-family: inherit;
+p {
+  width: 90%;
+  text-align: justify;
+}
+.card-image {
+  height: 300px;
 }
 
-.tabs:not(:last-child),
-.pagination:not(:last-child),
-.message:not(:last-child),
-.level:not(:last-child),
-.breadcrumb:not(:last-child),
-.block:not(:last-child),
-.title:not(:last-child),
-.subtitle:not(:last-child),
-.table-container:not(:last-child),
-.table:not(:last-child),
-.progress:not(:last-child),
-.notification:not(:last-child),
-.content:not(:last-child),
-.box:not(:last-child) {
-  margin-bottom: 1.5rem;
+.input {
+  width: 300px !important;
 }
-
-.mb-4 {
-  margin-bottom: 3rem !important;
+@media only screen and (max-width: 1280px) {
+  .boxe {
+    width: 100%;
+    height: 35em;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .boxe {
+    width: 100%;
+    height: 45em;
+  }
+  .title p {
+    width: 96%;
+  }
 }
 </style>
