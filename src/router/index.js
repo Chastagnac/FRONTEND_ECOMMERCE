@@ -14,8 +14,7 @@ import MyAccount from '../views/MyAccount.vue'
 import Shop from '../views/Shop.vue'
 import store from '../store'
 
-const routes = [
-    {
+const routes = [{
         path: '/',
         name: 'Home',
         component: Home
@@ -23,30 +22,30 @@ const routes = [
     {
         path: '/search',
         name: 'Search',
-        component : Search
+        component: Search
     },
     {
         path: '/myaccount',
         name: 'MyAccount',
-        component : MyAccount,
-        meta : {
+        component: MyAccount,
+        meta: {
             requireLogin: true
         }
     },
     {
         path: '/cart',
         name: 'Cart',
-        component : Cart
+        component: Cart
     },
-    {    
+    {
         path: '/sign-up',
         name: 'SignUp',
-        component : SignUp
+        component: SignUp
     },
-    {    
+    {
         path: '/log-in',
         name: 'Log-In',
-        component : LogIn
+        component: LogIn
     },
     {
         path: '/shop/:category_slug',
@@ -76,12 +75,12 @@ const routes = [
     {
         path: '/:category_slug/:product_slug',
         name: 'Product',
-        component : Product
+        component: Product
     },
     {
         path: '/shop',
         name: 'Shop',
-        component : Shop
+        component: Shop
     }
 ]
 
@@ -91,8 +90,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if(to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
-        next({name: 'LogIn', query: { to: to.path}})        
+    if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
+        next({ name: 'LogIn', query: { to: to.path } })
     } else {
         next()
     }
