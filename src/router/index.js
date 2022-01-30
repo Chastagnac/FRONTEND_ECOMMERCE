@@ -29,7 +29,7 @@ const routes = [{
         name: 'MyAccount',
         component: MyAccount,
         meta: {
-            requireLogin: true
+            requireLogin: false
         }
     },
     {
