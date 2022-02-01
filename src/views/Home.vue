@@ -43,7 +43,12 @@
               <br /><br />
             </p>
           </div>
-          <div class="column" id="droite"></div>
+          <div class="column">
+            <img
+              src="../assets/zero-dechet-tendance-qui-emballe-F.jpeg"
+              class="responsive"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -134,10 +139,15 @@ export default {
   background-color: #464646;
 }
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-#bluraccueil{
+  #bluraccueil {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(6px);
   }
+}
+.responsive {
+  float: right;
+  max-height: 100%;
+  height: auto;
 }
 .title {
   color: #363636;
@@ -167,9 +177,6 @@ export default {
   background: #fff;
 }
 
-#droite {
-  background: #d0ebdc;
-}
 .button2 {
   margin-top: 33px;
   background-color: #418014;
@@ -239,6 +246,13 @@ p {
     width: 96%;
   }
 }
+@media only screen and (max-width: 500px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 145%;
+  }
+}
+
 @media screen and (min-width: 1015px) and (max-width: 1420px) {
   #sect {
     background: #f5f5f6;
