@@ -33,9 +33,33 @@
         <div class="columns is-multiline">
           <div
             class="column"
-            v-bind:class="{ 'is-12': particulier, 'is-6': !particulier }"
+            v-bind:class="{ 'is-12': !particulier, 'is-6': !particulier }"
           >
-            <div class="field">
+            <div class="field" v-if="!particulier">
+              <label class="label" id="pn">Nom et prénom</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="np"
+                  type="text"
+                  placeholder="Entrez votre nom et prénom"
+                  v-model="data.name"
+                />
+              </div>
+            </div>
+             <div class="field" v-if="!particulier">
+              <label class="label" id="yourmail">Email</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="limae"
+                  type="email"
+                  placeholder="example@gmail.com"
+                  v-model="data.email"
+                />
+              </div>
+            </div>
+            <div class="field" v-if="particulier">
               <label class="label" id="pn">Nom et prénom</label>
               <div class="control">
                 <input
@@ -48,7 +72,8 @@
               </div>
             </div>
 
-            <div class="field">
+           
+            <div class="field" v-if="particulier">
               <label class="label" id="yourmail">Email</label>
               <div class="control">
                 <input
@@ -61,9 +86,12 @@
               </div>
             </div>
           </div>
-          <div class="column is-6">
-            <div class="field" v-if="!particulier">
-              <label class="label">Raison sociale</label>
+          
+          <div id ="parent">
+            <div id="enfant">
+                 <div class="column is-6">
+            <div class="field child" id="rs" v-if="!particulier">
+              <label class="label" id="lbrs">Raison sociale</label>
               <div class="control">
                 <input
                   class="input"
@@ -74,9 +102,10 @@
                 />
               </div>
             </div>
+            
 
-            <div class="field" v-if="!particulier">
-              <label class="label">Numéro de siret</label>
+            <div class="field child" id="numsi" v-if="!particulier">
+              <label class="label" id="lbnds">Numéro de siret</label>
               <div class="control">
                 <input
                   class="input"
@@ -89,7 +118,12 @@
             </div>
           </div>
         </div>
-        <hr />
+            </div>
+
+          </div>
+         
+        
+      
         <div class="columns is-multiline">
           <div class="column is-9">
             <div class="field">
@@ -181,11 +215,31 @@ export default {
 </script>
 
 <style scoped>
+#parent {
+    width: 100%;
+  
+    white-space: nowrap;
+    overflow-x: auto;
+}
+ .child {
+    display: inline-block;
+    width: 73%;
+    height: 100%;
+   
+}
 #mytitle {
   font-size: 40px;
   margin-bottom: 5%;
   color: black;
   font-weight: bold;
+}
+#lbnds{
+  text-align: left;
+  margin-left: 2%;
+}
+#lbrs{
+ margin-left: 16%;
+  text-align: left;
 }
 
 .margin {
@@ -201,6 +255,12 @@ export default {
 
 .into-enter-active {
   animation: bounce-in 1s;
+}
+#rs{
+  margin-left: 15%;
+}
+#numsi{
+  margin-left:20%;
 }
 
 @keyframes bounce-in {
@@ -257,7 +317,7 @@ export default {
 #msg {
   display: block;
   max-width: 79%;
-  min-width: 77%;
+  min-width: 76%;
   padding: calc(0.75em - 1px);
   resize: vertical;
   left: 12%;
