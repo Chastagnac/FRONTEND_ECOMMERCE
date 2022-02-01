@@ -3,7 +3,7 @@
     <section class="section is-large">
       <br />
       <br />
-      <div class="boxe">
+      <div class="boxe" id="bluraccueil">
         <h1 class="title">
           <strong> La démarche zéro déchet, zéro gaspillage </strong
           ><br /><br />
@@ -132,6 +132,12 @@ export default {
   background-attachment: fixed;
   background-size: cover;
   background-color: #464646;
+}
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+#bluraccueil{
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+  }
 }
 .title {
   color: #363636;
