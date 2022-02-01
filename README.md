@@ -1,4 +1,4 @@
-# djackets_vue
+# frontend
 
 ## Project setup
 ```
