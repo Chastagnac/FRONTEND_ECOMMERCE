@@ -1,17 +1,17 @@
 <template>
     <div class="page-sign-up">
         <div class="columns">
-            <div class="column is-4 is-offset-4">
+            <div class="column is-4 is-offset-4" id="blur">
                 <h2>
-                    <a class="tab-link active"  data-ref="connexion"  href="javascript:void(0)"><router-link id="abcde" to="/log-in">Connexion </router-link></a>
-                      <a class="tab-link active"  data-ref="inscription" href="javascript:void(0)"><router-link id="inscription" to="sign-up">Inscription </router-link></a>
+                    <a class="tab-link active"  data-ref="connexion"  href="javascript:void(0)"><router-link id="connexionsign" to="/log-in">Connexion </router-link></a>
+                      <a class="tab-link active"  data-ref="inscription" href="javascript:void(0)"><router-link id="inscriptionsign" to="sign-up">Inscription </router-link></a>
                 </h2>
                 
     
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
-                        <label for ="nomuse">Nom d'utilisateur</label>
+                        <label id ="nomuse" for ="nomuse">Nom d'utilisateur</label>
                         <div class="control" >
                             <input type="text" id="holderi" class="input"  placeholder="Nom d'utilisateur" v-model="username">
                            
@@ -19,19 +19,19 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label>E-mail</label>
+                        <label id = "email">E-mail</label>
                         <div class="control">
                             <input type="email" class="input"  id="holderi" placeholder="Adresse email" v-model="email">
                         </div>
                     </div>
                     <div class="field">
-                        <label>Mot de passe</label>
+                        <label id="mdp">Mot de passe</label>
                         <div class="control">
                             <input type="password" class="input" id="holderi" placeholder="Mot de Passe" v-model="password">
                         </div>
                     </div>
                     <div class="field">
-                        <label>Répéter mot de passe</label>
+                        <label id = "rmdp">Répéter mot de passe</label>
                         <div class="control">
                             <input type="password" class="input"  id="holderi" placeholder="Mot de Passe" v-model="password2" >
                         </div>
@@ -147,6 +147,14 @@ export default {
     margin-top: 9%;
     border-radius: 30px;
 }
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+#blur{
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+  }
+}
+
+
 .tab-link {
     text-decoration: none;
     color: #141414;
@@ -165,14 +173,24 @@ h2{
     text-align: center;
 }
 
-#inscription {
+#inscriptionsign {
     color: #6E934C;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-#abcde{
-    color:#141414;
+#inscriptionsign:hover{
+  color:#6E934C;
+  font-size: 25px;
 }
+
+#connexionsign{
+    color: #141414;
+;
+}
+#connexionsign:hover{
+  color:#141414;
+  font-size: 25px;
+}
+
 
 .button {
     background-color: #517D2A;
@@ -224,10 +242,23 @@ h2{
 label {
     text-align: center;
     color: #333333;
-    left: 30%;
-    maring-left: 30%;
+    
+    
     font-size: 19px;
 }
+
+#nomuse{
+    margin-left: 27%;
+}
+#email{
+    margin-left: 27%;
+}#mdp{
+    margin-left: 27%;
+}
+#rmdp{
+    margin-left: 27%;
+}
+
 .textarea, .input {
     box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
     max-width: 100%;
@@ -237,9 +268,7 @@ label {
     border-radius: 10px;
         
 }
-.input{
-    
-}
+
 
 
 

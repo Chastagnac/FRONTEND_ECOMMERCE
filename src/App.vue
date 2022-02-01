@@ -28,7 +28,7 @@
             <div class="navbar-item has-dropdown is-hoverable"></div>
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Service</router-link>
-             <router-link to="/contact" class="navbar-item">Contact</router-link>
+            <router-link to="/contact" class="navbar-item">Contact</router-link>
           </div>
           <div class="navbar-end">
             <router-link
@@ -42,7 +42,7 @@
                 data-mdb-ripple-color="dark"
               ></i>
             </router-link>
-            <router-link v-else to="/log-in" class="navbar-item">
+            <router-link v-else to="/MyAccount" class="navbar-item">
               <i
                 class="far fa-user"
                 href="https://www.facebook.com/profile.php?id=100074600241159"
@@ -60,7 +60,7 @@
         <router-view />
       </section>
     </div>
-    
+
     <Footer></Footer>
   </div>
 </template>

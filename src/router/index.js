@@ -81,7 +81,8 @@ const routes = [{
         path: '/shop',
         name: 'Shop',
         component: Shop
-    }
+    },
+
 ]
 
 const router = createRouter({
