@@ -9,7 +9,7 @@
           class="tab-link active"
           data-ref="connexion"
           href="javascript:void(0)"
-          ><router-link id="connexionsign" to="/myaccount"
+          ><router-link id="connexionsign" to="/my-account"
             >Mes infos
           </router-link></a
         >
@@ -60,12 +60,12 @@
             />
           </div>
         </div>
-        <button class="button2" v-on:click="(modif = false)">
+        <button class="button2" v-on:click="modif = false">
           Modifier mes informations
         </button>
       </div>
       <div class="field" v-if="!modif">
-        <label class="label labmya nmya" >Nom</label>
+        <label class="label labmya nmya">Nom</label>
         <div class="control">
           <input
             class="input"
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="field" v-if="!modif">
-        <label class="label labmya" >Prénom</label>
+        <label class="label labmya">Prénom</label>
         <div class="control">
           <input
             class="input"
@@ -97,16 +97,11 @@
           />
         </div>
       </div>
-      <button
-        class="button2"
-        v-if="!modif"
-        v-on:click="(modif = true)" id="bmya"
-      >
+      <button class="button2" v-if="!modif" v-on:click="modif = true" id="bmya">
         Valider
       </button>
+      <button @click="logout()">Déconexion</button>
     </div>
-
-    
   </div>
 </template>
 
@@ -118,7 +113,6 @@ export default {
   data() {
     return {
       modif: true,
-      
     };
   },
   methods: {
@@ -145,11 +139,11 @@ export default {
   text-align: center;
 }
 
-.labmya{
+.labmya {
   text-align: left;
-  margin-left:17%;
+  margin-left: 17%;
 }
-.nmya{
+.nmya {
   margin-top: 1.3%;
 }
 
@@ -159,7 +153,7 @@ export default {
   margin-top: 4%;
 }
 input::placeholder {
-        color: #1c87c9;
-        opacity: 1;
-      }
+  color: #1c87c9;
+  opacity: 1;
+}
 </style>

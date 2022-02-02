@@ -1,6 +1,6 @@
 <template>
   <div class="page-checkout">
-    <div class="columns is-multiline">
+    <div class="columns is-multiline" style="width: 85%; margin: auto">
       <div class="column is-12">
         <h1 class="title">Paiement</h1>
       </div>
@@ -85,16 +85,16 @@
           <hr />
           <div id="card-element" class="mb-5"></div>
           <template v-if="cartTotalLenght">
-            <hr>
-            <button class="button is-dark" @click="submitForm">
+            <hr />
+            <button class="button is-dark" style="margin : 20px" @click="submitForm">
               Payer avec Stripe
             </button>
           </template>
-            <div class="notification is-danger mt-4" v-if="errors.length">
+          
+        </div>
+      </div><div class="notification is-danger mt-4" v-if="errors.length">
             <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
           </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>

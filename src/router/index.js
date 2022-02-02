@@ -12,6 +12,7 @@ import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Shop from '../views/Shop.vue'
+import Checkout from '../views/Checkout.vue'
 import store from '../store'
 
 const routes = [{
@@ -25,7 +26,12 @@ const routes = [{
         component: Search
     },
     {
-        path: '/myaccount',
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/my-account',
         name: 'MyAccount',
         component: MyAccount,
         meta: {
