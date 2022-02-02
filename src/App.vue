@@ -42,7 +42,7 @@
                 data-mdb-ripple-color="dark"
               ></i>
             </router-link>
-            <router-link v-else to="/MyAccount" class="navbar-item">
+            <router-link v-else to="/log-in" class="navbar-item">
               <i
                 class="far fa-user"
                 href="https://www.facebook.com/profile.php?id=100074600241159"

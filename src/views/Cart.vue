@@ -34,7 +34,7 @@
 
                     <hr>
 
-                    <router-link to="/cart/checkout" class="button is-dark">Procéder au paiement</router-link>
+                    <router-link to="/checkout" class="button is-dark">Procéder au paiement</router-link>
                 </div>
             </div>
         </div>
