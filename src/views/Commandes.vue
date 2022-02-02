@@ -1,6 +1,6 @@
 <template>
-  <div class="page my-account">
-    <div class="container is-max-desktop">
+    <div class="page commandes">
+        <div class="container is-max-desktop">
       <div>
         <h1 id="mytitlee">Mon espace</h1>
       </div>
@@ -9,7 +9,7 @@
           class="tab-link active"
           data-ref="connexion"
           href="javascript:void(0)"
-          ><router-link id="connexionsign" to="/my-account"
+          ><router-link id="connexionsign" to="/myaccount"
             >Mes infos
           </router-link></a
         >
@@ -60,12 +60,12 @@
             />
           </div>
         </div>
-        <button class="button2" v-on:click="modif = false">
+        <button class="button2" v-on:click="(modif = false)">
           Modifier mes informations
         </button>
       </div>
       <div class="field" v-if="!modif">
-        <label class="label labmya nmya">Nom</label>
+        <label class="label labmya nmya" >Nom</label>
         <div class="control">
           <input
             class="input"
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="field" v-if="!modif">
-        <label class="label labmya">Prénom</label>
+        <label class="label labmya" >Prénom</label>
         <div class="control">
           <input
             class="input"
@@ -97,22 +97,27 @@
           />
         </div>
       </div>
-      <button class="button2" v-if="!modif" v-on:click="modif = true" id="bmya">
+      <button
+        class="button2"
+        v-if="!modif"
+        v-on:click="(modif = true)" id="bmya"
+      >
         Valider
       </button>
-      <button @click="logout()">Déconexion</button>
     </div>
-  </div>
+
+    </div>
 </template>
 
 <script>
 import axios from "axios";
 
 export default {
-  name: "MyAccount",
+  name: "commandes",
   data() {
     return {
       modif: true,
+      
     };
   },
   methods: {
@@ -129,31 +134,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-#mytitlee {
-  font-size: 40px;
-  margin-bottom: 5%;
-  color: black;
-  font-weight: bold;
-  text-align: center;
-}
-
-.labmya {
-  text-align: left;
-  margin-left: 17%;
-}
-.nmya {
-  margin-top: 1.3%;
-}
-
-#bmya {
-  margin: auto;
-  display: flex;
-  margin-top: 4%;
-}
-input::placeholder {
-  color: #1c87c9;
-  opacity: 1;
-}
-</style>

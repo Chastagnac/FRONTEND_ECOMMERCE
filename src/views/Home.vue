@@ -3,7 +3,7 @@
     <section class="section is-large">
       <br />
       <br />
-      <div class="boxe">
+      <div class="boxe" id="bluraccueil">
         <h1 class="title">
           <strong> La démarche zéro déchet, zéro gaspillage </strong
           ><br /><br />
@@ -43,7 +43,12 @@
               <br /><br />
             </p>
           </div>
-          <div class="column" id="droite"></div>
+          <div class="column">
+            <img
+              src="../assets/zero-dechet-tendance-qui-emballe-F.jpeg"
+              class="responsive"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -133,6 +138,17 @@ export default {
   background-size: cover;
   background-color: #464646;
 }
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  #bluraccueil {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+  }
+}
+.responsive {
+  float: right;
+  max-height: 82%;
+  height: auto;
+}
 .title {
   color: #363636;
   font-size: 2rem;
@@ -161,9 +177,6 @@ export default {
   background: #fff;
 }
 
-#droite {
-  background: #d0ebdc;
-}
 .button2 {
   margin-top: 33px;
   background-color: #418014;
@@ -231,6 +244,49 @@ p {
   }
   .title p {
     width: 96%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 145%;
+  }
+}
+
+@media screen and (min-width: 1015px) and (max-width: 1420px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 23%;
+  }
+}
+@media screen and (min-width: 900px) and (max-width: 1015px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 33%;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 917px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 53%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 800px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 53%;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 600px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 83%;
+  }
+  .section.is-medium {
+    padding: 9rem 4.5rem;
+    background: #fff;
+    height: 46em;
+    margin-top: 31%;
   }
 }
 </style>

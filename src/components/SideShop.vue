@@ -1,6 +1,6 @@
 <template>
   <div class="column is-3">
-    <aside class="menu is-hidden-mobile">
+    <aside class="menu is-hidden-mobile mt">
       <p class="menu-label">Catégories</p>
       <ul class="menu-list">
         <li>
@@ -56,3 +56,8 @@ export default {
   methods: {},
 };
 </script>
+<style scoped>
+.mt {
+    margin-top: 60px;
+}
+</style>

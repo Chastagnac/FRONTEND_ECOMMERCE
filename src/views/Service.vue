@@ -8,7 +8,7 @@
         </h2>
       </div>
 
-      <section class="section has-background-primary">
+      <section id ="verde" class="section has-background-primary">
         <div class="container" style="margin: 24px">
           <div class="is-vcentered columns is-multiline">
             <div class="column is-6 is-5-desktop mb-4">
@@ -68,5 +68,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.has-background-primary {
+  background-color: #418014 !important;
+}
+
 </style>

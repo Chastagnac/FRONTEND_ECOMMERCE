@@ -1,19 +1,21 @@
 <template>
   <div class="page-log-in">
     <div class="columns">
-      <div v-if="isconnection" class="column is-4 is-offset-4">
+      <div v-if="isconnection" id="blure" class="column is-4 is-offset-4">
         <h2>
           <a
             class="tab-link active"
             data-ref="connexion"
             href="javascript:void(0)"
-            ><router-link id="abcde" to="/log-in">Connexion </router-link></a
+            ><router-link id="connexionlog" to="/log-in"
+              >Connexion
+            </router-link></a
           >
           <a
             class="tab-link active"
             data-ref="inscription"
             href="javascript:void(0)"
-            ><router-link id="inscription" to="sign-up"
+            ><router-link id="inscriptionlog" to="sign-up"
               >Inscription
             </router-link></a
           >
@@ -22,7 +24,7 @@
 
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label>Nom d'utilisateur</label>
+            <label id="nuse">Nom d'utilisateur</label>
             <div class="control">
               <input
                 type="text"
@@ -34,7 +36,7 @@
             </div>
           </div>
           <div class="field">
-            <label>Mot de passe</label>
+            <label id="nmdp">Mot de passe</label>
             <div class="control">
               <input
                 type="password"
@@ -48,6 +50,11 @@
           <div class="field">
             <div class="control">
               <button class="button is-dark">Connexion</button>
+            </div>
+            <div class="control">
+              <router-link style="color : black" to="/forget-password"
+                >Mot de passe oublié ?
+              </router-link>
             </div>
           </div>
         </form>
@@ -117,6 +124,27 @@ export default {
 
 
 <style lang="scss">
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  #blure {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+  }
+}
+
+#inscriptionlog {
+  color: #141414;
+}
+#inscriptionlog:hover {
+  color: #141414;
+  font-size: 25px;
+}
+#connexionlog {
+  color: #6e934c;
+}
+#connexionlog:hover {
+  color: #6e934c;
+  font-size: 25px;
+}
 .page-log-in {
   padding: 0;
   background-image: url("../assets/environnement-urbain.jpg");
@@ -126,5 +154,11 @@ export default {
   background-size: cover;
   background-color: #464646;
   height: 44em;
+}
+#nuse {
+  margin-left: 27%;
+}
+#nmdp {
+  margin-left: 27%;
 }
 </style>
