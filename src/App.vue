@@ -8,7 +8,6 @@
               style="height: 150px"
               :src="require(`@/assets/logoblack.png`)"
           /></router-link>
-
           <a
             role="button"
             class="navbar-burger"
