@@ -57,53 +57,14 @@
               id="limae"
               type="email"
               placeholder="example@gmail.com"
+              readonly="readonly"
             />
           </div>
         </div>
-        <button class="button2" v-on:click="(modif = false)">
+        <button class="button2">
           Modifier mes informations
         </button>
       </div>
-      <div class="field" v-if="!modif">
-        <label class="label labmya nmya" >Nom</label>
-        <div class="control">
-          <input
-            class="input"
-            id="np"
-            type="text"
-            placeholder="Veuillez entrer votre nouveau nom "
-          />
-        </div>
-      </div>
-      <div class="field" v-if="!modif">
-        <label class="label labmya" >Prénom</label>
-        <div class="control">
-          <input
-            class="input"
-            id="np"
-            type="text"
-            placeholder="Veuillez entrer votre nouveau prénom"
-          />
-        </div>
-      </div>
-      <div class="field" v-if="!modif">
-        <label class="label labmya">Adresse email</label>
-        <div class="control">
-          <input
-            class="input"
-            id="np"
-            type="text"
-            placeholder="Veuillez entrer votre nouvelle adresse email"
-          />
-        </div>
-      </div>
-      <button
-        class="button2"
-        v-if="!modif"
-        v-on:click="(modif = true)" id="bmya"
-      >
-        Valider
-      </button>
     </div>
 
     
