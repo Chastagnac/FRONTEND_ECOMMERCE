@@ -1,13 +1,16 @@
 <template>
   <div>
-    <router-link v-bind:to="product.get_absolute_url">
-      <div class="box" style="margin: 30px; height: 370px">
+    <div class="box" style="margin: 30px; height: 370px">
+      <router-link v-bind:to="product.get_absolute_url">
         <article class="media" style="background-color: black">
-          <img :src="product.get_thumbnail" />
+          <img
+            :src="product.get_thumbnail"
+            style="height: 200px; width: 100%"
+          />
         </article>
-        <div class="media-content">
+        <div class="media-content" style="height: 90px">
           <div class="content">
-            <p>
+            <p style="text-align: justify">
               {{ product.name }}
               <br />
             </p>
@@ -17,14 +20,8 @@
         <div class="container">
           <strong>{{ product.price }} €</strong><br />
         </div>
-        <button @click="addToCart()">
-          <i
-            class="fas fa-shopping-cart fa-1x"
-            style="color: green !important"
-          ></i>
-        </button>
-      </div>
-    </router-link>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -70,8 +67,14 @@ export default {
   width: 15%;
 }
 .box {
+  transition: 0.3s;
   border-style: groove;
   border-color: #1d3d113b;
+}
+.box:hover {
+  transform: scale(1.05);
+  border-style: groove;
+  border-color: #62ca3b3b;
 }
 .content {
   margin-top: 10px;
@@ -81,14 +84,5 @@ export default {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-}
-.add {
-  margin-left: 14%;
-  position: absolute;
-  display: flex;
-  padding: 0px 2px 0px 28px;
-  font-variant: JIS04;
-  border-radius: 51px;
-  display: flex;
 }
 </style>
