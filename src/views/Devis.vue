@@ -94,7 +94,7 @@
               <label class="label" id="lbrs">Raison sociale</label>
               <div class="control">
                 <input
-                  class="input"
+                  class="input rss"
                   id="rs"
                   type="text"
                   placeholder="Nom de votre entreprise"
@@ -274,6 +274,73 @@ export default {
     transform: scale(0);
   }
 }
+@media only screen and (max-width: 1023px) {
+ .child {
+    display: block;
+    width: 73%;
+    height: 100%;
+   
+}
+#np {
+  width: 470px !important;
+  border-color: #418014;
+}
+#limae {
+  width: 481px !important;
+  border-color: #418014;
+}
+.rss{
+  width: 91%;
+margin-left: 23%;
+
+}
+.rs{
+  margin-left:39%;
+}
+#pn {
+  text-align: center;
+  margin-left: 0%;
+
+}
+#yourmail {
+  text-align: center;
+  margin-left: 0%;
+}
+#yourobject {
+  text-align: center;
+  margin-left: 0%;
+}
+#lbrs[data-v-55d08eb5] {
+  margin-left: 0%;
+  text-align: center;
+}
+#lbnds[data-v-55d08eb5] {
+  text-align: center;
+  margin-left: 0%;
+}
+.child[data-v-55d08eb5] {
+  display: block;
+  width: 73%;
+  margin-left: 57%;
+}
+
+}
+
+@media only screen and (max-width: 864px) {
+
+  #tejbo {
+  width: 483px !important;
+  margin-right: 2%;
+  border-color: #418014;
+}
+#pn {
+  text-align: center;
+
+}
+}
+
+
+
 </style>
 
 <style lang="scss">
@@ -342,4 +409,6 @@ export default {
 #colorbutt {
   background: #418014;
 }
+
+
 </style>
