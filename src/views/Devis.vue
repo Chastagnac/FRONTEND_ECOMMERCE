@@ -94,7 +94,7 @@
               <label class="label" id="lbrs">Raison sociale</label>
               <div class="control">
                 <input
-                  class="input"
+                  class="input rss"
                   id="rs"
                   type="text"
                   placeholder="Nom de votre entreprise"
@@ -241,7 +241,6 @@ export default {
  margin-left: 16%;
   text-align: left;
 }
-
 .margin {
   margin: 40px;
 }
@@ -252,7 +251,6 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 .into-enter-active {
   animation: bounce-in 1s;
 }
@@ -262,7 +260,6 @@ export default {
 #numsi{
   margin-left:20%;
 }
-
 @keyframes bounce-in {
   0% {
     transform: scale(1);
@@ -273,6 +270,131 @@ export default {
   100% {
     transform: scale(0);
   }
+}
+@media only screen and (max-width: 1023px) {
+ .child {
+    display: block;
+    width: 73%;
+    height: 100%;
+   
+}
+#np {
+  width: 470px !important;
+  border-color: #418014;
+}
+#limae {
+  width: 481px !important;
+  border-color: #418014;
+}
+.rss{
+  width: 91%;
+margin-left: 23%;
+}
+.rs{
+  margin-left:39%;
+}
+#pn {
+  text-align: center;
+  margin-left: 0%;
+}
+#yourmail {
+  text-align: center;
+  margin-left: 0%;
+}
+#yourobject {
+  text-align: center;
+  margin-left: 0%;
+}
+#lbrs[data-v-55d08eb5] {
+  margin-left: 0%;
+  text-align: center;
+}
+#lbnds[data-v-55d08eb5] {
+  text-align: center;
+  margin-left: 0%;
+}
+.child[data-v-55d08eb5] {
+  display: block;
+  width: 73%;
+  margin-left: 57%;
+}
+}
+@media only screen and (max-width: 864px) {
+  #tejbo {
+  width: 483px !important;
+  margin-right: 2%;
+  border-color: #418014;
+}
+#pn {
+  text-align: center;
+}
+#rs[data-v-55d08eb5] {
+  width: 100%;
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+}
+#numsi[data-v-55d08eb5] {
+   width: 100%;
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+}
+#nds {
+  border-color: #418014;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+}
+}
+@media only screen and (max-width: 496px) {
+  #np[data-v-55d08eb5] {
+  width: 100% !important;
+  border-color: #418014;
+}
+#msg{
+  display: block;
+padding: calc(0.75em - 1px);
+resize: vertical;
+width: 100%;
+left:0%;
+border-color: #418014;
+max-width: 100%;
+min-width: 100%;
+}
+#drope {
+  border-color: #418014;
+  right: 25%;
+}
+#tejbo {
+ width: 100% !important;
+margin-right: 12%;
+border-color: #418014;
+}
+#limae[data-v-55d08eb5] {
+  width: 100% !important;
+  border-color: #418014;
+  margin-right: 12%;
+}
+#rs[data-v-55d08eb5] {
+  width: 100%;
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+}
+#numsi[data-v-55d08eb5] {
+   width: 100%;
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+}
+#nds {
+  border-color: #418014;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+}
+
 }
 </style>
 
@@ -294,7 +416,6 @@ export default {
 #nds {
   border-color: #418014;
 }
-
 #np {
   width: 642px !important;
   border-color: #418014;
@@ -308,12 +429,10 @@ export default {
   margin-right: 8%;
   border-color: #418014;
 }
-
 #drope {
   right: 10%;
   border-color: #418014;
 }
-
 #msg {
   display: block;
   max-width: 79%;
