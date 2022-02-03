@@ -289,6 +289,10 @@ export default {
 .rss{
   width: 91%;
 margin-left: 23%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
 }
 .rs{
   margin-left:39%;
@@ -296,6 +300,10 @@ margin-left: 23%;
 #pn {
   text-align: center;
   margin-left: 0%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
 }
 #yourmail {
   text-align: center;
@@ -318,8 +326,16 @@ margin-left: 23%;
   width: 73%;
   margin-left: 57%;
 }
+<<<<<<< HEAD
 }
 @media only screen and (max-width: 864px) {
+=======
+
+}
+
+@media only screen and (max-width: 864px) {
+
+>>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
   #tejbo {
   width: 483px !important;
   margin-right: 2%;
@@ -327,6 +343,7 @@ margin-left: 23%;
 }
 #pn {
   text-align: center;
+<<<<<<< HEAD
 }
 #rs[data-v-55d08eb5] {
   width: 100%;
@@ -396,6 +413,14 @@ border-color: #418014;
 }
 
 }
+=======
+
+}
+}
+
+
+
+>>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
 </style>
 
 <style lang="scss">
@@ -461,4 +486,6 @@ border-color: #418014;
 #colorbutt {
   background: #418014;
 }
+
+
 </style>
