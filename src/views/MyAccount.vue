@@ -4,6 +4,7 @@
       <div>
         <h1 id="mytitlee">Mon espace</h1>
       </div>
+      <li v-bind:key="index" v-for="(info , index) in info"></li>
       <h2>
         <a
           class="tab-link active"
@@ -33,7 +34,8 @@
               class="input"
               id="np"
               type="text"
-              placeholder="Entrez votre nom"
+              placeholder= prenom
+              v-model="nom"
             />
           </div>
         </div>
@@ -45,6 +47,7 @@
               id="np"
               type="text"
               placeholder="Entrez votre prénom"
+              v-model="prenom"
             />
           </div>
         </div>
@@ -58,10 +61,11 @@
               type="email"
               placeholder="example@gmail.com"
               readonly="readonly"
+              v-model="email"
             />
           </div>
         </div>
-        <button class="button2">
+        <button class="button2" v-on:click="updateUser()">
           Modifier mes informations
         </button>
       </div>
@@ -78,20 +82,54 @@ export default {
   name: "MyAccount",
   data() {
     return {
+      username: '',
+      email: '',
+      password: '',
+      password2: '',
+
       modif: true,
-      
+      info: null,
     };
   },
   methods: {
+
+    mounted()
+    {
+      this.getUser();
+    },
+
     logout() {
       axios.defaults.headers.common["Authorization"] = "";
 
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("userid");
-
+ 
       this.$store.commit("removeToken");
       this.$router.push("/");
+    },
+
+    updateUser(){
+        axios
+        .post("/api/v1/users/reset_username/", formData)
+        .then(response => {
+            this.info = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    getUser(){
+        axios.defaults.headers.common["Authorization"] = "";
+        axios
+        .get("/api/v1/users/me/?format=api")
+        .then((response) => {
+          this.info = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
