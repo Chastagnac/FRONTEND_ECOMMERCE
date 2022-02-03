@@ -18,8 +18,7 @@
 
         <div class="boxeInto">
           <router-link to="/service">
-            <button class="button2">Découvrez nos services</button></router-link
-          >
+            <button class="button2">Découvrez nos services</button></router-link>
         </div>
       </div>
     </section>
