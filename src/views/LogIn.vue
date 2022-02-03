@@ -52,8 +52,8 @@
               <button class="button is-dark">Connexion</button>
             </div>
             <div class="control">
-              <router-link style="color : black" to="/forget-password"
-                >Mot de passe oublié ?
+              <router-link style="color : black" to="/forget-password">
+                Mot de passe oublié ?
               </router-link>
             </div>
           </div>
