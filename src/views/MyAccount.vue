@@ -68,6 +68,10 @@
         <button class="button2" v-on:click="updateUser()">
           Modifier mes informations
         </button>
+
+        <button  class="buttonDeco" v-on:click="logout()">
+          Déconnexion
+        </button>
       </div>
     </div>
 
@@ -93,10 +97,7 @@ export default {
   },
   methods: {
 
-    mounted()
-    {
-      this.getUser();
-    },
+
 
     logout() {
       axios.defaults.headers.common["Authorization"] = "";
@@ -110,8 +111,9 @@ export default {
     },
 
     updateUser(){
+        axios.defaults.headers.common["Authorization"] = "";
         axios
-        .post("/api/v1/users/reset_username/", formData)
+        .post("/api/v1/users/me/?format=api")
         .then(response => {
             this.info = response.data;
         })
@@ -121,7 +123,7 @@ export default {
     },
 
     getUser(){
-        axios.defaults.headers.common["Authorization"] = "";
+        axios.defaults.headers.common["Authorization"] = "token" + localStorage.getItem("token");
         axios
         .get("/api/v1/users/me/?format=api")
         .then((response) => {
@@ -161,4 +163,24 @@ input::placeholder {
         color: #1c87c9;
         opacity: 1;
       }
+
+.buttonDeco {
+  margin-top: 33px;
+  background-color: #4c4f52;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  color: whitesmoke;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 20px;
+}
 </style>
