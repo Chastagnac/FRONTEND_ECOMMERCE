@@ -16,6 +16,7 @@
     "view-design": "^4.7.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vuetify-loader": "^1.4.3",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
