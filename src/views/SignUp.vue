@@ -31,6 +31,7 @@
                 class="input"
                 placeholder="Nom d'utilisateur"
                 v-model="username"
+                :disabled="disabled"
               />
             </div>
           </div>
@@ -43,6 +44,7 @@
                 id="holderi"
                 placeholder="Adresse email"
                 v-model="email"
+                :disabled="disabled"
               />
             </div>
           </div>
@@ -55,6 +57,7 @@
                 id="holderi"
                 placeholder="Mot de Passe"
                 v-model="password"
+                :disabled="disabled"
               />
             </div>
           </div>
@@ -67,6 +70,7 @@
                 id="holderi"
                 placeholder="Mot de Passe"
                 v-model="password2"
+                :disabled="disabled"
               />
             </div>
           </div>
@@ -99,12 +103,37 @@ export default {
       password: "",
       password2: "",
       errors: [],
+      disabled: false,
     };
   },
+  mounted() {
+    if (!this.infoCookie()) {
+      toast({
+        message: `Veuillez acceptez les cookies pour pouvoir vous connecter`,
+        type: "is-warning",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 11000,
+        position: "top-right",
+      });
+    }
+  },
+
   methods: {
+    infoCookie() {
+      if (document.cookie[31] === "a") {
+        this.disabled = false;
+        return true;
+      } else {
+        this.disabled = true;
+        return false;
+      }
+    },
     submitForm() {
       this.errors = [];
-
+      if (this.disabled === true) {
+        this.errors.push(`Veuillez accepter les cookies`);
+      }
       if (this.username === "") {
         this.errors.push(`Le nom d'utilisateur doit être renseigné`);
       }

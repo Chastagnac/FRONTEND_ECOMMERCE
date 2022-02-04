@@ -113,6 +113,7 @@ export default {
   data() {
     return {
       modif: true,
+      infos: [],
     };
   },
   methods: {

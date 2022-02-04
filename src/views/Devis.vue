@@ -140,21 +140,26 @@
         </div>
         <div class="field is-grouped">
           <div class="control" id="mybutton">
-            <button class="button is-link" id="colorbutt">
+            <button class="button is-link" id="colorbutt" @click="trigerPost">
               Créer mon ticket de suivi<i
                 class="fas fa-tags"
                 style="margin-left: 10px; margin-top: 5px"
               ></i>
             </button>
+            <div class="notification is-danger" v-if="errors.length">
+              <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+            </div>
           </div>
         </div>
       </div>
-      {{ data }}
+      {{ data }} {{ particulier }}
+      {{ erreurs }}
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
 export default {
   name: "Service",
   data() {
@@ -171,11 +176,71 @@ export default {
           content: "",
         },
       },
+      erreurs: [],
       is_valide: false,
+      errors: [],
     };
   },
   methods: {
-    trigerPost() {},
+    trigerPost() {
+      this.errors = [];
+
+      if (this.data.name === "") {
+        this.errors.push(`Le nom doit être renseigné`);
+      }
+
+      if (this.data.email === "") {
+        this.errors.push(`Le mail doit être rempli`);
+      }
+
+      if (this.data.message.categorie === "") {
+        this.errors.push(`La catégorie doit être renseignée`);
+      }
+
+      if (this.data.message.object === "") {
+        this.errors.push(`L'objet doit être renseigné`);
+      }
+      if (this.data.message.content === "") {
+        this.errors.push(`Le contenu doit être renseigné`);
+      }
+      if (this.errors.lenght) {
+        const formData = {
+          status: this.particulier,
+          name: this.data.name,
+          email: this.data.email,
+          siret: this.data.siret,
+          raison_social: this.data.raison_social,
+          object: this.data.message.object,
+          category: this.data.message.categorie,
+          content: this.data.message.content,
+        };
+        axios
+          .post("/api/v1/send-quote/", formData)
+          .then((response) => {
+            toast({
+              message:
+                "Devis créé ! Un membre d'Eco Service vas venir s'occuper de vous !",
+              type: "is-success",
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 4000,
+              position: "bottom-right",
+            });
+            this.$router.push("/");
+          })
+          .catch((error) => {
+            if (error.response) {
+              this.erreurs.push(error.response.data);
+
+              console.log(JSON.stringify(error.response.data));
+            } else if (error.message) {
+              this.errors.push("Something went wrong. Please try again");
+
+              console.log(JSON.stringify(error));
+            }
+          });
+      }
+    },
   },
 };
 </script>

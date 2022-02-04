@@ -8,6 +8,7 @@ import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
 import Conditions from '../views/Conditions.vue'
+import DevisClients from '../views/DevisClients.vue'
 import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
@@ -42,6 +43,11 @@ const routes = [{
         path: '/cart',
         name: 'Cart',
         component: Cart
+    },
+    {
+        path: '/devis-clients',
+        name: 'DevisClients',
+        component: DevisClients
     },
     {
         path: '/sign-up',

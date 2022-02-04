@@ -29,6 +29,9 @@
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Service</router-link>
             <router-link to="/contact" class="navbar-item">Contact</router-link>
+            <router-link to="/devis-clients" class="navbar-item"
+              >Devis clients</router-link
+            >
           </div>
           <div class="navbar-end">
             <router-link
@@ -95,6 +98,15 @@ export default {
   // Quand l'app est "montée" on recupère $cart du store dans this.cart
   mounted() {
     this.cart = this.$store.state.cart;
+    let recaptchaScript = document.createElement("script");
+    let recaptchaScript2 = document.createElement("script");
+    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
+    recaptchaScript2.setAttribute(
+      "src",
+      "//cdn.cookie-script.com/s/b001f3b1be1e28435196e1181691cec7.js"
+    );
+    document.head.appendChild(recaptchaScript);
+    document.head.appendChild(recaptchaScript2);
   },
   // Lorsque l'app tourne, si un produit viens s'add au panier,
   //  il incrémente et retoure le total

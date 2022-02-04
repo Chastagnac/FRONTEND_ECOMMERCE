@@ -8,7 +8,11 @@
         </h2>
       </div>
 
-      <section id ="verde" class="section has-background-primary">
+      <section
+        id="verde"
+        class="section has-background-primary"
+        style="border-radius: 10px"
+      >
         <div class="container" style="margin: 24px">
           <div class="is-vcentered columns is-multiline">
             <div class="column is-6 is-5-desktop mb-4">
@@ -38,6 +42,7 @@
                     alt=""
                   />
                 </p>
+                <br />
                 <div class="card">
                   <router-link class="is-primary" to="/service/devis"
                     >Commencer le devis</router-link
@@ -72,5 +77,4 @@ export default {
 .has-background-primary {
   background-color: #418014 !important;
 }
-
 </style>
