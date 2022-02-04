@@ -7,7 +7,9 @@
             class="tab-link active"
             data-ref="connexion"
             href="javascript:void(0)"
-            ><router-link id="connexionlog" to="/log-in">Connexion </router-link></a
+            ><router-link id="connexionlog" to="/log-in"
+              >Connexion
+            </router-link></a
           >
           <a
             class="tab-link active"
@@ -19,10 +21,9 @@
           >
         </h2>
         <br />
-
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label id = "nuse">Nom d'utilisateur</label>
+            <label id="nuse">Nom d'utilisateur</label>
             <div class="control">
               <input
                 type="text"
@@ -30,11 +31,12 @@
                 placeholder="Nom d'utilisateur"
                 class="input"
                 v-model="username"
+                :disabled="disabled"
               />
             </div>
           </div>
           <div class="field">
-            <label id ="nmdp">Mot de passe</label>
+            <label id="nmdp">Mot de passe</label>
             <div class="control">
               <input
                 type="password"
@@ -42,12 +44,18 @@
                 placeholder="Mot de Passe"
                 class="input"
                 v-model="password"
+                :disabled="disabled"
               />
             </div>
           </div>
           <div class="field">
             <div class="control">
               <button class="button is-dark">Connexion</button>
+            </div>
+            <div class="control">
+              <router-link style="color: black" to="/forget-password"
+                >Mot de passe oublié ?
+              </router-link>
             </div>
           </div>
         </form>
@@ -71,17 +79,38 @@ export default {
       password: "",
       errors: [],
       isconnection: true,
+      disabled: false,
     };
   },
   mounted() {
-    document.title = "Connection |`Ilios Shop ";
+    if (!this.infoCookie()) {
+      toast({
+        message: `Veuillez acceptez les cookies pour pouvoir vous connecter`,
+        type: "is-warning",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 11000,
+        position: "top-right",
+      });
+    }
   },
   methods: {
+    infoCookie() {
+      if (document.cookie[31] === "a") {
+        this.disabled = false;
+        return true;
+      } else {
+        this.disabled = true;
+        return false;
+      }
+    },
     async submitForm() {
       axios.defaults.headers.common["Authorization"] = "";
 
       localStorage.removeItem("token");
-
+      if (this.disabled === true) {
+        this.errors.push(`Veuillez accepter les cookies`);
+      }
       const fromData = {
         username: this.username,
         password: this.password,
@@ -97,7 +126,7 @@ export default {
 
           localStorage.setItem("token", token);
 
-          const toPath = this.$route.query.to || "/cart";
+          const toPath = this.$route.query.to || "/";
           this.$router.push(toPath);
         })
         .catch((error) => {
@@ -118,24 +147,24 @@ export default {
 
 <style lang="scss">
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-#blure{
+  #blure {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(6px);
   }
 }
 
-#inscriptionlog{
-  color:#141414;
+#inscriptionlog {
+  color: #141414;
 }
-#inscriptionlog:hover{
-  color:#141414;
+#inscriptionlog:hover {
+  color: #141414;
   font-size: 25px;
 }
-#connexionlog{
-  color:#6E934C;
+#connexionlog {
+  color: #6e934c;
 }
-#connexionlog:hover{
-  color:#6E934C;
+#connexionlog:hover {
+  color: #6e934c;
   font-size: 25px;
 }
 .page-log-in {
@@ -148,11 +177,10 @@ export default {
   background-color: #464646;
   height: 44em;
 }
-#nuse{
-    margin-left: 27%;
+#nuse {
+  margin-left: 27%;
 }
-#nmdp{
-    margin-left: 27%;
+#nmdp {
+  margin-left: 27%;
 }
-
 </style>

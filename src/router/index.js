@@ -8,10 +8,12 @@ import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
 import Conditions from '../views/Conditions.vue'
+import DevisClients from '../views/DevisClients.vue'
 import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Shop from '../views/Shop.vue'
+import Checkout from '../views/Checkout.vue'
 import store from '../store'
 
 const routes = [{
@@ -25,7 +27,12 @@ const routes = [{
         component: Search
     },
     {
-        path: '/myaccount',
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/my-account',
         name: 'MyAccount',
         component: MyAccount,
         meta: {
@@ -36,6 +43,11 @@ const routes = [{
         path: '/cart',
         name: 'Cart',
         component: Cart
+    },
+    {
+        path: '/devis-clients',
+        name: 'DevisClients',
+        component: DevisClients
     },
     {
         path: '/sign-up',

@@ -235,7 +235,6 @@ export default {
   margin-left: 16%;
   text-align: left;
 }
-
 .margin {
   margin: 40px;
 }
@@ -246,7 +245,6 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 .into-enter-active {
   animation: bounce-in 1s;
 }
@@ -256,7 +254,6 @@ export default {
 #numsi {
   margin-left: 20%;
 }
-
 @keyframes bounce-in {
   0% {
     transform: scale(1);
@@ -320,7 +317,6 @@ export default {
     max-width: 100%;
     min-width: 56%;
   }
-
   #numsi[data-v-55d08eb5] {
     width: 100%;
     margin: auto;
@@ -337,7 +333,6 @@ export default {
     width: 100%;
   }
 }
-
 @media only screen and (max-width: 864px) {
   #tejbo {
     width: 483px !important;
@@ -364,14 +359,6 @@ export default {
     width: 100%;
     max-width: 100%;
     min-width: 57%;
-  }
-  #tejbo[data-v-55d08eb5] {
-    width: 57% !important;
-    margin-right: 0%;
-    border-color: #418014;
-  }
-  .raisonsociale {
-    width: 100%;
   }
   #tejbo[data-v-55d08eb5] {
     width: 57% !important;
@@ -430,6 +417,8 @@ export default {
     border-color: #418014;
   }
 }
+</style>
+<style lang="scss">
 #partic {
   background-color: #418014;
   color: #fff;
@@ -493,6 +482,7 @@ export default {
   background: #418014;
 }
 </style>
+
 <style lang="scss">
 #partic {
   background-color: #418014;

@@ -43,11 +43,15 @@
               <br /><br />
             </p>
           </div>
-          <div class="column" id="droite"></div>
+          <div class="column">
+            <img
+              src="../assets/zero-dechet-tendance-qui-emballe-F.jpeg"
+              class="responsive"
+            />
+          </div>
         </div>
       </div>
     </section>
-
     <div class="section" id="sect">
       <h1 class="title">Découvrez nos derniers produits !</h1>
       <h2 class="subtitle">
@@ -60,26 +64,22 @@
             :key="product.value"
             class="column is-one-third"
           >
-            <div class="card">
-              <div class="card-image">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image mb-6 is-128x128">
-                        <img :src="product.get_image" />
-                      </figure>
+            <div class="card box2">
+              <router-link v-bind:to="product.get_absolute_url">
+                <div class="card-image">
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image mb-6 is-128x128">
+                          <img :src="product.get_image" />
+                        </figure>
+                      </div>
+                      <div class="media-content"></div>
                     </div>
-                    <div class="media-content">
-                      <router-link
-                        v-bind:to="product.get_absolute_url"
-                        class="button is-dark mt-4"
-                        >Voir détails</router-link
-                      >
-                    </div>
+                    <p>{{ product.name }}</p>
                   </div>
-                  <p>{{ product.name }}</p>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -100,9 +100,6 @@ export default {
   mounted() {
     this.getLastedProducts();
     document.title = "Se-digitaliser";
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
-    document.head.appendChild(recaptchaScript);
   },
   methods: {
     getLastedProducts() {
@@ -134,10 +131,15 @@ export default {
   background-color: #464646;
 }
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-#bluraccueil{
+  #bluraccueil {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(6px);
   }
+}
+.responsive {
+  float: right;
+  max-height: 82%;
+  height: auto;
 }
 .title {
   color: #363636;
@@ -162,14 +164,20 @@ export default {
   background: #fff;
   height: 46em;
 }
-
+.box2 {
+  transition: 0.3s;
+  border-style: groove;
+  border-color: #1d3d113b;
+}
+.box2:hover {
+  transform: scale(1.05);
+  border-style: groove;
+  border-color: #62ca3b3b;
+}
 .cont {
   background: #fff;
 }
 
-#droite {
-  background: #d0ebdc;
-}
 .button2 {
   margin-top: 33px;
   background-color: #418014;
@@ -240,6 +248,13 @@ p {
     width: 96%;
   }
 }
+@media only screen and (max-width: 500px) {
+  #sect {
+    background: #f5f5f6;
+    margin-top: 145%;
+  }
+}
+
 @media screen and (min-width: 1015px) and (max-width: 1420px) {
   #sect {
     background: #f5f5f6;

@@ -117,7 +117,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "MyAccount",
   data() {
@@ -128,11 +127,9 @@ export default {
   methods: {
     logout() {
       axios.defaults.headers.common["Authorization"] = "";
-
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("userid");
-
       this.$store.commit("removeToken");
       this.$router.push("/");
     },
@@ -175,7 +172,6 @@ export default {
   font-weight: bold;
   text-align: center;
 }
-
 .labmya {
   text-align: left;
   margin-left: 17%;
@@ -183,7 +179,6 @@ export default {
 .nmya {
   margin-top: 1.3%;
 }
-
 #bmya {
   margin: auto;
   display: flex;

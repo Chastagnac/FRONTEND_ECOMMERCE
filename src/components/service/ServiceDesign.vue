@@ -39,10 +39,10 @@
             ></span>
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Lorem ipsum dolor
+                Substances dangereuses Identifier
               </h4>
               <p class="subtitle has-text-grey">
-                Pellentesque eu quam vitae mi lacinia consequat quis in metus.
+                Mettez en place les meilleures stratégies de traitement.
               </p>
             </div>
           </div>
@@ -63,10 +63,11 @@
             ></span>
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Lorem ipsum dolor
+                Ramassage sur Place
               </h4>
               <p class="subtitle has-text-grey">
-                Pellentesque eu quam vitae mi lacinia consequat quis in metus.
+                Un agent eco service viendra récupérer le matériel dont vous
+                souhaitez vous débarrasser.
               </p>
             </div>
           </div>
@@ -86,11 +87,10 @@
                 <circle cx="24" cy="24" r="23.5" stroke="#00d1b2"></circle></svg
             ></span>
             <div class="ml-3">
-              <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Lorem ipsum dolor
-              </h4>
+              <h4 class="is-size-4 has-text-weight-bold mb-2">Tutoriels</h4>
               <p class="subtitle has-text-grey">
-                Pellentesque eu quam vitae mi lacinia consequat quis in metus.
+                Eco service propose divers tutoriels pour simplifier
+                l’expérience utilisateur.
               </p>
             </div>
           </div>
@@ -120,10 +120,10 @@
             ></span>
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Lorem ipsum dolor
+                E-Commerce Eco-Responsable
               </h4>
               <p class="subtitle has-text-grey">
-                Pellentesque eu quam vitae mi lacinia consequat quis in metus.
+                Eco-Service lance sa boutique ecommerce éco responsable.
               </p>
             </div>
           </div>
@@ -144,10 +144,11 @@
             ></span>
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Lorem ipsum dolor
+                Gestion énergétique
               </h4>
               <p class="subtitle has-text-grey">
-                Pellentesque eu quam vitae mi lacinia consequat quis in metus.
+                Eco service conseille ses clients sur la meilleure option
+                énergétique possible.
               </p>
             </div>
           </div>
@@ -167,11 +168,10 @@
                 <circle cx="24" cy="24" r="23.5" stroke="#00d1b2"></circle></svg
             ></span>
             <div class="ml-3">
-              <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Lorem ipsum dolor
-              </h4>
+              <h4 class="is-size-4 has-text-weight-bold mb-2">Communauté</h4>
               <p class="subtitle has-text-grey">
-                Pellentesque eu quam vitae mi lacinia consequat quis in metus.
+                Eco Service, souhaité communiquer sur les bonnes pratiques
+                environnementales.
               </p>
             </div>
           </div>
@@ -188,4 +188,7 @@ export default {
 </script>
 
 <style>
+p {
+  line-height: 25px !important;
+}
 </style>
