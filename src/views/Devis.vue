@@ -33,9 +33,33 @@
         <div class="columns is-multiline">
           <div
             class="column"
-            v-bind:class="{ 'is-12': particulier, 'is-6': !particulier }"
+            v-bind:class="{ 'is-12': !particulier, 'is-6': !particulier }"
           >
-            <div class="field">
+            <div class="field" v-if="!particulier">
+              <label class="label" id="pn">Nom et prénom</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="np"
+                  type="text"
+                  placeholder="Entrez votre nom et prénom"
+                  v-model="data.name"
+                />
+              </div>
+            </div>
+            <div class="field" v-if="!particulier">
+              <label class="label" id="yourmail">Email</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="limae"
+                  type="email"
+                  placeholder="example@gmail.com"
+                  v-model="data.email"
+                />
+              </div>
+            </div>
+            <div class="field" v-if="particulier">
               <label class="label" id="pn">Nom et prénom</label>
               <div class="control">
                 <input
@@ -48,7 +72,7 @@
               </div>
             </div>
 
-            <div class="field">
+            <div class="field" v-if="particulier">
               <label class="label" id="yourmail">Email</label>
               <div class="control">
                 <input
@@ -61,35 +85,40 @@
               </div>
             </div>
           </div>
-          <div class="column is-6">
-            <div class="field" v-if="!particulier">
-              <label class="label">Raison sociale</label>
-              <div class="control">
-                <input
-                  class="input"
-                  id="rs"
-                  type="text"
-                  placeholder="Nom de votre entreprise"
-                  v-model="data.raison_social"
-                />
-              </div>
-            </div>
 
-            <div class="field" v-if="!particulier">
-              <label class="label">Numéro de siret</label>
-              <div class="control">
-                <input
-                  class="input"
-                  id="nds"
-                  type="text"
-                  placeholder="123 568 941 00056"
-                  v-model="data.siret"
-                />
+          <div id="parent">
+            <div id="enfant">
+              <div class="column is-6 raisonsociale">
+                <div class="field child" id="rs" v-if="!particulier">
+                  <label class="label" id="lbrs">Raison sociale</label>
+                  <div class="control">
+                    <input
+                      class="input rss"
+                      id="rs"
+                      type="text"
+                      placeholder="Nom de votre entreprise"
+                      v-model="data.raison_social"
+                    />
+                  </div>
+                </div>
+
+                <div class="field child" id="numsi" v-if="!particulier">
+                  <label class="label" id="lbnds">Numéro de siret</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      id="nds"
+                      type="text"
+                      placeholder="123 568 941 00056"
+                      v-model="data.siret"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <hr />
+
         <div class="columns is-multiline">
           <div class="column is-9">
             <div class="field">
@@ -140,26 +169,21 @@
         </div>
         <div class="field is-grouped">
           <div class="control" id="mybutton">
-            <button class="button is-link" id="colorbutt" @click="trigerPost">
+            <button class="button is-link" id="colorbutt">
               Créer mon ticket de suivi<i
                 class="fas fa-tags"
                 style="margin-left: 10px; margin-top: 5px"
               ></i>
             </button>
-            <div class="notification is-danger" v-if="errors.length">
-              <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-            </div>
           </div>
         </div>
       </div>
-      {{ data }} {{ particulier }}
-      {{ erreurs }}
+      {{ data }}
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
-import { toast } from "bulma-toast";
 export default {
   name: "Service",
   data() {
@@ -176,83 +200,41 @@ export default {
           content: "",
         },
       },
-      erreurs: [],
       is_valide: false,
-      errors: [],
     };
   },
   methods: {
-    trigerPost() {
-      this.errors = [];
-
-      if (this.data.name === "") {
-        this.errors.push(`Le nom doit être renseigné`);
-      }
-
-      if (this.data.email === "") {
-        this.errors.push(`Le mail doit être rempli`);
-      }
-
-      if (this.data.message.categorie === "") {
-        this.errors.push(`La catégorie doit être renseignée`);
-      }
-
-      if (this.data.message.object === "") {
-        this.errors.push(`L'objet doit être renseigné`);
-      }
-      if (this.data.message.content === "") {
-        this.errors.push(`Le contenu doit être renseigné`);
-      }
-      if (this.errors.lenght) {
-        const formData = {
-          status: this.particulier,
-          name: this.data.name,
-          email: this.data.email,
-          siret: this.data.siret,
-          raison_social: this.data.raison_social,
-          object: this.data.message.object,
-          category: this.data.message.categorie,
-          content: this.data.message.content,
-        };
-        axios
-          .post("/api/v1/send-quote/", formData)
-          .then((response) => {
-            toast({
-              message:
-                "Devis créé ! Un membre d'Eco Service vas venir s'occuper de vous !",
-              type: "is-success",
-              dismissible: true,
-              pauseOnHover: true,
-              duration: 4000,
-              position: "bottom-right",
-            });
-            this.$router.push("/");
-          })
-          .catch((error) => {
-            if (error.response) {
-              this.erreurs.push(error.response.data);
-
-              console.log(JSON.stringify(error.response.data));
-            } else if (error.message) {
-              this.errors.push("Something went wrong. Please try again");
-
-              console.log(JSON.stringify(error));
-            }
-          });
-      }
-    },
+    trigerPost() {},
   },
 };
 </script>
 
 <style scoped>
+#parent {
+  width: 100%;
+
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.child {
+  display: inline-block;
+  width: 73%;
+  height: 100%;
+}
 #mytitle {
   font-size: 40px;
   margin-bottom: 5%;
   color: black;
   font-weight: bold;
 }
-
+#lbnds {
+  text-align: left;
+  margin-left: 2%;
+}
+#lbrs {
+  margin-left: 16%;
+  text-align: left;
+}
 .margin {
   margin: 40px;
 }
@@ -263,11 +245,15 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 .into-enter-active {
   animation: bounce-in 1s;
 }
-
+#rs {
+  margin-left: 15%;
+}
+#numsi {
+  margin-left: 20%;
+}
 @keyframes bounce-in {
   0% {
     transform: scale(1);
@@ -278,6 +264,222 @@ export default {
   100% {
     transform: scale(0);
   }
+}
+@media only screen and (max-width: 1023px) {
+  .child {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #np {
+    width: 56% !important;
+    border-color: #418014;
+  }
+  #limae {
+    width: 56% !important;
+    border-color: #418014;
+  }
+  .rss {
+    width: 91%;
+    margin-left: 23%;
+  }
+  .rs {
+    margin-left: 39%;
+  }
+  #pn {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #yourmail {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #yourobject {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #lbrs[data-v-55d08eb5] {
+    margin-left: 0%;
+    text-align: center;
+  }
+  #lbnds[data-v-55d08eb5] {
+    text-align: center;
+    margin-left: 0%;
+  }
+  .child[data-v-55d08eb5] {
+    display: block;
+    width: 73%;
+    margin-left: 57%;
+  }
+  #rs[data-v-55d08eb5] {
+    width: 100%;
+    margin-left: 0%;
+    max-width: 100%;
+    min-width: 56%;
+  }
+  #numsi[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #nds {
+    border-color: #418014;
+    width: 100%;
+    max-width: 100%;
+    min-width: 57%;
+  }
+  .raisonsociale {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 864px) {
+  #tejbo {
+    width: 483px !important;
+    margin-right: 2%;
+    border-color: #418014;
+  }
+  #pn {
+    text-align: center;
+  }
+  #rs[data-v-55d08eb5] {
+    width: 82%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 69%;
+  }
+  #numsi[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #nds {
+    border-color: #418014;
+    width: 100%;
+    max-width: 100%;
+    min-width: 57%;
+  }
+  #tejbo[data-v-55d08eb5] {
+    width: 57% !important;
+    margin-right: 0%;
+    border-color: #418014;
+  }
+  .raisonsociale {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 496px) {
+  #np[data-v-55d08eb5] {
+    width: 100% !important;
+    border-color: #418014;
+  }
+  #msg {
+    display: block;
+    padding: calc(0.75em - 1px);
+    resize: vertical;
+    width: 100%;
+    left: 0%;
+    border-color: #418014;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #drope {
+    border-color: #418014;
+    right: 25%;
+  }
+  #limae[data-v-55d08eb5] {
+    width: 100% !important;
+    border-color: #418014;
+    margin-right: 12%;
+  }
+  #rs[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #numsi[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #nds {
+    border-color: #418014;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #tejbo[data-v-55d08eb5][data-v-55d08eb5] {
+    width: 100% !important;
+    margin-right: 0%;
+    border-color: #418014;
+  }
+}
+</style>
+<style lang="scss">
+#partic {
+  background-color: #418014;
+  color: #fff;
+}
+#prof {
+  background-color: #418014;
+  color: #fff;
+}
+#fleche {
+  border-color: #418014;
+}
+#rs {
+  border-color: #418014;
+}
+#nds {
+  border-color: #418014;
+}
+#np {
+  width: 642px !important;
+  border-color: #418014;
+}
+#limae {
+  width: 642px !important;
+  border-color: #418014;
+}
+#tejbo {
+  width: 440px !important;
+  margin-right: 8%;
+  border-color: #418014;
+}
+#drope {
+  right: 10%;
+  border-color: #418014;
+}
+#msg {
+  display: block;
+  max-width: 79%;
+  min-width: 76%;
+  padding: calc(0.75em - 1px);
+  resize: vertical;
+  left: 12%;
+  border-color: #418014;
+}
+#pn {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourmail {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourobject {
+  text-align: left;
+  margin-left: 13%;
+}
+#mybutton {
+  display: block;
+  margin: auto;
+}
+#colorbutt {
+  background: #418014;
 }
 </style>
 
@@ -299,7 +501,6 @@ export default {
 #nds {
   border-color: #418014;
 }
-
 #np {
   width: 642px !important;
   border-color: #418014;
@@ -313,16 +514,14 @@ export default {
   margin-right: 8%;
   border-color: #418014;
 }
-
 #drope {
   right: 10%;
   border-color: #418014;
 }
-
 #msg {
   display: block;
   max-width: 79%;
-  min-width: 77%;
+  min-width: 76%;
   padding: calc(0.75em - 1px);
   resize: vertical;
   left: 12%;
