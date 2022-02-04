@@ -1,9 +1,6 @@
 <template>
   <div class="Contact">
     <div class="container is-max-desktop">
-      <div>
-        <h1 id="mytitlee">Contactez nous !</h1>
-      </div>
       <h2>
         <a class="tab-link active" data-ref="connexion"
           ><router-link id="connexionsign" to="/contact"
