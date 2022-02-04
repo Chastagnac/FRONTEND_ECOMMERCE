@@ -241,6 +241,7 @@ export default {
  margin-left: 16%;
   text-align: left;
 }
+
 .margin {
   margin: 40px;
 }
@@ -251,6 +252,7 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
 .into-enter-active {
   animation: bounce-in 1s;
 }
@@ -260,6 +262,7 @@ export default {
 #numsi{
   margin-left:20%;
 }
+
 @keyframes bounce-in {
   0% {
     transform: scale(1);
@@ -289,6 +292,10 @@ export default {
 .rss{
   width: 91%;
 margin-left: 23%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 }
 .rs{
   margin-left:39%;
@@ -296,6 +303,10 @@ margin-left: 23%;
 #pn {
   text-align: center;
   margin-left: 0%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 }
 #yourmail {
   text-align: center;
@@ -324,6 +335,10 @@ margin-left: 0%;
 max-width: 100%;
 min-width: 56%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 #numsi[data-v-55d08eb5] {
    width: 100%;
   margin: auto;
@@ -339,9 +354,18 @@ min-width: 56%;
 }
 .raisonsociale{
   width: 100%;
+<<<<<<< HEAD
 }
 }
 @media only screen and (max-width: 864px) {
+=======
+}
+
+}
+
+@media only screen and (max-width: 864px) {
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
   #tejbo {
   width: 483px !important;
   margin-right: 2%;
@@ -349,6 +373,10 @@ min-width: 56%;
 }
 #pn {
   text-align: center;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 }
 #rs[data-v-55d08eb5] {
   width: 82%;
@@ -367,6 +395,17 @@ min-width: 69%;
   width: 100%;
   max-width: 100%;
   min-width: 57%;
+<<<<<<< HEAD
+}
+#tejbo[data-v-55d08eb5] {
+  width: 57% !important;
+  margin-right: 0%;
+  border-color: #418014;
+}
+.raisonsociale{
+  width: 100%;
+=======
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 }
 #tejbo[data-v-55d08eb5] {
   width: 57% !important;
@@ -376,6 +415,7 @@ min-width: 69%;
 .raisonsociale{
   width: 100%;
 }
+
 }
 @media only screen and (max-width: 496px) {
   #np[data-v-55d08eb5] {
@@ -396,6 +436,10 @@ min-width: 100%;
   border-color: #418014;
   right: 25%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 #limae[data-v-55d08eb5] {
   width: 100% !important;
   border-color: #418014;
@@ -425,6 +469,7 @@ min-width: 100%;
   border-color: #418014;
 }
 }
+<<<<<<< HEAD
 </style>
 <style lang="scss">
 #partic {
@@ -489,6 +534,82 @@ min-width: 100%;
 #colorbutt {
   background: #418014;
 }
+=======
+
+
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
+</style>
+<style lang="scss">
+#partic {
+  background-color: #418014;
+  color: #fff;
+}
+#prof {
+  background-color: #418014;
+  color: #fff;
+}
+#fleche {
+  border-color: #418014;
+}
+#rs {
+  border-color: #418014;
+}
+#nds {
+  border-color: #418014;
+}
+#np {
+  width: 642px !important;
+  border-color: #418014;
+}
+#limae {
+  width: 642px !important;
+  border-color: #418014;
+}
+#tejbo {
+  width: 440px !important;
+  margin-right: 8%;
+  border-color: #418014;
+}
+#drope {
+  right: 10%;
+  border-color: #418014;
+}
+#msg {
+  display: block;
+  max-width: 79%;
+  min-width: 76%;
+  padding: calc(0.75em - 1px);
+  resize: vertical;
+  left: 12%;
+  border-color: #418014;
+}
+#pn {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourmail {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourobject {
+  text-align: left;
+  margin-left: 13%;
+}
+#mybutton {
+  display: block;
+  margin: auto;
+}
+#colorbutt {
+  background: #418014;
+}
+<<<<<<< HEAD
+=======
+
+
+
+
+
 </style>
 
 <style lang="scss">
@@ -509,6 +630,7 @@ min-width: 100%;
 #nds {
   border-color: #418014;
 }
+
 #np {
   width: 642px !important;
   border-color: #418014;
@@ -522,10 +644,12 @@ min-width: 100%;
   margin-right: 8%;
   border-color: #418014;
 }
+
 #drope {
   right: 10%;
   border-color: #418014;
 }
+
 #msg {
   display: block;
   max-width: 79%;
@@ -554,4 +678,7 @@ min-width: 100%;
 #colorbutt {
   background: #418014;
 }
+
+
+>>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 </style>
