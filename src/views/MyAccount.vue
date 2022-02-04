@@ -2,86 +2,121 @@
   <div class="page my-account">
     <div class="container is-max-desktop">
       <div>
-        <h1 id="mytitlee">Mon espace</h1>
+        <h1 id="mytitleee">Mon espace</h1>
       </div>
-      <li v-bind:key="index" v-for="(info , index) in info"></li>
-      <h2>
-        <a
-          class="tab-link active"
-          data-ref="connexion"
-          href="javascript:void(0)"
-          ><router-link id="connexionsign" to="/myaccount"
-            >Mes infos
-          </router-link></a
-        >
-        <a
-          class="tab-link active"
-          data-ref="inscription"
-          href="javascript:void(0)"
-          ><router-link id="inscriptionsign" to="shop"
-            >Mes commandes
-          </router-link></a
-        >
-      </h2>
-      <div
-        class="column is-12 is-11-desktop mx-auto has-text-centered"
-        v-if="modif"
-      >
-        <div class="field">
-          <label class="label" id="pn">Nom</label>
-          <div class="control">
-            <input
-              class="input"
-              id="np"
-              type="text"
-              placeholder= prenom
-              v-model="nom"
-            />
-          </div>
-        </div>
-        <div class="field">
-          <label class="label" id="pn">Prénom</label>
-          <div class="control">
-            <input
-              class="input"
-              id="np"
-              type="text"
-              placeholder="Entrez votre prénom"
-              v-model="prenom"
-            />
-          </div>
-        </div>
 
-        <div class="field">
-          <label class="label" id="yourmail">Adresse email</label>
+      <div class="boxemya">
+        <div class="avatarrond">
+          <img id="imavatar" src="../assets/avatarmodified.png" />
+        </div>
+        <h2>
+          <a
+            class="tab-link active"
+            data-ref="connexion"
+            href="javascript:void(0)"
+            ><router-link id="connexionmya" to="/myaccount"
+              >Mes infos
+            </router-link></a
+          >
+          <a
+            class="tab-link active"
+            data-ref="inscription"
+            href="javascript:void(0)"
+            ><router-link id="inscriptionmya" to="shop"
+              >Mes commandes
+            </router-link></a
+          >
+        </h2>
+        <div
+          class="column is-12 is-11-desktop mx-auto has-text-centered"
+          v-if="modif"
+        >
+          <div class="field">
+            <label class="label" id="nommya">Nom</label>
+            <div class="control">
+              <input
+                class="input"
+                id="npmya"
+                type="text"
+                placeholder="Entrez votre nom"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" id="pnmya">Prénom</label>
+            <div class="control">
+              <input
+                class="input"
+                id="npmya"
+                type="text"
+                placeholder="Entrez votre prénom"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" id="yourmailnma">Adresse email</label>
+            <div class="control">
+              <input
+                class="input"
+                id="npmya"
+                type="email"
+                placeholder="example@gmail.com"
+              />
+            </div>
+          </div>
+          <button class="button2" v-on:click="modif = false">
+            Modifier mes informations
+          </button>
+        </div>
+        <div class="field" v-if="!modif">
+          <label class="label labmya nmya" id="nommya">Nom</label>
           <div class="control">
             <input
               class="input"
-              id="limae"
-              type="email"
-              placeholder="example@gmail.com"
-              readonly="readonly"
-              v-model="email"
+              id="npmya"
+              type="text"
+              placeholder="Veuillez entrer votre nouveau nom "
             />
           </div>
         </div>
-        <button class="button2" v-on:click="updateUser()">
-          Modifier mes informations
-        </button>
-
-        <button  class="buttonDeco" v-on:click="logout()">
-          Déconnexion
+        <div class="field" v-if="!modif">
+          <label class="label labmya" id="pnmya">Prénom</label>
+          <div class="control">
+            <input
+              class="input"
+              id="npmya"
+              type="text"
+              placeholder="Veuillez entrer votre nouveau prénom"
+            />
+          </div>
+        </div>
+        <div class="field" v-if="!modif">
+          <label class="label labmya" id="yourmailnma">Adresse email</label>
+          <div class="control">
+            <input
+              class="input"
+              id="npmya"
+              type="text"
+              placeholder="Veuillez entrer votre nouvelle adresse email"
+            />
+          </div>
+        </div>
+        <button
+          class="button2"
+          v-if="!modif"
+          v-on:click="modif = true"
+          id="bmya"
+        >
+          Valider
         </button>
       </div>
     </div>
-
-    
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
   name: "MyAccount",
   data() {
@@ -138,9 +173,36 @@ export default {
 </script>
 
 <style lang="scss">
-#mytitlee {
+.boxemya {
+  width: 74%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(182, 182, 182, 0.6);
+  border-radius: 30px;
+}
+.avatarrond {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+#imavatar {
+  position: absolute;
+  top: 14%;
+}
+#connexionmya {
+  float: left;
+  margin-left: 17%;
+  color: #6e934c;
+}
+#inscriptionmya {
+  float: right;
+  color: #141414;
+  margin-right: 5%;
+}
+#mytitleee {
   font-size: 40px;
-  margin-bottom: 5%;
+  margin-bottom: 9%;
   color: black;
   font-weight: bold;
   text-align: center;
@@ -160,27 +222,37 @@ export default {
   margin-top: 4%;
 }
 input::placeholder {
-        color: #1c87c9;
-        opacity: 1;
-      }
-
-.buttonDeco {
-  margin-top: 33px;
-  background-color: #4c4f52;
-  border-color: #dbdbdb;
-  border-width: 1px;
-  color: #363636;
-  cursor: pointer;
-  justify-content: center;
-  padding-bottom: calc(0.5em - 1px);
-  color: whitesmoke;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: calc(0.5em - 1px);
-  text-align: center;
-  white-space: nowrap;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 20px;
+  color: #1c87c9;
+  opacity: 1;
+}
+#npmya {
+  width: 46% !important;
+  border-color: #418014;
+}
+#nommya {
+  text-align: left;
+  margin-left: 28%;
+}
+#yourmailnma {
+  text-align: left;
+  margin-left: 28%;
+}
+#pnmya {
+  text-align: left;
+  margin-left: 28%;
+}
+@media only screen and (max-width: 592px) {
+  #nommya {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #yourmailnma {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #pnmya {
+    text-align: center;
+    margin-left: 0%;
+  }
 }
 </style>
