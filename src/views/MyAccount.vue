@@ -121,17 +121,52 @@ export default {
   name: "MyAccount",
   data() {
     return {
+      username: '',
+      email: '',
+      password: '',
+      password2: '',
+
       modif: true,
+      info: null,
     };
   },
   methods: {
+
+
+
     logout() {
       axios.defaults.headers.common["Authorization"] = "";
+
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("userid");
+ 
       this.$store.commit("removeToken");
       this.$router.push("/");
+    },
+
+    updateUser(){
+        axios.defaults.headers.common["Authorization"] = "";
+        axios
+        .post("/api/v1/users/me/?format=api")
+        .then(response => {
+            this.info = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    getUser(){
+        axios.defaults.headers.common["Authorization"] = "token" + localStorage.getItem("token");
+        axios
+        .get("/api/v1/users/me/?format=api")
+        .then((response) => {
+          this.info = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
@@ -172,13 +207,15 @@ export default {
   font-weight: bold;
   text-align: center;
 }
-.labmya {
+
+.labmya{
   text-align: left;
-  margin-left: 17%;
+  margin-left:17%;
 }
-.nmya {
+.nmya{
   margin-top: 1.3%;
 }
+
 #bmya {
   margin: auto;
   display: flex;

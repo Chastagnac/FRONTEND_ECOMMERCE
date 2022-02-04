@@ -138,7 +138,7 @@ export default {
 }
 .responsive {
   float: right;
-  max-height: 82%;
+  max-height: 100%;
   height: auto;
 }
 .title {

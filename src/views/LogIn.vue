@@ -7,9 +7,7 @@
             class="tab-link active"
             data-ref="connexion"
             href="javascript:void(0)"
-            ><router-link id="connexionlog" to="/log-in"
-              >Connexion
-            </router-link></a
+            ><router-link id="connexionlog" to="/log-in">Connexion </router-link></a
           >
           <a
             class="tab-link active"
@@ -23,7 +21,7 @@
         <br />
         <form @submit.prevent="submitForm">
           <div class="field">
-            <label id="nuse">Nom d'utilisateur</label>
+            <label id = "nuse">Nom d'utilisateur</label>
             <div class="control">
               <input
                 type="text"
@@ -36,7 +34,7 @@
             </div>
           </div>
           <div class="field">
-            <label id="nmdp">Mot de passe</label>
+            <label id ="nmdp">Mot de passe</label>
             <div class="control">
               <input
                 type="password"
@@ -153,18 +151,18 @@ export default {
   }
 }
 
-#inscriptionlog {
-  color: #141414;
+#inscriptionlog{
+  color:#141414;
 }
-#inscriptionlog:hover {
-  color: #141414;
+#inscriptionlog:hover{
+  color:#141414;
   font-size: 25px;
 }
-#connexionlog {
-  color: #6e934c;
+#connexionlog{
+  color:#6E934C;
 }
-#connexionlog:hover {
-  color: #6e934c;
+#connexionlog:hover{
+  color:#6E934C;
   font-size: 25px;
 }
 .page-log-in {
@@ -177,10 +175,11 @@ export default {
   background-color: #464646;
   height: 44em;
 }
-#nuse {
-  margin-left: 27%;
+#nuse{
+    margin-left: 27%;
 }
-#nmdp {
-  margin-left: 27%;
+#nmdp{
+    margin-left: 27%;
 }
+
 </style>

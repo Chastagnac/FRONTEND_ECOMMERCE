@@ -27,11 +27,6 @@ const routes = [{
         component: Search
     },
     {
-        path: '/checkout',
-        name: 'Checkout',
-        component: Checkout
-    },
-    {
         path: '/my-account',
         name: 'MyAccount',
         component: MyAccount,

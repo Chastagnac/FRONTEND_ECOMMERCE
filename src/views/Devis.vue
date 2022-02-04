@@ -212,7 +212,6 @@ export default {
 <style scoped>
 #parent {
   width: 100%;
-
   white-space: nowrap;
   overflow-x: auto;
 }
