@@ -44,7 +44,7 @@ export default createStore({
         },
         setToken(state, token) {
             state.token = token
-            state.isAuthenticated = true 
+            state.isAuthenticated = true
         },
         removeToken(state) {
             state.token = ''
@@ -52,6 +52,15 @@ export default createStore({
         },
         isAuthenticated() {
             return state.isAuthenticated
+        },
+        isCookie() {
+            const str = document.cookie[31]
+            if(str === "a") {    
+                state.isCookie = true
+            } else {
+                state.isCookie = false
+            }
+            return str
         }
     },
     actions: {

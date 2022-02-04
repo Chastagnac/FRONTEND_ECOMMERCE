@@ -13,9 +13,9 @@
           impact sur l’environnement, en diminuant la quantité de déchets que
           nous produisons et leurs impacts négatifs sur la planète.<br />Le zéro
           déchet est une démarche progressive et positive, qu’on peut suivre à
-          titre individuel et collectif.
+          titre individuel et collectif. 
         </h2>
-
+  
         <div class="boxeInto">
           <router-link to="/service">
             <button class="button2">Découvrez nos services</button></router-link
@@ -52,7 +52,6 @@
         </div>
       </div>
     </section>
-
     <div class="section" id="sect">
       <h1 class="title">Découvrez nos derniers produits !</h1>
       <h2 class="subtitle">
@@ -65,26 +64,22 @@
             :key="product.value"
             class="column is-one-third"
           >
-            <div class="card">
-              <div class="card-image">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image mb-6 is-128x128">
-                        <img :src="product.get_image" />
-                      </figure>
+            <div class="card box2">
+              <router-link v-bind:to="product.get_absolute_url">
+                <div class="card-image">
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image mb-6 is-128x128">
+                          <img :src="product.get_image" />
+                        </figure>
+                      </div>
+                      <div class="media-content"></div>
                     </div>
-                    <div class="media-content">
-                      <router-link
-                        v-bind:to="product.get_absolute_url"
-                        class="button is-dark mt-4"
-                        >Voir détails</router-link
-                      >
-                    </div>
+                    <p>{{ product.name }}</p>
                   </div>
-                  <p>{{ product.name }}</p>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -105,9 +100,6 @@ export default {
   mounted() {
     this.getLastedProducts();
     document.title = "Se-digitaliser";
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
-    document.head.appendChild(recaptchaScript);
   },
   methods: {
     getLastedProducts() {
@@ -172,7 +164,16 @@ export default {
   background: #fff;
   height: 46em;
 }
-
+.box2 {
+  transition: 0.3s;
+  border-style: groove;
+  border-color: #1d3d113b;
+}
+.box2:hover {
+  transform: scale(1.05);
+  border-style: groove;
+  border-color: #62ca3b3b;
+}
 .cont {
   background: #fff;
 }
@@ -211,6 +212,7 @@ export default {
   height: 27em;
   width: 48%;
   margin: 7px auto;
+  border-radius: 3%;
 }
 
 .boxeInto {

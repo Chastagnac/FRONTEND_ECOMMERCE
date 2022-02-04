@@ -36,7 +36,7 @@
         class="slider input"
         type="text"
         v-model="price"
-        style="width: 65px; height: 23px; border-radius: 2px; margin-left: 5px"
+        style="width: 60px !important; height: 23px; border-radius: 2px; margin-left: 5px"
       />
       €
     </aside>

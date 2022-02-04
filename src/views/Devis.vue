@@ -47,7 +47,7 @@
                 />
               </div>
             </div>
-             <div class="field" v-if="!particulier">
+            <div class="field" v-if="!particulier">
               <label class="label" id="yourmail">Email</label>
               <div class="control">
                 <input
@@ -72,7 +72,6 @@
               </div>
             </div>
 
-           
             <div class="field" v-if="particulier">
               <label class="label" id="yourmail">Email</label>
               <div class="control">
@@ -86,44 +85,40 @@
               </div>
             </div>
           </div>
-          
-          <div id ="parent">
-            <div id="enfant">
-                 <div class="column is-6">
-            <div class="field child" id="rs" v-if="!particulier">
-              <label class="label" id="lbrs">Raison sociale</label>
-              <div class="control">
-                <input
-                  class="input rss"
-                  id="rs"
-                  type="text"
-                  placeholder="Nom de votre entreprise"
-                  v-model="data.raison_social"
-                />
-              </div>
-            </div>
-            
 
-            <div class="field child" id="numsi" v-if="!particulier">
-              <label class="label" id="lbnds">Numéro de siret</label>
-              <div class="control">
-                <input
-                  class="input"
-                  id="nds"
-                  type="text"
-                  placeholder="123 568 941 00056"
-                  v-model="data.siret"
-                />
+          <div id="parent">
+            <div id="enfant">
+              <div class="column is-6 raisonsociale">
+                <div class="field child" id="rs" v-if="!particulier">
+                  <label class="label" id="lbrs">Raison sociale</label>
+                  <div class="control">
+                    <input
+                      class="input rss"
+                      id="rs"
+                      type="text"
+                      placeholder="Nom de votre entreprise"
+                      v-model="data.raison_social"
+                    />
+                  </div>
+                </div>
+
+                <div class="field child" id="numsi" v-if="!particulier">
+                  <label class="label" id="lbnds">Numéro de siret</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      id="nds"
+                      type="text"
+                      placeholder="123 568 941 00056"
+                      v-model="data.siret"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-            </div>
 
-          </div>
-         
-        
-      
         <div class="columns is-multiline">
           <div class="column is-9">
             <div class="field">
@@ -216,16 +211,15 @@ export default {
 
 <style scoped>
 #parent {
-    width: 100%;
-  
-    white-space: nowrap;
-    overflow-x: auto;
+  width: 100%;
+
+  white-space: nowrap;
+  overflow-x: auto;
 }
- .child {
-    display: inline-block;
-    width: 73%;
-    height: 100%;
-   
+.child {
+  display: inline-block;
+  width: 73%;
+  height: 100%;
 }
 #mytitle {
   font-size: 40px;
@@ -233,15 +227,14 @@ export default {
   color: black;
   font-weight: bold;
 }
-#lbnds{
+#lbnds {
   text-align: left;
   margin-left: 2%;
 }
-#lbrs{
- margin-left: 16%;
+#lbrs {
+  margin-left: 16%;
   text-align: left;
 }
-
 .margin {
   margin: 40px;
 }
@@ -252,17 +245,15 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 .into-enter-active {
   animation: bounce-in 1s;
 }
-#rs{
+#rs {
   margin-left: 15%;
 }
-#numsi{
-  margin-left:20%;
+#numsi {
+  margin-left: 20%;
 }
-
 @keyframes bounce-in {
   0% {
     transform: scale(1);
@@ -275,74 +266,158 @@ export default {
   }
 }
 @media only screen and (max-width: 1023px) {
- .child {
+  .child {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #np {
+    width: 56% !important;
+    border-color: #418014;
+  }
+  #limae {
+    width: 56% !important;
+    border-color: #418014;
+  }
+  .rss {
+    width: 91%;
+    margin-left: 23%;
+  }
+  .rs {
+    margin-left: 39%;
+  }
+  #pn {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #yourmail {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #yourobject {
+    text-align: center;
+    margin-left: 0%;
+  }
+  #lbrs[data-v-55d08eb5] {
+    margin-left: 0%;
+    text-align: center;
+  }
+  #lbnds[data-v-55d08eb5] {
+    text-align: center;
+    margin-left: 0%;
+  }
+  .child[data-v-55d08eb5] {
     display: block;
     width: 73%;
-    height: 100%;
-   
+    margin-left: 57%;
+  }
+  #rs[data-v-55d08eb5] {
+    width: 100%;
+    margin-left: 0%;
+    max-width: 100%;
+    min-width: 56%;
+  }
+  #numsi[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #nds {
+    border-color: #418014;
+    width: 100%;
+    max-width: 100%;
+    min-width: 57%;
+  }
+  .raisonsociale {
+    width: 100%;
+  }
 }
-#np {
-  width: 470px !important;
-  border-color: #418014;
-}
-#limae {
-  width: 481px !important;
-  border-color: #418014;
-}
-.rss{
-  width: 91%;
-margin-left: 23%;
-
-}
-.rs{
-  margin-left:39%;
-}
-#pn {
-  text-align: center;
-  margin-left: 0%;
-
-}
-#yourmail {
-  text-align: center;
-  margin-left: 0%;
-}
-#yourobject {
-  text-align: center;
-  margin-left: 0%;
-}
-#lbrs[data-v-55d08eb5] {
-  margin-left: 0%;
-  text-align: center;
-}
-#lbnds[data-v-55d08eb5] {
-  text-align: center;
-  margin-left: 0%;
-}
-.child[data-v-55d08eb5] {
-  display: block;
-  width: 73%;
-  margin-left: 57%;
-}
-
-}
-
 @media only screen and (max-width: 864px) {
-
   #tejbo {
-  width: 483px !important;
-  margin-right: 2%;
-  border-color: #418014;
+    width: 483px !important;
+    margin-right: 2%;
+    border-color: #418014;
+  }
+  #pn {
+    text-align: center;
+  }
+  #rs[data-v-55d08eb5] {
+    width: 82%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 69%;
+  }
+  #numsi[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #nds {
+    border-color: #418014;
+    width: 100%;
+    max-width: 100%;
+    min-width: 57%;
+  }
+  #tejbo[data-v-55d08eb5] {
+    width: 57% !important;
+    margin-right: 0%;
+    border-color: #418014;
+  }
+  .raisonsociale {
+    width: 100%;
+  }
 }
-#pn {
-  text-align: center;
-
+@media only screen and (max-width: 496px) {
+  #np[data-v-55d08eb5] {
+    width: 100% !important;
+    border-color: #418014;
+  }
+  #msg {
+    display: block;
+    padding: calc(0.75em - 1px);
+    resize: vertical;
+    width: 100%;
+    left: 0%;
+    border-color: #418014;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #drope {
+    border-color: #418014;
+    right: 25%;
+  }
+  #limae[data-v-55d08eb5] {
+    width: 100% !important;
+    border-color: #418014;
+    margin-right: 12%;
+  }
+  #rs[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #numsi[data-v-55d08eb5] {
+    width: 100%;
+    margin: auto;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #nds {
+    border-color: #418014;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+  #tejbo[data-v-55d08eb5][data-v-55d08eb5] {
+    width: 100% !important;
+    margin-right: 0%;
+    border-color: #418014;
+  }
 }
-}
-
-
-
 </style>
-
 <style lang="scss">
 #partic {
   background-color: #418014;
@@ -361,7 +436,6 @@ margin-left: 23%;
 #nds {
   border-color: #418014;
 }
-
 #np {
   width: 642px !important;
   border-color: #418014;
@@ -375,12 +449,10 @@ margin-left: 23%;
   margin-right: 8%;
   border-color: #418014;
 }
-
 #drope {
   right: 10%;
   border-color: #418014;
 }
-
 #msg {
   display: block;
   max-width: 79%;
@@ -409,6 +481,69 @@ margin-left: 23%;
 #colorbutt {
   background: #418014;
 }
+</style>
 
-
+<style lang="scss">
+#partic {
+  background-color: #418014;
+  color: #fff;
+}
+#prof {
+  background-color: #418014;
+  color: #fff;
+}
+#fleche {
+  border-color: #418014;
+}
+#rs {
+  border-color: #418014;
+}
+#nds {
+  border-color: #418014;
+}
+#np {
+  width: 642px !important;
+  border-color: #418014;
+}
+#limae {
+  width: 642px !important;
+  border-color: #418014;
+}
+#tejbo {
+  width: 440px !important;
+  margin-right: 8%;
+  border-color: #418014;
+}
+#drope {
+  right: 10%;
+  border-color: #418014;
+}
+#msg {
+  display: block;
+  max-width: 79%;
+  min-width: 76%;
+  padding: calc(0.75em - 1px);
+  resize: vertical;
+  left: 12%;
+  border-color: #418014;
+}
+#pn {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourmail {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourobject {
+  text-align: left;
+  margin-left: 13%;
+}
+#mybutton {
+  display: block;
+  margin: auto;
+}
+#colorbutt {
+  background: #418014;
+}
 </style>

@@ -21,7 +21,6 @@
           >
         </h2>
         <br />
-
         <form @submit.prevent="submitForm">
           <div class="field">
             <label id="nuse">Nom d'utilisateur</label>
@@ -32,6 +31,7 @@
                 placeholder="Nom d'utilisateur"
                 class="input"
                 v-model="username"
+                :disabled="disabled"
               />
             </div>
           </div>
@@ -44,6 +44,7 @@
                 placeholder="Mot de Passe"
                 class="input"
                 v-model="password"
+                :disabled="disabled"
               />
             </div>
           </div>
@@ -52,7 +53,7 @@
               <button class="button is-dark">Connexion</button>
             </div>
             <div class="control">
-              <router-link style="color : black" to="/forget-password"
+              <router-link style="color: black" to="/forget-password"
                 >Mot de passe oublié ?
               </router-link>
             </div>
@@ -78,17 +79,38 @@ export default {
       password: "",
       errors: [],
       isconnection: true,
+      disabled: false,
     };
   },
   mounted() {
-    document.title = "Connection |`Ilios Shop ";
+    if (!this.infoCookie()) {
+      toast({
+        message: `Veuillez acceptez les cookies pour pouvoir vous connecter`,
+        type: "is-warning",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 11000,
+        position: "top-right",
+      });
+    }
   },
   methods: {
+    infoCookie() {
+      if (document.cookie[31] === "a") {
+        this.disabled = false;
+        return true;
+      } else {
+        this.disabled = true;
+        return false;
+      }
+    },
     async submitForm() {
       axios.defaults.headers.common["Authorization"] = "";
 
       localStorage.removeItem("token");
-
+      if (this.disabled === true) {
+        this.errors.push(`Veuillez accepter les cookies`);
+      }
       const fromData = {
         username: this.username,
         password: this.password,
@@ -104,7 +126,7 @@ export default {
 
           localStorage.setItem("token", token);
 
-          const toPath = this.$route.query.to || "/cart";
+          const toPath = this.$route.query.to || "/";
           this.$router.push(toPath);
         })
         .catch((error) => {
