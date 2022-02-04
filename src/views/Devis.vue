@@ -89,7 +89,7 @@
           
           <div id ="parent">
             <div id="enfant">
-                 <div class="column is-6">
+                 <div class="column is-6 raisonsociale">
             <div class="field child" id="rs" v-if="!particulier">
               <label class="label" id="lbrs">Raison sociale</label>
               <div class="control">
@@ -274,25 +274,21 @@ export default {
 @media only screen and (max-width: 1023px) {
  .child {
     display: block;
-    width: 73%;
+    width: 100%;
     height: 100%;
    
 }
 #np {
-  width: 470px !important;
+  width: 56% !important;
   border-color: #418014;
 }
 #limae {
-  width: 481px !important;
+  width: 56% !important;
   border-color: #418014;
 }
 .rss{
   width: 91%;
 margin-left: 23%;
-<<<<<<< HEAD
-=======
-
->>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
 }
 .rs{
   margin-left:39%;
@@ -300,10 +296,6 @@ margin-left: 23%;
 #pn {
   text-align: center;
   margin-left: 0%;
-<<<<<<< HEAD
-=======
-
->>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
 }
 #yourmail {
   text-align: center;
@@ -326,16 +318,30 @@ margin-left: 23%;
   width: 73%;
   margin-left: 57%;
 }
-<<<<<<< HEAD
+#rs[data-v-55d08eb5] {
+  width: 100%;
+margin-left: 0%;
+max-width: 100%;
+min-width: 56%;
+}
+#numsi[data-v-55d08eb5] {
+   width: 100%;
+  margin: auto;
+  max-width: 100%;
+  min-width: 100%;
+  
+}
+#nds {
+  border-color: #418014;
+  width: 100%;
+  max-width: 100%;
+  min-width: 57%;
+}
+.raisonsociale{
+  width: 100%;
+}
 }
 @media only screen and (max-width: 864px) {
-=======
-
-}
-
-@media only screen and (max-width: 864px) {
-
->>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
   #tejbo {
   width: 483px !important;
   margin-right: 2%;
@@ -343,13 +349,12 @@ margin-left: 23%;
 }
 #pn {
   text-align: center;
-<<<<<<< HEAD
 }
 #rs[data-v-55d08eb5] {
-  width: 100%;
-  margin: auto;
-  max-width: 100%;
-  min-width: 100%;
+  width: 82%;
+margin: auto;
+max-width: 100%;
+min-width: 69%;
 }
 #numsi[data-v-55d08eb5] {
    width: 100%;
@@ -361,7 +366,15 @@ margin-left: 23%;
   border-color: #418014;
   width: 100%;
   max-width: 100%;
-  min-width: 100%;
+  min-width: 57%;
+}
+#tejbo[data-v-55d08eb5] {
+  width: 57% !important;
+  margin-right: 0%;
+  border-color: #418014;
+}
+.raisonsociale{
+  width: 100%;
 }
 }
 @media only screen and (max-width: 496px) {
@@ -382,11 +395,6 @@ min-width: 100%;
 #drope {
   border-color: #418014;
   right: 25%;
-}
-#tejbo {
- width: 100% !important;
-margin-right: 12%;
-border-color: #418014;
 }
 #limae[data-v-55d08eb5] {
   width: 100% !important;
@@ -411,16 +419,76 @@ border-color: #418014;
   max-width: 100%;
   min-width: 100%;
 }
-
+#tejbo[data-v-55d08eb5][data-v-55d08eb5] {
+  width: 100% !important;
+  margin-right: 0%;
+  border-color: #418014;
 }
-=======
-
 }
+</style>
+<style lang="scss">
+#partic {
+  background-color: #418014;
+  color: #fff;
 }
-
-
-
->>>>>>> 97c884903e2dbdbf81811ae10ab946f73ff167c7
+#prof {
+  background-color: #418014;
+  color: #fff;
+}
+#fleche {
+  border-color: #418014;
+}
+#rs {
+  border-color: #418014;
+}
+#nds {
+  border-color: #418014;
+}
+#np {
+  width: 642px !important;
+  border-color: #418014;
+}
+#limae {
+  width: 642px !important;
+  border-color: #418014;
+}
+#tejbo {
+  width: 440px !important;
+  margin-right: 8%;
+  border-color: #418014;
+}
+#drope {
+  right: 10%;
+  border-color: #418014;
+}
+#msg {
+  display: block;
+  max-width: 79%;
+  min-width: 76%;
+  padding: calc(0.75em - 1px);
+  resize: vertical;
+  left: 12%;
+  border-color: #418014;
+}
+#pn {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourmail {
+  text-align: left;
+  margin-left: 13%;
+}
+#yourobject {
+  text-align: left;
+  margin-left: 13%;
+}
+#mybutton {
+  display: block;
+  margin: auto;
+}
+#colorbutt {
+  background: #418014;
+}
 </style>
 
 <style lang="scss">
@@ -486,6 +554,4 @@ border-color: #418014;
 #colorbutt {
   background: #418014;
 }
-
-
 </style>

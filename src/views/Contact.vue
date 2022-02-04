@@ -27,11 +27,11 @@
        
       >
         <div class="field">
-          <label class="label" id="pn">Nom</label>
+          <label class="label" id="pnc">Nom</label>
           <div class="control">
             <input
               class="input"
-              id="np"
+              id="limaec"
               type="text"
               placeholder="Entrez votre nom"
             />
@@ -39,22 +39,22 @@
         </div>
        
         <div class="field">
-          <label class="label" id="yourmail">Adresse email</label>
+          <label class="label" id="yourmailc">Adresse email</label>
           <div class="control">
             <input
               class="input"
-              id="limae"
+              id="limaec"
               type="email"
               placeholder="Exemple@gmail.com"
             />
           </div>
         </div>
         <div class="field">
-          <label class="label" id="yourmail">Objet</label>
+          <label class="label" id="objetc">Objet</label>
           <div class="control">
             <input
               class="input"
-              id="limae"
+              id="limaec"
               type="email"
               placeholder="Définir l'objet"
             />
@@ -62,11 +62,11 @@
         </div>
         
         <div class="field">
-          <label class="label" id="yourmail">Message</label>
+          <label class="label" id="messagec">Message</label>
           <div class="control">
             <textarea
               class="textarea"
-              id="msg"
+              id="msgc"
               placeholder="Décrivez nous votre besoin..."
               
             ></textarea>
@@ -93,7 +93,56 @@ export default {
 
 <style lang="scss">
 #msg::placeholder {
-        color: #gray;
+        color: gray;
         opacity: 1;
       }
+ #limaec {
+  width: 56% !important;
+  border-color: #418014;
+}   
+#msgc {
+  display: block;
+  max-width: 79%;
+  min-width: 56%;
+  padding: calc(0.75em - 1px);
+  resize: vertical;
+  left: 22%;
+  border-color: #418014;
+}  
+#pnc {
+  text-align: center;
+  margin-left: 0%;
+  margin-right: 50%;
+}
+#yourmailc {
+  text-align: center;
+  margin-right: 42%;
+}
+#objetc{
+  text-align: center;
+  margin-right: 50%;
+}
+#messagec{
+  text-align: center;
+  margin-right: 47%;
+}
+@media only screen and (max-width: 793px) {
+  #messagec {
+  text-align: center;
+  margin-right: 0%;
+}
+#pnc {
+  text-align: center;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+#yourmailc {
+  text-align: center;
+  margin-right: 0%;
+}
+#objetc{
+  text-align: center;
+  margin-right: 0%;
+}
+}
 </style>

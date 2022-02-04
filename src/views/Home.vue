@@ -13,9 +13,9 @@
           impact sur l’environnement, en diminuant la quantité de déchets que
           nous produisons et leurs impacts négatifs sur la planète.<br />Le zéro
           déchet est une démarche progressive et positive, qu’on peut suivre à
-          titre individuel et collectif.
+          titre individuel et collectif. 
         </h2>
-
+  
         <div class="boxeInto">
           <router-link to="/service">
             <button class="button2">Découvrez nos services</button></router-link
@@ -204,6 +204,7 @@ export default {
   height: 27em;
   width: 48%;
   margin: 7px auto;
+  border-radius: 3%;
 }
 
 .boxeInto {
