@@ -8,11 +8,7 @@
         </h2>
       </div>
 
-      <section
-        id="verde"
-        class="section has-background-primary"
-        style="border-radius: 10px"
-      >
+      <section id ="verde" class="section has-background-primary">
         <div class="container" style="margin: 24px">
           <div class="is-vcentered columns is-multiline">
             <div class="column is-6 is-5-desktop mb-4">

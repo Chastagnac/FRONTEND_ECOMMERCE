@@ -20,44 +20,49 @@
             />
           </div>
         </div>
-
+       
         <div class="field">
-          <label class="label" id="yourmailc">Adresse email</label>
+          <label class="label" id="yourmail">Adresse email</label>
           <div class="control">
             <input
               class="input"
-              id="limaec"
+              id="limae"
               type="email"
               placeholder="Exemple@gmail.com"
             />
           </div>
         </div>
         <div class="field">
-          <label class="label" id="objetc">Objet</label>
+          <label class="label" id="yourmail">Objet</label>
           <div class="control">
             <input
               class="input"
-              id="limaec"
+              id="limae"
               type="email"
               placeholder="Définir l'objet"
             />
           </div>
         </div>
-
+        
         <div class="field">
-          <label class="label" id="messagec">Message</label>
+          <label class="label" id="yourmail">Message</label>
           <div class="control">
             <textarea
               class="textarea"
-              id="msgc"
+              id="msg"
               placeholder="Décrivez nous votre besoin..."
+              
             ></textarea>
           </div>
         </div>
 
-        <button class="button2">Envoyer</button>
+        <button class="button2">
+          Envoyer
+        </button>
       </div>
-    </div>
+   </div>  
+   
+
   </div>
 </template>
 <script>

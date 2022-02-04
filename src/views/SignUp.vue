@@ -217,6 +217,13 @@ export default {
     backdrop-filter: blur(6px);
   }
 }
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+#blur{
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+  }
+}
+
 
 .tab-link {
   text-decoration: none;
@@ -244,6 +251,10 @@ h2 {
   color: #6e934c;
   font-size: 25px;
 }
+#inscriptionsign:hover{
+  color:#6E934C;
+  font-size: 25px;
+}
 
 #connexionsign {
   color: #141414;
@@ -252,6 +263,11 @@ h2 {
   color: #141414;
   font-size: 25px;
 }
+#connexionsign:hover{
+  color:#141414;
+  font-size: 25px;
+}
+
 
 .button {
   background-color: #517d2a;

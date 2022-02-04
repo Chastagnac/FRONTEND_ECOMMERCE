@@ -34,6 +34,9 @@
             >
           </div>
           <div class="navbar-end">
+            <router-link to="/cart" class="navbar-item">
+              <i class="fas fa-shopping-cart"></i
+            ></router-link>
             <router-link
               v-if="$store.state.isAuthenticated"
               to="my-account"
@@ -52,9 +55,16 @@
                 data-mdb-ripple-color="dark"
               ></i>
             </router-link>
-            <router-link to="/cart" class="navbar-item">
-              <i class="fas fa-shopping-cart"></i
-            ></router-link>
+
+
+            <router-link v-if="$store.state.isAuthenticated" v-on:click.native="logout()"  to="/" class="navbar-item">
+              <i
+                class="fas fa-sign-out-alt"
+                v-on:click.native="logout()"
+                href="https://www.facebook.com/profile.php?id=100074600241159"
+                data-mdb-ripple-color="dark"
+              ></i>
+             </router-link>
           </div>
         </div>
       </nav>
@@ -120,6 +130,17 @@ export default {
       return totalLenght;
     },
   },
+  methods: {
+       logout() {
+        axios.defaults.headers.common["Authorization"] = "";
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("userid");
+  
+        this.$store.commit("removeToken");
+        this.$router.push("/");
+    },
+  }
 };
 </script>
 
