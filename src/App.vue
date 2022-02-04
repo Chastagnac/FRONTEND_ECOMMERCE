@@ -34,6 +34,9 @@
             >
           </div>
           <div class="navbar-end">
+            <router-link to="/cart" class="navbar-item">
+              <i class="fas fa-shopping-cart"></i
+            ></router-link>
             <router-link
               v-if="$store.state.isAuthenticated"
               to="my-account"
@@ -62,10 +65,6 @@
                 data-mdb-ripple-color="dark"
               ></i>
              </router-link>
-
-            <router-link to="/cart" class="navbar-item">
-              <i class="fas fa-shopping-cart"></i
-            ></router-link>
           </div>
         </div>
       </nav>
