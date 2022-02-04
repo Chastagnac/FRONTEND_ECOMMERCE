@@ -59,14 +59,12 @@
                 />
               </div>
             </div>
-          </div>
-          <div class="column is-6">
-            <div class="field" v-if="!particulier">
-              <label class="label">Raison sociale</label>
+            <div class="field" v-if="particulier">
+              <label class="label" id="pn">Nom et prénom</label>
               <div class="control">
                 <input
                   class="input"
-                  id="rs"
+                  id="np"
                   type="text"
                   placeholder="Entrez votre nom et prénom"
                   v-model="data.name"
@@ -214,7 +212,6 @@ export default {
 <style scoped>
 #parent {
   width: 100%;
-
   white-space: nowrap;
   overflow-x: auto;
 }
