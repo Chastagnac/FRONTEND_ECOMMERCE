@@ -96,10 +96,6 @@ export default {
         color: gray;
         opacity: 1;
       }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
  #limaec {
   width: 56% !important;
   border-color: #418014;
@@ -130,10 +126,6 @@ export default {
   text-align: center;
   margin-right: 47%;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
 @media only screen and (max-width: 793px) {
   #messagec {
   text-align: center;
@@ -152,13 +144,8 @@ export default {
   text-align: center;
   margin-right: 0%;
 }
-<<<<<<< HEAD
-}
-</style>
-=======
 
 
 }
 </style>
 
->>>>>>> 6cc418eaab3cff254fd414fda01b59fc1d69f155
