@@ -65,7 +65,7 @@
               />
             </div>
           </div>
-          <button class="button2" v-on:click="modif = false">
+          <button class="button2 buttmya" v-on:click="modif = false">
             Modifier mes informations
           </button>
         </div>
@@ -103,7 +103,7 @@
           </div>
         </div>
         <button
-          class="button2"
+          class="button2 buttmya"
           v-if="!modif"
           v-on:click="modif = true"
           id="bmya"
@@ -241,6 +241,28 @@ input::placeholder {
   text-align: left;
   margin-left: 28%;
 }
+@media only screen and (max-width: 840px) {
+#imavatar {
+  position: initial;
+  top: 0%;
+  margin-top: 1%;
+}
+
+}
+@media only screen and (max-width: 706px) {
+ #inscriptionmya {
+  float: right;
+  color: #141414;
+  margin-right: 31%;
+  margin-bottom: 3%;
+  margin-left: 18%;
+}
+#connexionmya {
+  float: initial;
+  margin-left: 8%;
+  color: #6e934c;
+}
+}
 @media only screen and (max-width: 592px) {
   #nommya {
     text-align: center;
@@ -254,5 +276,15 @@ input::placeholder {
     text-align: center;
     margin-left: 0%;
   }
+ #inscriptionmya {
+  float: right;
+  color: #141414;
+  margin-right: 31%;
+  margin-bottom: 3%;
+  margin-left: 18%;
+}
+.buttmya{
+  font-size: 14px;
+}
 }
 </style>
