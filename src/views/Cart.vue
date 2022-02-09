@@ -1,5 +1,5 @@
 <template>
-    <div class="page-cart">
+    <div class="page-cart" style="margin : 20px">
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Panier</h1>
@@ -34,7 +34,7 @@
 
                     <hr>
 
-                    <router-link to="/cart/checkout" class="button is-dark">Procéder au paiement</router-link>
+                    <router-link to="/checkout" class="button is-dark">Procéder au paiement</router-link>
                 </div>
             </div>
         </div>
