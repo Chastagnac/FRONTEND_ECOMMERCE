@@ -287,4 +287,10 @@ input::placeholder {
   font-size: 14px;
 }
 }
+@media only screen and (max-width: 592px) {
+  #npmya {
+  width: 100% !important;
+  border-color: #418014;
+}
+}
 </style>

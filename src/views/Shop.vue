@@ -86,4 +86,14 @@ export default {
   margin: 20px;
   grid-template-columns: 33% 33% 33%;
 }
+@media only screen and (max-width: 592px) {
+.gridcontainer {
+  display: flex;
+  -moz-text-align-last: center;
+  text-align-last: center;
+  margin: 20px;
+  grid-template-columns: 33% 33% 33%;
+  flex-direction: column;
+}
+}
 </style>
