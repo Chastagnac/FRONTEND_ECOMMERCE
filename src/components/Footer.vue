@@ -9,7 +9,7 @@
          <router-link to="/contact"><li> Contact</li></router-link>
           <router-link to="/conditions-generales"><li> Conditions générales</li></router-link>
           <router-link to="/service"><li> Services</li></router-link>
-          <router-link to="/shop"><li> Porduits</li></router-link>
+          <router-link to="/shop"><li> Produits</li></router-link>
         </ul>
       </div>
 
