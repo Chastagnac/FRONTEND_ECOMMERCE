@@ -81,6 +81,8 @@
    <script>
 import axios from "axios";
 import Footer from "@/components/Footer";
+import { toast } from "bulma-toast";
+
 export default {
   data() {
     return {
@@ -137,8 +139,17 @@ export default {
         localStorage.removeItem("username");
         localStorage.removeItem("userid");
   
-        this.$store.commit("removeToken");
+        this.$store.commit("removeToken");       
         this.$router.push("/");
+        
+        toast({
+            message: `Vous êtes déconnecté`,
+            type: "is-info",
+            dismissible: true,
+            pauseOnHover: true,
+            duration: 1000,
+            position: "top-right",
+      });
     },
   }
 };

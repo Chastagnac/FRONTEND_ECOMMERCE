@@ -27,89 +27,76 @@
             </router-link></a
           >
         </h2>
-        <div
-          class="column is-12 is-11-desktop mx-auto has-text-centered"
-          v-if="modif"
-        >
-          <div class="field">
-            <label class="label" id="nommya">Nom</label>
-            <div class="control">
-              <input
-                class="input"
-                id="npmya"
-                type="text"
-                placeholder="Entrez votre nom"
-              />
+        <div class="column is-12 is-11-desktop mx-auto has-text-centered">
+            <div class="field">
+              <label class="label" id="nommya">Nom d'utilisateur</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="npmya"
+                  type="text"
+                  v-model="input.username"/>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label class="label" id="pnmya">Prénom</label>
-            <div class="control">
-              <input
-                class="input"
-                id="npmya"
-                type="text"
-                placeholder="Entrez votre prénom"
-              />
+          
+        <form @submit.prevent="updateUser">
+            <div class="field">
+              <label class="label" id="yourmailnma">Adresse email</label>
+              <div class="control">
+                <input
+                readonly="readonly"
+                  class="input"
+                  id="npmya"
+                  type="email"
+                  v-model="input.email"
+                />
+              </div>
             </div>
-          </div>
+            
+            <div class="field">
+                <label class="label" id="pnmya">Mot de Passe Actuel</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="npmya"
+                    type="password"
+                    placeholder="Entrez votre mot de passe"
+                    v-model="password_actuel"/>        
+                </div>
+            </div>
 
-          <div class="field">
-            <label class="label" id="yourmailnma">Adresse email</label>
-            <div class="control">
-              <input
-                class="input"
-                id="npmya"
-                type="email"
-                placeholder="example@gmail.com"
-              />
+            <div class="field">
+                <label class="label" id="pnmya">Nouveau Mot de Passe</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="npmya"
+                    type="password"
+                    placeholder="Entrez un nouveau mot de passe"
+                    v-model="password_change"/>        
+                </div>
             </div>
-          </div>
-          <button class="button2" v-on:click="modif = false">
-            Modifier mes informations
-          </button>
+
+            <div class="field">
+                <label class="label" id="pnmya">Confirmation Mot de Passe</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    id="npmya"
+                    type="password"
+                    placeholder="Confirmez le mot de passe"
+                    v-model="password_change2"/>
+                </div>
+            </div>
+
+            <button class="button2" id="bmya">
+                    Valider
+            </button>
+        </form>
+         <div class="notification is-danger" v-if="errors.length">
+          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
         </div>
-        <div class="field" v-if="!modif">
-          <label class="label labmya nmya" id="nommya">Nom</label>
-          <div class="control">
-            <input
-              class="input"
-              id="npmya"
-              type="text"
-              placeholder="Veuillez entrer votre nouveau nom "
-            />
-          </div>
         </div>
-        <div class="field" v-if="!modif">
-          <label class="label labmya" id="pnmya">Prénom</label>
-          <div class="control">
-            <input
-              class="input"
-              id="npmya"
-              type="text"
-              placeholder="Veuillez entrer votre nouveau prénom"
-            />
-          </div>
-        </div>
-        <div class="field" v-if="!modif">
-          <label class="label labmya" id="yourmailnma">Adresse email</label>
-          <div class="control">
-            <input
-              class="input"
-              id="npmya"
-              type="text"
-              placeholder="Veuillez entrer votre nouvelle adresse email"
-            />
-          </div>
-        </div>
-        <button
-          class="button2"
-          v-if="!modif"
-          v-on:click="modif = true"
-          id="bmya"
-        >
-          Valider
-        </button>
       </div>
     </div>
   </div>
@@ -117,56 +104,133 @@
 
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
+
 export default {
   name: "MyAccount",
   data() {
     return {
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
+      
+      input: {
+        username: '',
+        email: '',
+      },
 
-      modif: true,
-      info: null,
+      username_change: '',
+      password_actuel: '',
+      password_change: '',
+      password_change2: '',
+
+      errors: [],
+      info: [],
     };
   },
+  mounted(){
+      axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
+      axios
+      .get("/api/v1/users/me")
+      .then((response) => {
+        this.info = response.data;
+        this.input.email = this.info.email;
+        this.input.username = this.info.username;
+
+        this.username_change = this.info.username;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {
-
-
-
-    logout() {
-      axios.defaults.headers.common["Authorization"] = "";
-
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
-      localStorage.removeItem("userid");
- 
-      this.$store.commit("removeToken");
-      this.$router.push("/");
-    },
-
     updateUser(){
-        axios.defaults.headers.common["Authorization"] = "";
-        axios
-        .post("/api/v1/users/me/?format=api")
-        .then(response => {
-            this.info = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
 
-    getUser(){
-        axios.defaults.headers.common["Authorization"] = "token" + localStorage.getItem("token");
+      axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
+
+      this.errors = [];
+      if(this.password_actuel === "")
+      {
+        this.errors.push(`Afin de valider les modifications le mot de passe doit être renseigné`);
+      }
+      if (this.input.username === "") {
+        this.errors.push(`Le nom d'utilisateur doit être renseigné`);
+      }
+      else if(this.input.username !== this.username_change)
+      {
+        const data = {
+          current_password: this.password_actuel,
+          new_username: this.input.username
+        }
         axios
-        .get("/api/v1/users/me/?format=api")
-        .then((response) => {
-          this.info = response.data;
+        .post("/api/v1/users/set_username/",data)
+        .then(response => {
+            toast({
+              message: "Votre nom d'utilisateur à bien été modifié !",
+              type: "is-success",
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: "bottom-right",
+            });
         })
         .catch((error) => {
-          console.log(error);
-        });
+            if (error.response) {
+              for (const property in error.response.data) {
+                this.errors.push(
+                  `${error.response.data[property]}`
+                );
+              }
+              console.log(JSON.stringify(error.response.data));
+            } else if (error.message) {
+              this.errors.push("Something went wrong. Please try again");
+
+              console.log(JSON.stringify(error));
+            }
+          });
+      }
+
+      if (this.password_change !== "") {
+
+        if (this.input.password2 !== this.input.password) 
+        {
+          this.errors.push(`Les mots de passe doivent être identiques`);
+        }
+        else if (this.password_change === this.password_change2 && this.password_change !== this.password_actuel && this.password_change2 !== this.password_actuel)
+        {
+          const data = { 
+          new_password: this.password_change,
+          current_password: this.password_actuel,
+          }
+          axios
+          .post("/api/v1/users/set_password/",data)
+          .then(response => {
+               toast({
+                message: "Votre mot de passe à bien été modifié !",
+                type: "is-success",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2000,
+                position: "bottom-right",
+            });
+          })
+          .catch((error) => {
+              if (error.response) {
+                for (const property in error.response.data) {
+                  this.errors.push(
+                    `${error.response.data[property]}`
+                  );
+                }
+                console.log(JSON.stringify(error.response.data));
+              } else if (error.message) {
+                this.errors.push("Something went wrong. Please try again");
+
+                console.log(JSON.stringify(error));
+              }
+            });
+        }
+        else
+        {
+          this.errors.push(`Votre mot de passe est identique à l'ancien`);
+        }
+      } 
     },
   },
 };
