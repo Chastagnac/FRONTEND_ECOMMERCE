@@ -174,7 +174,7 @@ export default {
             if (error.response) {
               for (const property in error.response.data) {
                 this.errors.push(
-                  `${property}:${error.response.data[property]}`
+                  `${error.response.data[property]}`
                 );
               }
 
