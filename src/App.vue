@@ -29,7 +29,7 @@
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Service</router-link>
             <router-link to="/contact" class="navbar-item">Contact</router-link>
-            <router-link to="/devis-clients" class="navbar-item"
+            <router-link to="/service/devis" class="navbar-item"
               >Devis clients</router-link
             >
           </div>
