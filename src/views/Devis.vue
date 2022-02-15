@@ -10,7 +10,7 @@
           <button
             class="button is-warning margin is-large"
             id="partic"
-            v-on:click="(is_valide = true), (particulier = true)"
+            v-on:click="(is_valide = true), (particulier = 1)"
           >
             Particulier
           </button>
@@ -97,7 +97,7 @@
                       id="rs"
                       type="text"
                       placeholder="Nom de votre entreprise"
-                      v-model="data.raison_social"
+                      v-model="data.raison_sociale"
                     />
                   </div>
                 </div>
@@ -130,14 +130,14 @@
                     id="tejbo"
                     type="text"
                     placeholder="Définir l'objet"
-                    v-model="data.message.object"
+                    v-model="data.object"
                   />
                 </div>
               </div>
             </div>
           </div>
           <div class="select" id="drope" style="margin-top: 43px">
-            <select v-model="data.message.categorie" id="fleche">
+            <select v-model="data.category" id="fleche">
               <option disabled value="">Catégorie</option>
               <option>Alimentation</option>
               <option>Electronique</option>
@@ -154,7 +154,7 @@
               class="textarea"
               id="msg"
               placeholder="Message"
-              v-model="data.message.content"
+              v-model="data.content"
             ></textarea>
           </div>
         </div>
@@ -169,7 +169,7 @@
         </div>
         <div class="field is-grouped">
           <div class="control" id="mybutton">
-            <button class="button is-link" id="colorbutt">
+            <button class="button is-link" id="colorbutt" @click="trigerPost()">
               Créer mon ticket de suivi<i
                 class="fas fa-tags"
                 style="margin-left: 10px; margin-top: 5px"
@@ -178,33 +178,75 @@
           </div>
         </div>
       </div>
-      {{ data }}
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
 export default {
   name: "Service",
   data() {
     return {
-      particulier: "",
       data: {
-        email: "",
+        status: 1,
         name: "",
-        siret: null,
-        raison_social: null,
-        message: {
-          categorie: "",
-          object: "",
-          content: "",
-        },
+        email: "",
+        siret: "",
+        raison_sociale: "null",
+        object: "",
+        category: "",
+        content: "",
       },
       is_valide: false,
+      errors: [],
     };
   },
   methods: {
-    trigerPost() {},
+    async trigerPost() {
+      if (this.data.name === "") {
+        this.errors.push("Veuillez remplir le nom");
+      }
+      if (this.data.email === "") {
+        this.errors.push("Veuillez remplir l'email");
+      }
+      if (this.data.object === "") {
+        this.errors.push("Veuillez remplir l'objet");
+      }
+      if (this.data.category === "") {
+        this.errors.push("Veuillez choisir une catégorie");
+      }
+      if (this.data.content === "") {
+        this.errors.push("Veuillez remplir le contenu");
+      }
+      if (this.errors.length === 0) {
+        await axios
+          .post("http://127.0.0.1:8000/api/v1/latest-quote/", this.data)
+          .then((response) => {
+            toast({
+              message:
+                "Devis créé, votre dossier est en attente de validation !",
+              type: "is-success",
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 10000,
+              position: "bottom-right",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        toast({
+          message: "Veuillez remplir les champs manquants",
+          type: "is-danger",
+          dismissible: true,
+          pauseOnHover: true,
+          duration: 10000,
+          position: "bottom-right",
+        });
+      }
+    },
   },
 };
 </script>

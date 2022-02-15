@@ -9,24 +9,25 @@
         >
       </h2>
       <div class="column is-12 is-11-desktop mx-auto has-text-centered">
-        <div class="field">
-          <label class="label" id="pnc">Nom</label>
-          <div class="control">
-            <input
-              class="input"
-              id="limaec"
-              type="text"
-              placeholder="Entrez votre nom"
-            />
-          </div>
-        </div>
+        <div class="field" >
+              <label class="label" id="yourmail">Nom et prénom</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="npcontact"
+                  type="text"
+                  placeholder="Entrez votre nom et prénom"
+                  
+                />
+              </div>
+            </div>
        
         <div class="field">
           <label class="label" id="yourmail">Adresse email</label>
           <div class="control">
             <input
               class="input"
-              id="limae"
+              id="npcontact"
               type="email"
               placeholder="Exemple@gmail.com"
             />
@@ -37,7 +38,7 @@
           <div class="control">
             <input
               class="input"
-              id="limae"
+              id="npcontact"
               type="email"
               placeholder="Définir l'objet"
             />
@@ -109,6 +110,13 @@ export default {
   text-align: center;
   margin-right: 47%;
 }
+
+#npcontact {
+  width: 76% !important;
+  border-color: #418014;
+}
+
+
 @media only screen and (max-width: 793px) {
   #messagec {
     text-align: center;
@@ -127,5 +135,11 @@ export default {
     text-align: center;
     margin-right: 0%;
   }
+}
+@media only screen and (max-width: 566px) {
+  #yourmail {
+  text-align: center;
+  margin-left: 0%;
+}
 }
 </style>
