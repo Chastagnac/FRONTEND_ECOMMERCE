@@ -74,6 +74,18 @@
               />
             </div>
           </div>
+
+        <div class="field">
+          <div class="recaptcha">
+            <div class="recaptcha-size">
+              <vue-recaptcha           
+                sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
+                @verify="captchaVerif"
+              ></vue-recaptcha>
+            </div>
+          </div>
+        </div>
+
           <div class="field">
             <div class="control">
               <button class="button is-dark">S'inscrire</button>
@@ -93,6 +105,7 @@
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
   name: "SignUp",
@@ -102,6 +115,8 @@ export default {
       email: "",
       password: "",
       password2: "",
+
+      captcha_response: "",
       errors: [],
       disabled: false,
     };
@@ -118,8 +133,14 @@ export default {
       });
     }
   },
+  components: { VueRecaptcha },
 
   methods: {
+
+    captchaVerif( response ){
+      this.captcha_response = response;
+    },
+
     infoCookie() {
       if (document.cookie[31] === "a") {
         this.disabled = false;
@@ -148,6 +169,11 @@ export default {
 
       if (this.password2 !== this.password) {
         this.errors.push(`Les mots de passe doivent être identiques`);
+      }
+
+      if(this.captcha_response == "")
+      {
+        this.errors.push("Veuillez cocher le captcha");
       }
 
       if (!this.errors.lenght) {
@@ -193,6 +219,24 @@ export default {
 
 
 <style lang="scss">
+
+.recaptcha{
+    box-sizing: border-box;
+    clear: both;
+    font-size: 1rem;
+    position: relative;
+    text-align: -webkit-center;
+}
+.recaptcha-size{
+    margin: 0 auto;
+    display: inline-block;
+    padding-left: 4.5rem;
+    transform:scale(0.85);
+    -webkit-transform:scale(0.85);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
+
 .page-sign-up {
   padding: 0;
   background-image: url("../assets/environnement-urbain.jpg");
