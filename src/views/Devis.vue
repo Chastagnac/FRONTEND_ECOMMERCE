@@ -1,31 +1,9 @@
 <template>
   <div class="devis">
     <div class="container is-max-desktop">
-      <transition name="fade">
-        <div
-          class="column is-12 is-11-desktop mx-auto has-text-centered"
-          v-if="!is_valide"
-        >
-          <h1 class="title is-1">Vous êtes ?</h1>
-          <button
-            class="button is-warning margin is-large"
-            id="partic"
-            v-on:click="(is_valide = true), (particulier = 1)"
-          >
-            Particulier
-          </button>
-          <button
-            class="button is-info margin is-large"
-            id="prof"
-            @click="(is_valide = true), (particulier = false)"
-          >
-            Professionnel
-          </button>
-        </div>
-      </transition>
+        
       <div
         class="column is-12 is-11-desktop mx-auto has-text-centered"
-        v-if="is_valide"
       >
         <div>
           <h1 id="mytitle">Mon devis</h1>
@@ -89,7 +67,7 @@
           <div id="parent">
             <div id="enfant">
               <div class="column is-6 raisonsociale">
-                <div class="field child" id="rs" v-if="!particulier">
+                <div class="field child" id="rs">
                   <label class="label" id="lbrs">Raison sociale</label>
                   <div class="control">
                     <input
@@ -102,7 +80,7 @@
                   </div>
                 </div>
 
-                <div class="field child" id="numsi" v-if="!particulier">
+                <div class="field child" id="numsi">
                   <label class="label" id="lbnds">Numéro de siret</label>
                   <div class="control">
                     <input
@@ -189,7 +167,6 @@ export default {
   data() {
     return {
       data: {
-        status: 1,
         name: "",
         email: "",
         siret: "",
