@@ -218,9 +218,26 @@ export default {
     };
   },
 
+  mounted(){
+    this.mounted()
+  },
+
   components: { VueRecaptcha },
 
   methods: {
+
+    mounted(){
+        axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
+        axios
+        .get("/api/v1/users/me")
+        .then((response) => {
+          this.info = response.data;
+          this.data.email = this.info.email;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+     },
 
     captchaVerif( response ){
       this.data.captcha_response = response;
@@ -262,7 +279,7 @@ export default {
               dismissible: true,
               pauseOnHover: true,
               duration: 10000,
-              position: "bottom-right",
+              position: "top-right",
             });
           })
           .catch((error) => {
@@ -278,7 +295,8 @@ export default {
                 dismissible: true,
                 pauseOnHover: true,
                 duration: 3000,
-                position: "bottom-right",
+                position: "top-right",
+                animate: { in: 'fadeIn', out: 'fadeOut' },
                 });
             }
           });          
@@ -289,6 +307,8 @@ export default {
 </script>
 
 <style scoped>
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css);
 
 .recaptcha{
     box-sizing: border-box;

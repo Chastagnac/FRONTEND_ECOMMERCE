@@ -149,6 +149,7 @@ export default {
             pauseOnHover: true,
             duration: 1000,
             position: "top-right",
+            animate: { in: 'fadeIn', out: 'fadeOut' },
       });
     },
   }

@@ -1,3 +1,4 @@
+
 <template>
   <div class="page-sign-up">
     <div class="columns">
@@ -91,10 +92,10 @@
               <button class="button is-dark">S'inscrire</button>
             </div>
           </div>
-        </form>
-        <div class="notification is-danger" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-        </div>
+        </form> 
+            <div v-if="errors.length">                                         
+                  <p v-for="error in errors" v-bind:key="error">{{ toast_affiche(error) }}</p>
+            </div>
       </div>
     </div>
   </div>
@@ -119,7 +120,11 @@ export default {
       captcha_response: "",
       errors: [],
       disabled: false,
+
+      toasterrors: [],
+
     };
+    
   },
   mounted() {
     if (!this.infoCookie()) {
@@ -130,12 +135,25 @@ export default {
         pauseOnHover: true,
         duration: 11000,
         position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
       });
     }
   },
   components: { VueRecaptcha },
 
   methods: {
+    
+    toast_affiche(parametre){
+       toast({
+        message: parametre,
+        type: "is-danger",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
 
     captchaVerif( response ){
       this.captcha_response = response;
@@ -191,19 +209,27 @@ export default {
               type: "is-success",
               dismissible: true,
               pauseOnHover: true,
-              duration: 2000,
+              duration: 3000,
               position: "bottom-right",
+              animate: { in: 'fadeIn', out: 'fadeOut' },
             });
             this.$router.push("/log-in");
           })
           .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.errors.push(
-                  `${error.response.data[property]}`
-                );
-              }
-
+                this.toasterrors = `${error.response.data[property]}`;
+                 toast({
+                      message: this.toasterrors,
+                      type: "is-danger",
+                      dismissible: true,
+                      pauseOnHover: true,
+                      duration: 2000,
+                      position: "bottom-right",
+                      animate: { in: 'fadeIn', out: 'fadeOut' },
+                    });
+              };
+                         
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
               this.errors.push("Something went wrong. Please try again");
@@ -218,7 +244,9 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" >
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css);
 
 .recaptcha{
     box-sizing: border-box;

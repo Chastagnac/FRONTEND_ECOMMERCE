@@ -93,8 +93,8 @@
                     Valider
             </button>
         </form>
-         <div class="notification is-danger" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+         <div v-if="errors.length">
+          <p v-for="error in errors" v-bind:key="error">{{ toast_affiche(error) }}</p>
         </div>
         </div>
       </div>
@@ -121,6 +121,9 @@ export default {
       password_change: '',
       password_change2: '',
 
+      toasterrors: [],
+      toasterrors2: [],
+
       errors: [],
       info: [],
     };
@@ -141,16 +144,29 @@ export default {
       });
   },
   methods: {
+
+    toast_affiche(parametre){
+       toast({
+        message: parametre,
+        type: "is-danger",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
     updateUser(){
 
       axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
 
       this.errors = [];
-      if(this.password_actuel === "")
+      if(this.password_actuel == "")
       {
         this.errors.push(`Afin de valider les modifications le mot de passe doit être renseigné`);
       }
-      if (this.input.username === "") {
+      if (this.input.username == "") {
         this.errors.push(`Le nom d'utilisateur doit être renseigné`);
       }
       else if(!this.errors.lenght && this.input.username !== this.username_actuel)
@@ -167,16 +183,24 @@ export default {
               type: "is-success",
               dismissible: true,
               pauseOnHover: true,
-              duration: 2000,
+              duration: 3000,
               position: "bottom-right",
+              animate: { in: 'fadeIn', out: 'fadeOut' },
             });
         })
         .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.errors.push(
-                  `${error.response.data[property]}`
-                );
+                this.toasterrors = `${error.response.data[property]}`;
+                 toast({
+                      message: this.toasterrors,
+                      type: "is-danger",
+                      dismissible: true,
+                      pauseOnHover: true,
+                      duration: 2000,
+                      position: "bottom-right",
+                      animate: { in: 'fadeIn', out: 'fadeOut' },
+                    });
               }
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
@@ -185,15 +209,26 @@ export default {
               console.log(JSON.stringify(error));
             }
           });
+      }else if (this.input.username == this.username_actuel && !this.errors.lenght)
+      {
+        toast({
+            message: "Aucune information n'a été modifiée",
+            type: "is-info",
+            dismissible: true,
+            pauseOnHover: true,
+            duration: 2000,
+            position: "top-right",
+            animate: { in: 'fadeIn', out: 'fadeOut' },
+          });
       }
 
-      if (this.password_change !== "") {
+      if (this.password_change != "") {
 
-        if (this.input.password2 !== this.input.password) 
+        if (this.input.password2 != this.input.password) 
         {
           this.errors.push(`Les mots de passe doivent être identiques`);
         }
-        else if (!this.errors.lenght && this.password_change === this.password_change2 && this.password_change !== this.password_actuel && this.password_change2 !== this.password_actuel)
+        else if (!this.errors.lenght && this.password_change == this.password_change2 && this.password_change != this.password_actuel && this.password_change2 !== this.password_actuel)
         {
           const data = { 
           new_password: this.password_change,
@@ -209,14 +244,22 @@ export default {
                 pauseOnHover: true,
                 duration: 2000,
                 position: "bottom-right",
+                animate: { in: 'fadeIn', out: 'fadeOut' },
             });
           })
           .catch((error) => {
               if (error.response) {
                 for (const property in error.response.data) {
-                  this.errors.push(
-                    `${error.response.data[property]}`
-                  );
+                 this.toasterrors2 = `${error.response.data[property]}`;
+                 toast({
+                      message: this.toasterrors,
+                      type: "is-danger",
+                      dismissible: true,
+                      pauseOnHover: true,
+                      duration: 2000,
+                      position: "bottom-right",
+                      animate: { in: 'fadeIn', out: 'fadeOut' },
+                    });
                 }
                 console.log(JSON.stringify(error.response.data));
               } else if (error.message) {
@@ -237,6 +280,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css);
+
 .boxemya {
   width: 74%;
   text-align: center;

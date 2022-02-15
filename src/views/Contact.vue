@@ -8,6 +8,7 @@
           </router-link></a
         >
       </h2>
+      <form @submit.prevent="submitForm">
       <div class="column is-12 is-11-desktop mx-auto has-text-centered">
         <div class="field" >
               <label class="label" id="yourmail">Nom et prénom</label>
@@ -17,7 +18,7 @@
                   id="npcontact"
                   type="text"
                   placeholder="Entrez votre nom et prénom"
-                  
+                  v-model="input.username"
                 />
               </div>
             </div>
@@ -30,6 +31,7 @@
               id="npcontact"
               type="email"
               placeholder="Exemple@gmail.com"
+              v-model="input.email"
             />
           </div>
         </div>
@@ -41,6 +43,7 @@
               id="npcontact"
               type="email"
               placeholder="Définir l'objet"
+              v-model="input.object"
             />
           </div>
         </div>
@@ -52,8 +55,19 @@
               class="textarea"
               id="msg"
               placeholder="Décrivez nous votre besoin..."
-              
+              v-model="input.message"
             ></textarea>
+          </div>
+        </div>
+
+         <div class="field">
+          <div class="recaptcha">
+            <div class="recaptcha-size">
+              <vue-recaptcha           
+                sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
+                @verify="captchaVerif"
+              ></vue-recaptcha>
+            </div>
           </div>
         </div>
 
@@ -61,18 +75,105 @@
           Envoyer
         </button>
       </div>
+      </form>
+      
    </div>  
    
 
   </div>
 </template>
 <script>
+import axios from "axios";
+import { toast } from "bulma-toast";
+import { VueRecaptcha } from 'vue-recaptcha';
+
 export default {
   name: "Contact",
   data() {
-    return {};
+    return {
+      input: {
+        email:"",
+        username: "",
+        object:"",
+        message: "",
+
+
+        captcha_response: "",
+        errors: [],
+      }
+    };
   },
-};
+  components: { VueRecaptcha },
+
+   mounted(){
+        axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
+        axios
+        .get("/api/v1/users/me")
+        .then((response) => {
+          this.info = response.data;
+          this.input.email = this.info.email;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+     },
+
+   methods: {
+       captchaVerif( response ){
+      this.data.captcha_response = response;
+    },
+
+     submitForm(){
+       this.errors = [];
+      if (this.input.username == "") {
+        this.input.errors.push(`Le nom d'utilisateur doit être renseigné`);
+      }
+
+      if (this.input.email == "") {
+        this.input.errors.push(`Le mail doit être rempli`);
+      }
+
+      if (this.input.object == "") {
+        this.input.errors.push(`Le mot de passe doit être renseigné`);
+      }
+
+      if (this.input.message == "") {
+        this.input.errors.push(`Les mots de passe doivent être identiques`);
+      }
+
+      if(this.input.captcha_response == "")
+      {
+        this.input.errors.push("Veuillez cocher le captcha");
+      }
+
+      if (!this.errors.lenght) {
+        const formData = {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        };
+     }else
+     {
+       this.input.errors.forEach(element => {
+            if(element != "")
+            {
+              toast({
+                message: element,
+                type: "is-danger",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 3000,
+                position: "top-right",
+                animate: { in: 'fadeIn', out: 'fadeOut' },
+                });
+            }
+          });          
+     }
+   
+   }
+
+  }
+}
 </script>
 
 <style lang="scss">
