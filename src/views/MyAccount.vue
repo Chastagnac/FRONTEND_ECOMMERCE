@@ -14,7 +14,7 @@
             class="tab-link active"
             data-ref="connexion"
             href="javascript:void(0)"
-            ><router-link id="connexionmya" to="/myaccount"
+            ><router-link id="connexionmya" to="/my-account"
               >Mes infos
             </router-link></a
           >
@@ -116,7 +116,7 @@ export default {
         email: '',
       },
 
-      username_change: '',
+      username_actuel: '',
       password_actuel: '',
       password_change: '',
       password_change2: '',
@@ -134,7 +134,7 @@ export default {
         this.input.email = this.info.email;
         this.input.username = this.info.username;
 
-        this.username_change = this.info.username;
+        this.username_actuel = this.info.username;
       })
       .catch((error) => {
         console.log(error);
@@ -153,7 +153,7 @@ export default {
       if (this.input.username === "") {
         this.errors.push(`Le nom d'utilisateur doit être renseigné`);
       }
-      else if(this.input.username !== this.username_change)
+      else if(!this.errors.lenght && this.input.username !== this.username_actuel)
       {
         const data = {
           current_password: this.password_actuel,
@@ -193,7 +193,7 @@ export default {
         {
           this.errors.push(`Les mots de passe doivent être identiques`);
         }
-        else if (this.password_change === this.password_change2 && this.password_change !== this.password_actuel && this.password_change2 !== this.password_actuel)
+        else if (!this.errors.lenght && this.password_change === this.password_change2 && this.password_change !== this.password_actuel && this.password_change2 !== this.password_actuel)
         {
           const data = { 
           new_password: this.password_change,
@@ -228,7 +228,7 @@ export default {
         }
         else
         {
-          this.errors.push(`Votre mot de passe est identique à l'ancien`);
+          this.errors.push(`Votre mot de passe est identique au mot de passe actuel`);
         }
       } 
     },
