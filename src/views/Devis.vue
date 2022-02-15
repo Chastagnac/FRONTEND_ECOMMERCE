@@ -158,15 +158,26 @@
             ></textarea>
           </div>
         </div>
-
         <div class="field">
           <div class="control">
             <label class="checkbox">
-              <input type="checkbox" />
+              <input type="checkbox" v-model="data.checkbox" />
               J'ai lu et j'accepte les <a href="#">termes et conditions</a>
-            </label>
+            </label> 
+          </div>                
+        </div>
+
+        <div class="field">
+          <div class="recaptcha">
+            <div class="recaptcha-size">
+              <vue-recaptcha           
+                sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
+                @verify="captchaVerif"
+              ></vue-recaptcha>
+            </div>
           </div>
         </div>
+         
         <div class="field is-grouped">
           <div class="control" id="mybutton">
             <button class="button is-link" id="colorbutt" @click="trigerPost()">
@@ -184,6 +195,8 @@
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import { VueRecaptcha } from 'vue-recaptcha';
+
 export default {
   name: "Service",
   data() {
@@ -193,31 +206,50 @@ export default {
         name: "",
         email: "",
         siret: "",
-        raison_sociale: "null",
+        raison_sociale: "",
         object: "",
         category: "",
-        content: "",
-      },
+        content: "",  
+        captcha_response: "",  
+        checkbox: "",    
+      },     
       is_valide: false,
       errors: [],
     };
   },
+
+  components: { VueRecaptcha },
+
   methods: {
+
+    captchaVerif( response ){
+      this.data.captcha_response = response;
+    },
+
     async trigerPost() {
-      if (this.data.name === "") {
+      this.errors = [];
+      if (this.data.name == "") {
         this.errors.push("Veuillez remplir le nom");
       }
-      if (this.data.email === "") {
+      if (this.data.email == "") {
         this.errors.push("Veuillez remplir l'email");
       }
-      if (this.data.object === "") {
+      if (this.data.object == "") {
         this.errors.push("Veuillez remplir l'objet");
       }
-      if (this.data.category === "") {
+      if (this.data.category == "") {
         this.errors.push("Veuillez choisir une catégorie");
       }
-      if (this.data.content === "") {
+      if (this.data.content == "") {
         this.errors.push("Veuillez remplir le contenu");
+      }
+      if(this.data.captcha_response == "")
+      {
+        this.errors.push("Veuillez cocher le captcha");
+      }
+      if(!this.data.checkbox)
+      {
+        this.errors.push("Veuillez accepter les termes et conditions");
       }
       if (this.errors.length === 0) {
         await axios
@@ -237,14 +269,19 @@ export default {
             console.log(error);
           });
       } else {
-        toast({
-          message: "Veuillez remplir les champs manquants",
-          type: "is-danger",
-          dismissible: true,
-          pauseOnHover: true,
-          duration: 10000,
-          position: "bottom-right",
-        });
+          this.errors.forEach(element => {
+            if(element != "")
+            {
+              toast({
+                message: element,
+                type: "is-danger",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 3000,
+                position: "bottom-right",
+                });
+            }
+          });          
       }
     },
   },
@@ -252,6 +289,23 @@ export default {
 </script>
 
 <style scoped>
+
+.recaptcha{
+    box-sizing: border-box;
+    clear: both;
+    font-size: 1rem;
+    position: relative;
+    text-align: -webkit-center;
+}
+.recaptcha-size{
+    margin: 0 auto;
+    display: inline-block;
+    padding-left: 4.5rem;
+    transform:scale(0.85);
+    -webkit-transform:scale(0.85);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
 #parent {
   width: 100%;
   white-space: nowrap;
