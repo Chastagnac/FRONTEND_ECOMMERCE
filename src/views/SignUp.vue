@@ -23,7 +23,7 @@
         </h2>
 
         <form @submit.prevent="submitForm">
-          <div class="toutaligne">
+          <div class="toutaligne" style="margin-top : 10px">
                <div class="field">
             <label id="nomuse" for="nomuse">Nom d'utilisateur</label>
             <div class="control">
