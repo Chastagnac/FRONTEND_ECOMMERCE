@@ -135,10 +135,6 @@
         </div>
         <div class="field">
           <div class="control">
-            <label class="checkbox">
-              <input type="checkbox" v-model="data.checkbox" />
-              J'ai lu et j'accepte les <a href="#">termes et conditions</a>
-            </label> 
           </div>                
         </div>
 
@@ -185,8 +181,7 @@ export default {
         object: "",
         category: "",
         content: "",  
-        captcha_response: "",  
-        checkbox: "",    
+        captcha_response: "",    
       },     
       is_valide: false,
       errors: [],
@@ -238,10 +233,6 @@ export default {
       if(this.data.captcha_response == "")
       {
         this.errors.push("Veuillez cocher le captcha");
-      }
-      if(!this.data.checkbox)
-      {
-        this.errors.push("Veuillez accepter les termes et conditions");
       }
       if (this.errors.length === 0) {
         await axios
