@@ -29,7 +29,7 @@
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Service</router-link>
             <router-link to="/contact" class="navbar-item">Contact</router-link>
-            <router-link to="/service/devis" class="navbar-item"
+            <router-link to="/devis-clients" class="navbar-item"
               >Devis clients</router-link
             >
           </div>
@@ -81,6 +81,8 @@
    <script>
 import axios from "axios";
 import Footer from "@/components/Footer";
+import { toast } from "bulma-toast";
+
 export default {
   data() {
     return {
@@ -137,8 +139,18 @@ export default {
         localStorage.removeItem("username");
         localStorage.removeItem("userid");
   
-        this.$store.commit("removeToken");
+        this.$store.commit("removeToken");       
         this.$router.push("/");
+        
+        toast({
+            message: `Vous êtes déconnecté`,
+            type: "is-info",
+            dismissible: true,
+            pauseOnHover: true,
+            duration: 1000,
+            position: "top-right",
+            animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
     },
   }
 };

@@ -1,3 +1,4 @@
+
 <template>
   <div class="page-sign-up">
     <div class="columns">
@@ -63,7 +64,7 @@
             </div>
           </div>
           <div class="field">
-            <label id="rmdp">Répéter mot de passe</label>
+            <label id="rmdp">Confirmer mot de passe</label>
             <div class="control">
               <input
                 type="password"
@@ -77,15 +78,27 @@
           </div>
           </div>
          
+
+        <div class="field">
+          <div class="recaptcha" style="margin-top : 10px">
+            <div class="recaptcha-size">
+              <vue-recaptcha           
+                sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
+                @verify="captchaVerif"
+              ></vue-recaptcha>
+            </div>
+          </div>
+        </div>
+
           <div class="field">
             <div class="control">
               <button class="button is-dark" id="btnsignup">S'inscrire</button>
             </div>
           </div>
-        </form>
-        <div class="notification is-danger" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-        </div>
+        </form> 
+            <div v-if="errors.length">                                         
+                  <p v-for="error in errors" v-bind:key="error">{{ toast_affiche(error) }}</p>
+            </div>
       </div>
     </div>
   </div>
@@ -96,6 +109,7 @@
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
   name: "SignUp",
@@ -105,9 +119,15 @@ export default {
       email: "",
       password: "",
       password2: "",
+
+      captcha_response: "",
       errors: [],
       disabled: false,
+
+      toasterrors: [],
+
     };
+    
   },
   mounted() {
     if (!this.infoCookie()) {
@@ -118,11 +138,30 @@ export default {
         pauseOnHover: true,
         duration: 11000,
         position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
       });
     }
   },
+  components: { VueRecaptcha },
 
   methods: {
+    
+    toast_affiche(parametre){
+       toast({
+        message: parametre,
+        type: "is-danger",
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
+    captchaVerif( response ){
+      this.captcha_response = response;
+    },
+
     infoCookie() {
       if (document.cookie[31] === "a") {
         this.disabled = false;
@@ -153,6 +192,11 @@ export default {
         this.errors.push(`Les mots de passe doivent être identiques`);
       }
 
+      if(this.captcha_response == "")
+      {
+        this.errors.push("Veuillez cocher le captcha");
+      }
+
       if (!this.errors.lenght) {
         const formData = {
           username: this.username,
@@ -168,19 +212,27 @@ export default {
               type: "is-success",
               dismissible: true,
               pauseOnHover: true,
-              duration: 2000,
+              duration: 3000,
               position: "bottom-right",
+              animate: { in: 'fadeIn', out: 'fadeOut' },
             });
             this.$router.push("/log-in");
           })
           .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.errors.push(
-                  `${property}:${error.response.data[property]}`
-                );
-              }
-
+                this.toasterrors = `${error.response.data[property]}`;
+                 toast({
+                      message: this.toasterrors,
+                      type: "is-danger",
+                      dismissible: true,
+                      pauseOnHover: true,
+                      duration: 2000,
+                      position: "bottom-right",
+                      animate: { in: 'fadeIn', out: 'fadeOut' },
+                    });
+              };
+                         
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
               this.errors.push("Something went wrong. Please try again");
@@ -195,7 +247,27 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" >
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css);
+
+.recaptcha{
+    box-sizing: border-box;
+    clear: both;
+    font-size: 1rem;
+    position: relative;
+    text-align: -webkit-center;
+}
+.recaptcha-size{
+    margin: 0 auto;
+    display: inline-block;
+    padding-left: 4.5rem;
+    transform:scale(0.85);
+    -webkit-transform:scale(0.85);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
+
 .page-sign-up {
   padding: 0;
   background-image: url("../assets/environnement-urbain.jpg");

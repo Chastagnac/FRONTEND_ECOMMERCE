@@ -1,32 +1,7 @@
 <template>
   <div class="devis">
     <div class="container is-max-desktop">
-      <transition name="fade">
-        <div
-          class="column is-12 is-11-desktop mx-auto has-text-centered"
-          v-if="!is_valide"
-        >
-          <h1 class="title is-1">Vous êtes ?</h1>
-          <button
-            class="button is-warning margin is-large"
-            id="partic"
-            v-on:click="(is_valide = true), (particulier = true)"
-          >
-            Particulier
-          </button>
-          <button
-            class="button is-info margin is-large"
-            id="prof"
-            @click="(is_valide = true), (particulier = false)"
-          >
-            Professionnel
-          </button>
-        </div>
-      </transition>
-      <div
-        class="column is-12 is-11-desktop mx-auto has-text-centered"
-        v-if="is_valide"
-      >
+      <div class="column is-12 is-11-desktop mx-auto has-text-centered">
         <div>
           <h1 id="mytitle">Mon devis</h1>
         </div>
@@ -89,7 +64,7 @@
           <div id="parent">
             <div id="enfant">
               <div class="column is-6 raisonsociale">
-                <div class="field child" id="rs" v-if="!particulier">
+                <div class="field child" id="rs">
                   <label class="label" id="lbrs">Raison sociale</label>
                   <div class="control">
                     <input
@@ -97,12 +72,12 @@
                       id="rs"
                       type="text"
                       placeholder="Nom de votre entreprise"
-                      v-model="data.raison_social"
+                      v-model="data.raison_sociale"
                     />
                   </div>
                 </div>
 
-                <div class="field child" id="numsi" v-if="!particulier">
+                <div class="field child" id="numsi">
                   <label class="label" id="lbnds">Numéro de siret</label>
                   <div class="control">
                     <input
@@ -130,14 +105,14 @@
                     id="tejbo"
                     type="text"
                     placeholder="Définir l'objet"
-                    v-model="data.message.object"
+                    v-model="data.object"
                   />
                 </div>
               </div>
             </div>
           </div>
           <div class="select" id="drope" style="margin-top: 43px">
-            <select v-model="data.message.categorie" id="fleche">
+            <select v-model="data.category" id="fleche">
               <option disabled value="">Catégorie</option>
               <option>Alimentation</option>
               <option>Electronique</option>
@@ -154,62 +129,170 @@
               class="textarea"
               id="msg"
               placeholder="Message"
-              v-model="data.message.content"
+              v-model="data.content"
             ></textarea>
           </div>
         </div>
-
         <div class="field">
           <div class="control">
-            <label class="checkbox">
-              <input type="checkbox" />
-              J'ai lu et j'accepte les <a href="#">termes et conditions</a>
-            </label>
+          </div>                
+        </div>
+
+        <div class="field">
+          <div class="recaptcha">
+            <div class="recaptcha-size">
+              <vue-recaptcha           
+                sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
+                @verify="captchaVerif"
+              ></vue-recaptcha>
+            </div>
           </div>
         </div>
+         
         <div class="field is-grouped">
           <div class="control" id="mybutton">
-            <button class="button is-link" id="colorbutt">
+            <button class="button is-link" id="colorbutt" @click="trigerPost()">
               Créer mon ticket de suivi<i
                 class="fas fa-tags"
                 style="margin-left: 10px; margin-top: 5px"
               ></i>
             </button>
-          </div>
+          </div> 
         </div>
       </div>
-      {{ data }}
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
+import { VueRecaptcha } from 'vue-recaptcha';
+
 export default {
   name: "Service",
   data() {
     return {
-      particulier: "",
+      captcha: false,
       data: {
-        email: "",
         name: "",
-        siret: null,
-        raison_social: null,
-        message: {
-          categorie: "",
-          object: "",
-          content: "",
-        },
-      },
+        email: "",
+        siret: "",
+        raison_sociale: "",
+        object: "",
+        category: "",
+        content: "",  
+        captcha_response: "",    
+      },     
       is_valide: false,
+      errors: [],
     };
   },
+
+  mounted(){
+    this.mounted()
+  },
+
+  components: { VueRecaptcha },
+
   methods: {
-    trigerPost() {},
+
+    mounted(){
+        axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
+        axios
+        .get("/api/v1/users/me")
+        .then((response) => {
+          this.info = response.data;
+          this.data.email = this.info.email;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+     },
+
+    captchaVerif( response ){
+      this.data.captcha_response = response;
+    },
+
+    async trigerPost() {
+      this.errors = [];
+      if (this.data.name == "") {
+        this.errors.push("Veuillez remplir le nom");
+      }
+      if (this.data.email == "") {
+        this.errors.push("Veuillez remplir l'email");
+      }
+      if (this.data.object == "") {
+        this.errors.push("Veuillez remplir l'objet");
+      }
+      if (this.data.category == "") {
+        this.errors.push("Veuillez choisir une catégorie");
+      }
+      if (this.data.content == "") {
+        this.errors.push("Veuillez remplir le contenu");
+      }
+      if(this.data.captcha_response == "")
+      {
+        this.errors.push("Veuillez cocher le captcha");
+      }
+      if (this.errors.length === 0) {
+        await axios
+          .post("http://127.0.0.1:8000/api/v1/latest-quote/", this.data)
+          .then((response) => {
+            this.$router.push("/service")
+            toast({
+              message:
+                "Devis créé, votre dossier est en attente de validation !",
+              type: "is-success",
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 10000,
+              position: "top-right",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+          this.errors.forEach(element => {
+            if(element != "")
+            {
+              toast({
+                message: element,
+                type: "is-danger",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 3000,
+                position: "top-right",
+                animate: { in: 'fadeIn', out: 'fadeOut' },
+                });
+            }
+          });          
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css);
+
+.recaptcha{
+    box-sizing: border-box;
+    clear: both;
+    font-size: 1rem;
+    position: relative;
+    text-align: -webkit-center;
+}
+.recaptcha-size{
+    margin: 0 auto;
+    display: inline-block;
+    padding-left: 4.5rem;
+    transform:scale(0.85);
+    -webkit-transform:scale(0.85);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+}
 #parent {
   width: 100%;
   white-space: nowrap;
