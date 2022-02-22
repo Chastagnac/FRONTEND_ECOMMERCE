@@ -240,8 +240,7 @@ export default {
           .then((response) => {
             this.$router.push("/service")
             toast({
-              message:
-                "Devis créé, votre dossier est en attente de validation !",
+              message:"Devis créé, votre dossier est en attente de validation !",
               type: "is-success",
               dismissible: true,
               pauseOnHover: true,

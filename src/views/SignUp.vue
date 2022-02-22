@@ -97,7 +97,7 @@
           </div>
         </form> 
             <div v-if="errors.length">                                         
-                  <p v-for="error in errors" v-bind:key="error">{{ toast_affiche(error) }}</p>
+                  <p v-for="error in errors" v-bind:key="error">{{ toast_affiche(error,"is-danger") }}</p>
             </div>
       </div>
     </div>
@@ -146,10 +146,10 @@ export default {
 
   methods: {
     
-    toast_affiche(parametre){
+    toast_affiche(parametre,type){
        toast({
         message: parametre,
-        type: "is-danger",
+        type: type,
         dismissible: true,
         pauseOnHover: true,
         duration: 3000,
@@ -207,36 +207,18 @@ export default {
         axios
           .post("/api/v1/users/", formData)
           .then((response) => {
-            toast({
-              message: "Compte créé, veuillez vous connecter !",
-              type: "is-success",
-              dismissible: true,
-              pauseOnHover: true,
-              duration: 3000,
-              position: "bottom-right",
-              animate: { in: 'fadeIn', out: 'fadeOut' },
-            });
+            this.toast_affiche("Compte créé, veuillez vous connecter !","is-success");
             this.$router.push("/log-in");
           })
           .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.toasterrors = `${error.response.data[property]}`;
-                 toast({
-                      message: this.toasterrors,
-                      type: "is-danger",
-                      dismissible: true,
-                      pauseOnHover: true,
-                      duration: 2000,
-                      position: "bottom-right",
-                      animate: { in: 'fadeIn', out: 'fadeOut' },
-                    });
+                this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
               };
                          
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
-              this.errors.push("Something went wrong. Please try again");
-
+              this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
               console.log(JSON.stringify(error));
             }
           });

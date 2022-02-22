@@ -93,9 +93,6 @@
                     Valider
             </button>
         </form>
-         <div v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ toast_affiche(error) }}</p>
-        </div>
         </div>
       </div>
     </div>
@@ -121,10 +118,7 @@ export default {
       password_change: '',
       password_change2: '',
 
-      toasterrors: [],
-      toasterrors2: [],
-
-      errors: [],
+      errors: 0,
       info: [],
     };
   },
@@ -145,10 +139,10 @@ export default {
   },
   methods: {
 
-    toast_affiche(parametre){
+    toast_affiche(parametre,type){
        toast({
         message: parametre,
-        type: "is-danger",
+        type: type,
         dismissible: true,
         pauseOnHover: true,
         duration: 3000,
@@ -161,16 +155,19 @@ export default {
 
       axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
 
-      this.errors = [];
+      this.errors = 0;
       if(this.password_actuel == "")
       {
-        this.errors.push(`Afin de valider les modifications le mot de passe doit être renseigné`);
+        this.errors = 1;
+        this.toast_affiche(`Afin de valider les modifications le mot de passe doit être renseigné`,"is-danger");
       }
       if (this.input.username == "") {
-        this.errors.push(`Le nom d'utilisateur doit être renseigné`);
+        this.errors = 1;
+        this.toast_affiche(`Le nom d'utilisateur doit être renseigné`,'is-danger');
       }
-      else if(!this.errors.lenght && this.input.username !== this.username_actuel)
+      else if(this.errors == 0 && this.input.username != this.username_actuel)
       {
+        this.errors = 1;
         const data = {
           current_password: this.password_actuel,
           new_username: this.input.username
@@ -178,47 +175,20 @@ export default {
         axios
         .post("/api/v1/users/set_username/",data)
         .then(response => {
-            toast({
-              message: "Votre nom d'utilisateur à bien été modifié !",
-              type: "is-success",
-              dismissible: true,
-              pauseOnHover: true,
-              duration: 3000,
-              position: "bottom-right",
-              animate: { in: 'fadeIn', out: 'fadeOut' },
-            });
+            this.toast_affiche("Votre nom d'utilisateur à bien été modifié !","is-success");
         })
         .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.toasterrors = `${error.response.data[property]}`;
-                 toast({
-                      message: this.toasterrors,
-                      type: "is-danger",
-                      dismissible: true,
-                      pauseOnHover: true,
-                      duration: 2000,
-                      position: "bottom-right",
-                      animate: { in: 'fadeIn', out: 'fadeOut' },
-                    });
+                this.errors = 0;
+                this.toast_affiche(`${error.response.data[property]}`,"is-danger");
               }
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
-              this.errors.push("Something went wrong. Please try again");
-
+              this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger");
+              this.errors = 0;
               console.log(JSON.stringify(error));
             }
-          });
-      }else if (this.input.username == this.username_actuel && !this.errors.lenght)
-      {
-        toast({
-            message: "Aucune information n'a été modifiée",
-            type: "is-info",
-            dismissible: true,
-            pauseOnHover: true,
-            duration: 2000,
-            position: "top-right",
-            animate: { in: 'fadeIn', out: 'fadeOut' },
           });
       }
 
@@ -226,10 +196,12 @@ export default {
 
         if (this.input.password2 != this.input.password) 
         {
-          this.errors.push(`Les mots de passe doivent être identiques`);
+          this.errors = 1;
+          this.toast_affiche(`Les mots de passe doivent être identiques`,'is-danger');
         }
-        else if (!this.errors.lenght && this.password_change == this.password_change2 && this.password_change != this.password_actuel && this.password_change2 !== this.password_actuel)
+        else if (this.errors == 0 && this.password_change != this.password_actuel && this.password_change2 !== this.password_actuel)
         {
+          this.errors = 1;
           const data = { 
           new_password: this.password_change,
           current_password: this.password_actuel,
@@ -237,43 +209,34 @@ export default {
           axios
           .post("/api/v1/users/set_password/",data)
           .then(response => {
-               toast({
-                message: "Votre mot de passe à bien été modifié !",
-                type: "is-success",
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: "bottom-right",
-                animate: { in: 'fadeIn', out: 'fadeOut' },
-            });
-          })
+              this.toast_affiche("Votre mot de passe à bien été modifié !","is-success");
+            })
           .catch((error) => {
               if (error.response) {
                 for (const property in error.response.data) {
-                 this.toasterrors2 = `${error.response.data[property]}`;
-                 toast({
-                      message: this.toasterrors,
-                      type: "is-danger",
-                      dismissible: true,
-                      pauseOnHover: true,
-                      duration: 2000,
-                      position: "bottom-right",
-                      animate: { in: 'fadeIn', out: 'fadeOut' },
-                    });
+                 this.toast_affiche(`${error.response.data[property]}`,"is-danger");
+                this.errors = 0;
                 }
                 console.log(JSON.stringify(error.response.data));
               } else if (error.message) {
-                this.errors.push("Something went wrong. Please try again");
-
+                 this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger");
+                 this.errors = 0;
                 console.log(JSON.stringify(error));
               }
             });
         }
         else
         {
-          this.errors.push(`Votre mot de passe est identique au mot de passe actuel`);
+          this.errors = 1;
+          this.toast_affiche(`Votre mot de passe est identique au mot de passe actuel`,'is-danger');
         }
-      } 
+      }
+
+      if(this.errors == 0)
+      {
+        this.errors = 0;
+        this.toast_affiche("Aucune information n'a été modifiée","is-info")
+      }
     },
   },
 };

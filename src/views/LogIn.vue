@@ -96,10 +96,7 @@ export default {
   },
   mounted() {
     if (!this.infoCookie()) {
-      toast_affiche(
-        "Veuillez acceptez les cookies pour pouvoir vous connecter",
-        "is-warning"
-      );
+      toast_affiche("Veuillez acceptez les cookies pour pouvoir vous connecter","is-warning");
     }
   },
   methods: {
@@ -126,11 +123,14 @@ export default {
     },
 
     async submitForm() {
-      if (this.username == "") {
-        this.toast_affiche("Veuillez entrer un nom d'utilisateur", "is-danger");
+
+      if(this.username == "")
+      {
+       this.toast_affiche("Veuillez entrer un nom d'utilisateur","is-danger");
       }
-      if (this.password == "") {
-        this.toast_affiche("Veuillez entrer un mot de passe", "is-danger");
+      if(this.password == "")
+      {
+        this.toast_affiche("Veuillez entrer un mot de passe","is-danger");
       }
       axios.defaults.headers.common["Authorization"] = "";
 
@@ -138,11 +138,11 @@ export default {
       if (this.disabled === true) {
         this.toast_affiche(`Veuillez accepter les cookies`, "is-danger");
       }
-      const fromData = {
-        username: this.username,
-        password: this.password,
-      };
-
+       const fromData = {
+          username: this.username,
+          password: this.password,
+        };
+        
       await axios
         .post("/api/v1/token/login/", fromData)
         .then((response) => {
@@ -150,7 +150,7 @@ export default {
           this.$store.commit("setToken", token);
           this.$store.commit("addAccount", fromData);
           axios.defaults.headers.common["Authorization"] = "Token " + token;
-
+         
           localStorage.setItem("token", token);
           this.toast_affiche("Vous êtes connecté", "is-info");
           const toPath = this.$route.query.to || "/";
@@ -159,16 +159,10 @@ export default {
         .catch((error) => {
           if (error.response) {
             for (const property in error.response.data) {
-              this.toast_affiche(
-                `${error.response.data[property]}`,
-                "is-danger"
-              );
+              this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
             }
           } else {
-            this.toast_affiche(
-              "Désolé. Un problème est survenu. Veuillez réessayer plus tard.",
-              "is-danger"
-            );
+             this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger");
             console.log(JSON.stringify(error));
           }
         });
