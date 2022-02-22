@@ -22,7 +22,8 @@
         </h2>
 
         <form @submit.prevent="submitForm">
-          <div class="field">
+          <div class="toutaligne">
+               <div class="field">
             <label id="nomuse" for="nomuse">Nom d'utilisateur</label>
             <div class="control">
               <input
@@ -74,9 +75,11 @@
               />
             </div>
           </div>
+          </div>
+         
           <div class="field">
             <div class="control">
-              <button class="button is-dark">S'inscrire</button>
+              <button class="button is-dark" id="btnsignup">S'inscrire</button>
             </div>
           </div>
         </form>
@@ -246,6 +249,7 @@ h2 {
 #inscriptionsign {
   color: #6e934c;
   font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s;
 }
 #inscriptionsign:hover {
   color: #6e934c;
@@ -258,6 +262,7 @@ h2 {
 
 #connexionsign {
   color: #141414;
+  transition: 0.3s;
 }
 #connexionsign:hover {
   color: #141414;
@@ -326,18 +331,7 @@ label {
   font-size: 19px;
 }
 
-#nomuse {
-  margin-left: 27%;
-}
-#email {
-  margin-left: 27%;
-}
-#mdp {
-  margin-left: 27%;
-}
-#rmdp {
-  margin-left: 27%;
-}
+
 
 .textarea,
 .input {
@@ -347,6 +341,13 @@ label {
   background: white;
   background-color: white;
   border-radius: 10px;
+}
+.toutaligne{
+ width: 48%;
+margin: auto;
+}
+#btnsignup{
+  margin-top: 2%;
 }
 </style>
 

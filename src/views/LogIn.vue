@@ -20,7 +20,8 @@
         </h2>
         <br />
         <form @submit.prevent="submitForm">
-          <div class="field">
+            <div class="toutaligne">
+              <div class="field">
             <label id = "nuse">Nom d'utilisateur</label>
             <div class="control">
               <input
@@ -45,32 +46,45 @@
                 :disabled="disabled"
               />
             </div>
+            </div>
+          
           </div>
           <div class="field">
             <div class="control">
               <button class="button is-dark">Connexion</button>
             </div>
-            <div class="control">
-              <router-link style="color: black" to="/forget-password"
-                >Mot de passe oublié ?
-              </router-link>
-            </div>
           </div>
         </form>
+        
+
+      <div class="mamodale">
+        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"> </modale>
+        <a id="mdpoublie" v-on:click ="toggleModale">Mot de passe oublié ?</a>
+      </div>
+
+        
+        
+  
         <div class="notification is-danger" v-if="errors.length">
           <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
         </div>
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import Modale from '@/components/Modale.vue'
+
+
+
 
 export default {
-  name: "Log-in",
+  name: "Log-in", 
+ 
   data() {
     return {
       username: "",
@@ -78,7 +92,11 @@ export default {
       errors: [],
       isconnection: true,
       disabled: false,
+      revele: false,
     };
+  }, 
+    components:{
+    'modale':Modale
   },
   mounted() {
     if (!this.infoCookie()) {
@@ -89,10 +107,14 @@ export default {
         pauseOnHover: true,
         duration: 11000,
         position: "top-right",
+        showModalFlag: false,
+        okPressed: false,
+        message: "Press 'Ok' or 'Cancel'."
       });
     }
   },
   methods: {
+   
     infoCookie() {
       if (document.cookie[31] === "a") {
         this.disabled = false;
@@ -138,6 +160,9 @@ export default {
           }
         });
     },
+     toggleModale: function(){
+      this.revele = !this.revele
+    },
   },
 };
 </script>
@@ -153,6 +178,7 @@ export default {
 
 #inscriptionlog{
   color:#141414;
+  transition: 0.3s;
 }
 #inscriptionlog:hover{
   color:#141414;
@@ -160,6 +186,7 @@ export default {
 }
 #connexionlog{
   color:#6E934C;
+  transition: 0.3s;
 }
 #connexionlog:hover{
   color:#6E934C;
@@ -175,11 +202,53 @@ export default {
   background-color: #464646;
   height: 44em;
 }
-#nuse{
-    margin-left: 27%;
+
+#mdpoublie{
+  display: flex;
+  color:black;
+  text-align: center;
+  justify-content: right;
+  text-decoration: underline;
 }
-#nmdp{
-    margin-left: 27%;
+
+
+@media only screen and (max-width: 1200px) {
+
 }
+@media only screen and (max-width: 769px) {
+  #blure {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  margin-left: 0%;
+}
+#blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  margin-left: 0%;
+  position: sticky;
+top: 9%;
+}
+}
+@media only screen and (max-width: 452px) {
+
+}
+@media only screen and (max-width: 300px) {
+  #mdpoublie{
+  display: flex;
+  color:black;
+  text-align: center;
+  justify-content: center;
+  text-decoration: underline;
+  
+}
+#blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  margin-left: 0%;
+  position: sticky;
+top: 9%;
+}
+}
+
 
 </style>
