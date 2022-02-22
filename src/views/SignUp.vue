@@ -240,15 +240,6 @@ export default {
     position: relative;
     text-align: -webkit-center;
 }
-.recaptcha-size{
-    margin: 0 auto;
-    display: inline-block;
-    padding-left: 4.5rem;
-    transform:scale(0.85);
-    -webkit-transform:scale(0.85);
-    transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-}
 
 .page-sign-up {
   padding: 0;

@@ -62,6 +62,7 @@ right: 3px;
   bottom: 0;
   left: 0;
   right: 0;
+  border-radius: 30px;
 }
 .mod {
 background: #f1f1f1;

@@ -117,22 +117,45 @@ export default {
    methods: {
 
      sendEmail(e) {
-
-        var templateParams = {
+       this.errors = 0;
+       if(this.input.email == "")
+       {
+         this.errors = 1;
+         this.toast_affiche("Veuillez entrer un email","is-danger");
+       }
+       if(this.input.username == "")
+       {
+         this.errors = 1;
+         this.toast_affiche("Veuillez entrer un nom et prénom","is-danger");
+       }
+       if(this.input.message == "")
+       {
+         this.errors = 1;
+         this.toast_affiche("Veuillez écrire un message","is-danger");
+       }
+        if(this.input.captcha_response == "")
+        {
+          this.errors = 1;
+          this.toast_affiche("Veuillez valider le captcha","is-danger");
+        }
+       if(this.errors == 0)
+       {
+         var templateParams = {
           from_name: this.input.username,
           message: this.input.message,
           reply_to: this.input.email, 
         };
 
-      try {
-          emailjs.send("service_6qlvzj7","template_8n7jwzq",templateParams,"user_p5FbC98Zv7d6YKahXNvTf")
-          this.toast_affiche("Votre demande à bien été prise en compte","is-success");
-      } catch(error) {
-         this.toast_affiche(error,"is-danger");
-      }
-      // Reset form field
-      this.username = ''
-      this.message = ''
+          try {
+              emailjs.send("service_6qlvzj7","template_8n7jwzq",templateParams,"user_p5FbC98Zv7d6YKahXNvTf")
+              this.toast_affiche("Votre demande à bien été prise en compte","is-success");
+          } catch(error) {
+            this.toast_affiche(error,"is-danger");
+          }
+
+          this.input.username = ''
+          this.input.message = ''
+       }        
     },
 
       toast_affiche(parametre,type){
@@ -147,47 +170,10 @@ export default {
       });
     },
 
-       captchaVerif( response ){
-      this.data.captcha_response = response;
+    captchaVerif( response ){
+      this.input.captcha_response = response;
     },
-
-     submitForm(){
-       this.errors = 0;
-      if (this.input.username == "") {
-        this.errors = 1;
-        this.toast_affiche(`Le nom d'utilisateur doit être renseigné`,'is-danger');
-      }
-
-      if (this.input.email == "") {
-        this.errors = 1;
-        this.toast_affiche(`Le mail doit être rempli`,"is-danger");
-      }
-
-      if (this.input.object == "") {
-        this.errors = 1;
-        this.toast_affiche(`Le mot de passe doit être renseigné`,"is-danger");
-      }
-
-      if (this.input.message == "") {
-        this.errors = 1;
-        this.toast_affiche(`Les mots de passe doivent être identiques`,"is-danger");
-      }
-
-      if(this.input.captcha_response == "")
-      {
-        this.errors = 1;
-        this.toast_affiche("Veuillez valider le captcha","is-danger");
-      }
-
-      if (this.errors == 0) {
-        const formData = {
-          username: this.username,
-          email: this.email,
-          password: this.password,
-        };
-     }   
    }
-  }
 }
 </script>
 
