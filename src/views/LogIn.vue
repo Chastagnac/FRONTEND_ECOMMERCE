@@ -78,18 +78,12 @@ export default {
       errors: [],
       isconnection: true,
       disabled: false,
+      toasterrors: [],
     };
   },
   mounted() {
     if (!this.infoCookie()) {
-      toast({
-        message: `Veuillez acceptez les cookies pour pouvoir vous connecter`,
-        type: "is-warning",
-        dismissible: true,
-        pauseOnHover: true,
-        duration: 11000,
-        position: "top-right",
-      });
+      toast_affiche("Veuillez acceptez les cookies pour pouvoir vous connecter","is-warning");
     }
   },
   methods: {
@@ -102,18 +96,40 @@ export default {
         return false;
       }
     },
+
+    toast_affiche(parametre,type){
+       toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
     async submitForm() {
+
+      if(this.username == "")
+      {
+       this.toast_affiche("Veuillez entrer un nom d'utilisateur","is-danger");
+      }
+      if(this.password == "")
+      {
+        this.toast_affiche("Veuillez entrer un mot de passe","is-danger");
+      }
       axios.defaults.headers.common["Authorization"] = "";
 
       localStorage.removeItem("token");
       if (this.disabled === true) {
-        this.errors.push(`Veuillez accepter les cookies`);
+        this.toast_affiche(`Veuillez accepter les cookies`,"is-danger");
       }
-      const fromData = {
-        username: this.username,
-        password: this.password,
-      };
-
+       const fromData = {
+          username: this.username,
+          password: this.password,
+        };
+        
       await axios
         .post("/api/v1/token/login/", fromData)
         .then((response) => {
@@ -121,19 +137,19 @@ export default {
           this.$store.commit("setToken", token);
           this.$store.commit("addAccount", fromData);
           axios.defaults.headers.common["Authorization"] = "Token " + token;
-
+         
           localStorage.setItem("token", token);
-
+          this.toast_affiche("Vous êtes connecté","is-success");
           const toPath = this.$route.query.to || "/";
           this.$router.push(toPath);
         })
         .catch((error) => {
           if (error.response) {
             for (const property in error.response.data) {
-              this.errors.push(`${error.response.data[property]}`);
+              this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
             }
           } else {
-            this.errors.push("Something went wrong. Please try again");
+             this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger");
             console.log(JSON.stringify(error));
           }
         });

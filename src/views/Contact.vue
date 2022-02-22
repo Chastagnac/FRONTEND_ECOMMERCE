@@ -2,13 +2,16 @@
   <div class="Contact">
     <div class="container is-max-desktop">
       <h2>
+        <div>
+        <br><br>
+      </div>  
         <a class="tab-link active" data-ref="connexion"
           ><router-link id="connexionsign" to="/contact"
             >Contact
           </router-link></a
         >
       </h2>
-      <form @submit.prevent="submitForm">
+      <form @submit.prevent="sendEmail">
       <div class="column is-12 is-11-desktop mx-auto has-text-centered">
         <div class="field" >
               <label class="label" id="yourmail">Nom et prénom</label>
@@ -22,7 +25,9 @@
                 />
               </div>
             </div>
-       
+       <div>
+        <br>
+      </div>  
         <div class="field">
           <label class="label" id="yourmail">Adresse email</label>
           <div class="control">
@@ -35,31 +40,24 @@
             />
           </div>
         </div>
-        <div class="field">
-          <label class="label" id="yourmail">Objet</label>
-          <div class="control">
-            <input
-              class="input"
-              id="npcontact"
-              type="email"
-              placeholder="Définir l'objet"
-              v-model="input.object"
-            />
-          </div>
-        </div>
-        
+      <div>
+        <br>
+      </div>    
         <div class="field">
           <label class="label" id="yourmail">Message</label>
           <div class="control">
             <textarea
               class="textarea"
               id="msg"
+              type="text"
               placeholder="Décrivez nous votre besoin..."
               v-model="input.message"
             ></textarea>
           </div>
         </div>
-
+      <div>
+        <br>
+      </div>  
          <div class="field">
           <div class="recaptcha">
             <div class="recaptcha-size">
@@ -76,7 +74,6 @@
         </button>
       </div>
       </form>
-      
    </div>  
    
 
@@ -86,6 +83,7 @@
 import axios from "axios";
 import { toast } from "bulma-toast";
 import { VueRecaptcha } from 'vue-recaptcha';
+import emailjs from 'emailjs-com';
 
 export default {
   name: "Contact",
@@ -94,13 +92,11 @@ export default {
       input: {
         email:"",
         username: "",
-        object:"",
         message: "",
 
-
         captcha_response: "",
-        errors: [],
-      }
+      },
+      errors: 0,
     };
   },
   components: { VueRecaptcha },
@@ -119,59 +115,78 @@ export default {
      },
 
    methods: {
+
+     sendEmail(e) {
+
+        var templateParams = {
+          from_name: this.input.username,
+          message: this.input.message,
+          reply_to: this.input.email, 
+        };
+
+      try {
+          emailjs.send("service_6qlvzj7","template_8n7jwzq",templateParams,"user_p5FbC98Zv7d6YKahXNvTf")
+          this.toast_affiche("Votre demande à bien été prise en compte","is-success");
+      } catch(error) {
+         this.toast_affiche(error,"is-danger");
+      }
+      // Reset form field
+      this.username = ''
+      this.message = ''
+    },
+
+      toast_affiche(parametre,type){
+       toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
        captchaVerif( response ){
       this.data.captcha_response = response;
     },
 
      submitForm(){
-       this.errors = [];
+       this.errors = 0;
       if (this.input.username == "") {
-        this.input.errors.push(`Le nom d'utilisateur doit être renseigné`);
+        this.errors = 1;
+        this.toast_affiche(`Le nom d'utilisateur doit être renseigné`,'is-danger');
       }
 
       if (this.input.email == "") {
-        this.input.errors.push(`Le mail doit être rempli`);
+        this.errors = 1;
+        this.toast_affiche(`Le mail doit être rempli`,"is-danger");
       }
 
       if (this.input.object == "") {
-        this.input.errors.push(`Le mot de passe doit être renseigné`);
+        this.errors = 1;
+        this.toast_affiche(`Le mot de passe doit être renseigné`,"is-danger");
       }
 
       if (this.input.message == "") {
-        this.input.errors.push(`Les mots de passe doivent être identiques`);
+        this.errors = 1;
+        this.toast_affiche(`Les mots de passe doivent être identiques`,"is-danger");
       }
 
       if(this.input.captcha_response == "")
       {
-        this.input.errors.push("Veuillez cocher le captcha");
+        this.errors = 1;
+        this.toast_affiche("Veuillez valider le captcha","is-danger");
       }
 
-      if (!this.errors.lenght) {
+      if (this.errors == 0) {
         const formData = {
           username: this.username,
           email: this.email,
           password: this.password,
         };
-     }else
-     {
-       this.input.errors.forEach(element => {
-            if(element != "")
-            {
-              toast({
-                message: element,
-                type: "is-danger",
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 3000,
-                position: "top-right",
-                animate: { in: 'fadeIn', out: 'fadeOut' },
-                });
-            }
-          });          
-     }
-   
+     }   
    }
-
   }
 }
 </script>
