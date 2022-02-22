@@ -1,10 +1,7 @@
 <template>
   <div class="devis">
     <div class="container is-max-desktop">
-        
-      <div
-        class="column is-12 is-11-desktop mx-auto has-text-centered"
-      >
+      <div class="column is-12 is-11-desktop mx-auto has-text-centered">
         <div>
           <h1 id="mytitle">Mon devis</h1>
         </div>
@@ -140,7 +137,7 @@
         <div class="field">
           <div class="control">
             <label class="checkbox">
-              <input type="checkbox" />
+              <input type="checkbox" v-model="captcha" />
               J'ai lu et j'accepte les <a href="#">termes et conditions</a>
             </label>
           </div>
@@ -153,7 +150,7 @@
                 style="margin-left: 10px; margin-top: 5px"
               ></i>
             </button>
-          </div>
+          </div> 
         </div>
       </div>
     </div>
@@ -166,11 +163,12 @@ export default {
   name: "Service",
   data() {
     return {
+      captcha: false,
       data: {
         name: "",
         email: "",
         siret: "",
-        raison_sociale: "null",
+        raison_sociale: "",
         object: "",
         category: "",
         content: "",
@@ -181,6 +179,7 @@ export default {
   },
   methods: {
     async trigerPost() {
+      this.errors = []
       if (this.data.name === "") {
         this.errors.push("Veuillez remplir le nom");
       }
@@ -196,10 +195,14 @@ export default {
       if (this.data.content === "") {
         this.errors.push("Veuillez remplir le contenu");
       }
+      if (this.captcha !== true) {
+        this.errors.push("Veuillez remplir le captcha");
+      }
       if (this.errors.length === 0) {
         await axios
           .post("http://127.0.0.1:8000/api/v1/latest-quote/", this.data)
           .then((response) => {
+            this.$router.push("/service")
             toast({
               message:
                 "Devis créé, votre dossier est en attente de validation !",
