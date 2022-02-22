@@ -139,7 +139,7 @@ export default {
           axios.defaults.headers.common["Authorization"] = "Token " + token;
          
           localStorage.setItem("token", token);
-          this.toast_affiche("Vous êtes connecté","is-success");
+          this.toast_affiche("Vous êtes connecté","is-info");
           const toPath = this.$route.query.to || "/";
           this.$router.push(toPath);
         })
