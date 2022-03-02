@@ -236,7 +236,7 @@ export default {
       }
       if (this.errors.length === 0) {
         await axios
-          .post("http://127.0.0.1:8000/api/v1/latest-quote/", this.data)
+          .post("/api/v1/latest-quote/", this.data)
           .then((response) => {
             this.$router.push("/service")
             toast({

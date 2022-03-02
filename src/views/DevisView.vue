@@ -31,14 +31,14 @@
           <button
             class="button is-success"
             style="margin: 20px"
-            @click="regus()"
+            @click="accept()"
           >
             Accepter le devis
           </button>
           <button
             class="button is-danger"
             style="margin: 20px"
-            @click="accept()"
+            @click="refus()"
           >
             Refuser le devis
           </button>
@@ -63,6 +63,57 @@ export default {
     this.getQuoteById();
   },
   methods: {
+
+     toast_affiche(parametre,type){
+       toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
+    refus(){
+      const fromData = {
+          status: -1,
+        };
+
+      const id = this.$route.params.id;
+      axios
+        .post(`/api/v1/latest-quote/${id}/`,fromData)
+        .then((response) => {
+          this.devis = response.data[0];
+          this.toast_affiche("Devis Refusé","is-success");
+           this.$router.push("/devis-clients")
+        })
+        .catch((error) => {
+          this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
+          console.log(error);
+        });
+    },
+
+    accept(){
+      const fromData = {
+          status: 1,
+        };
+
+      const id = this.$route.params.id;
+      axios
+        .post(`/api/v1/latest-quote/${id}/`,fromData)
+        .then((response) => {
+          this.toast_affiche("Devis Acceptée","is-success");
+          this.devis = response.data[0];
+          this.$router.push("/devis-clients")
+        })
+        .catch((error) => {
+          this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
+          console.log(error);
+        });
+    },
+
     getQuoteById() {
       const id = this.$route.params.id;
       axios
@@ -74,8 +125,6 @@ export default {
           console.log(error);
         });
     },
-    refus() {},
-    accept() {},
   },
 };
 </script>
