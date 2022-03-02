@@ -7,7 +7,9 @@
             class="tab-link active"
             data-ref="connexion"
             href="javascript:void(0)"
-            ><router-link id="connexionlog" to="/log-in">Connexion </router-link></a
+            ><router-link id="connexionlog" to="/log-in"
+              >Connexion
+            </router-link></a
           >
           <a
             class="tab-link active"
@@ -20,45 +22,47 @@
         </h2>
         <br />
         <form @submit.prevent="submitForm">
-          <div class="field">
-            <label id = "nuse">Nom d'utilisateur</label>
-            <div class="control">
-              <input
-                type="text"
-                id="holderi"
-                placeholder="Nom d'utilisateur"
-                class="input"
-                v-model="username"
-                :disabled="disabled"
-              />
+          <div class="toutaligne">
+            <div class="field">
+              <label id="nuse">Nom d'utilisateur</label>
+              <div class="control">
+                <input
+                  type="text"
+                  id="holderi"
+                  placeholder="Nom d'utilisateur"
+                  class="input"
+                  v-model="username"
+                  :disabled="disabled"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label id="nmdp">Mot de passe</label>
+              <div class="control">
+                <input
+                  type="password"
+                  id="holderi"
+                  placeholder="Mot de Passe"
+                  class="input"
+                  v-model="password"
+                  :disabled="disabled"
+                />
+              </div>
             </div>
           </div>
           <div class="field">
-            <label id ="nmdp">Mot de passe</label>
             <div class="control">
-              <input
-                type="password"
-                id="holderi"
-                placeholder="Mot de Passe"
-                class="input"
-                v-model="password"
-                :disabled="disabled"
-              />
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <button class="button is-dark">Connexion</button>
-            </div>
-            <div class="control">
-              <router-link style="color: black" to="/forget-password"
-                >Mot de passe oublié ?
-              </router-link>
+              <button class="button is-dark" style="margin-top: 2%">
+                Connexion
+              </button>
             </div>
           </div>
         </form>
-        <div class="notification is-danger" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+
+        <div class="mamodale">
+          <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale">
+          </modale>
+          <a id="mdpoublie" v-on:click="toggleModale">Mot de passe oublié ?</a>
         </div>
       </div>
     </div>
@@ -68,6 +72,7 @@
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import Modale from "@/components/Modale.vue";
 
 export default {
   name: "Log-in",
@@ -79,7 +84,11 @@ export default {
       isconnection: true,
       disabled: false,
       toasterrors: [],
+      revele: false,
     };
+  },
+  components: {
+    modale: Modale,
   },
   mounted() {
     if (!this.infoCookie()) {
@@ -97,15 +106,15 @@ export default {
       }
     },
 
-    toast_affiche(parametre,type){
-       toast({
+    toast_affiche(parametre, type) {
+      toast({
         message: parametre,
         type: type,
         dismissible: true,
         pauseOnHover: true,
         duration: 3000,
         position: "top-right",
-        animate: { in: 'fadeIn', out: 'fadeOut' },
+        animate: { in: "fadeIn", out: "fadeOut" },
       });
     },
 
@@ -123,7 +132,7 @@ export default {
 
       localStorage.removeItem("token");
       if (this.disabled === true) {
-        this.toast_affiche(`Veuillez accepter les cookies`,"is-danger");
+        this.toast_affiche(`Veuillez accepter les cookies`, "is-danger");
       }
        const fromData = {
           username: this.username,
@@ -139,7 +148,7 @@ export default {
           axios.defaults.headers.common["Authorization"] = "Token " + token;
          
           localStorage.setItem("token", token);
-          this.toast_affiche("Vous êtes connecté","is-info");
+          this.toast_affiche("Vous êtes connecté", "is-info");
           const toPath = this.$route.query.to || "/";
           this.$router.push(toPath);
         })
@@ -154,6 +163,9 @@ export default {
           }
         });
     },
+    toggleModale: function () {
+      this.revele = !this.revele;
+    },
   },
 };
 </script>
@@ -167,18 +179,20 @@ export default {
   }
 }
 
-#inscriptionlog{
-  color:#141414;
+#inscriptionlog {
+  color: #141414;
+  transition: 0.3s;
 }
-#inscriptionlog:hover{
-  color:#141414;
+#inscriptionlog:hover {
+  color: #141414;
   font-size: 25px;
 }
-#connexionlog{
-  color:#6E934C;
+#connexionlog {
+  color: #6e934c;
+  transition: 0.3s;
 }
-#connexionlog:hover{
-  color:#6E934C;
+#connexionlog:hover {
+  color: #6e934c;
   font-size: 25px;
 }
 .page-log-in {
@@ -191,11 +205,49 @@ export default {
   background-color: #464646;
   height: 44em;
 }
-#nuse{
-    margin-left: 27%;
-}
-#nmdp{
-    margin-left: 27%;
+
+#mdpoublie {
+  display: flex;
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+  justify-content: center;
+  text-decoration: underline;
 }
 
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 769px) {
+  #blure {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    margin-left: 0%;
+  }
+  #blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    margin-left: 0%;
+    position: sticky;
+    top: 9%;
+  }
+}
+@media only screen and (max-width: 452px) {
+}
+@media only screen and (max-width: 300px) {
+  #mdpoublie {
+    display: flex;
+    color: black;
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+    text-decoration: underline;
+  }
+  #blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    margin-left: 0%;
+    position: sticky;
+    top: 9%;
+  }
+}
 </style>

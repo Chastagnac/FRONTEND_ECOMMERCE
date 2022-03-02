@@ -261,7 +261,7 @@ export default {
 }
 #imavatar {
   position: absolute;
-  top: 14%;
+  top: 10%;
 }
 #connexionmya {
   float: left;
@@ -314,6 +314,28 @@ input::placeholder {
   text-align: left;
   margin-left: 28%;
 }
+@media only screen and (max-width: 840px) {
+#imavatar {
+  position: initial;
+  top: 0%;
+  margin-top: 1%;
+}
+
+}
+@media only screen and (max-width: 706px) {
+ #inscriptionmya {
+  float: right;
+  color: #141414;
+  margin-right: 31%;
+  margin-bottom: 3%;
+  margin-left: 18%;
+}
+#connexionmya {
+  float: initial;
+  margin-left: 8%;
+  color: #6e934c;
+}
+}
 @media only screen and (max-width: 592px) {
   #nommya {
     text-align: center;
@@ -327,5 +349,21 @@ input::placeholder {
     text-align: center;
     margin-left: 0%;
   }
+ #inscriptionmya {
+  float: right;
+  color: #141414;
+  margin-right: 31%;
+  margin-bottom: 3%;
+  margin-left: 18%;
+}
+.buttmya{
+  font-size: 14px;
+}
+}
+@media only screen and (max-width: 592px) {
+  #npmya {
+  width: 100% !important;
+  border-color: #418014;
+}
 }
 </style>

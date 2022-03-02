@@ -23,7 +23,8 @@
         </h2>
 
         <form @submit.prevent="submitForm">
-          <div class="field">
+          <div class="toutaligne" style="margin-top : 10px">
+               <div class="field">
             <label id="nomuse" for="nomuse">Nom d'utilisateur</label>
             <div class="control">
               <input
@@ -63,7 +64,7 @@
             </div>
           </div>
           <div class="field">
-            <label id="rmdp">Répéter mot de passe</label>
+            <label id="rmdp">Confirmer mot de passe</label>
             <div class="control">
               <input
                 type="password"
@@ -75,9 +76,11 @@
               />
             </div>
           </div>
+          </div>
+         
 
         <div class="field">
-          <div class="recaptcha">
+          <div class="recaptcha" style="margin-top : 10px">
             <div class="recaptcha-size">
               <vue-recaptcha           
                 sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
@@ -89,7 +92,7 @@
 
           <div class="field">
             <div class="control">
-              <button class="button is-dark">S'inscrire</button>
+              <button class="button is-dark" id="btnsignup">S'inscrire</button>
             </div>
           </div>
         </form> 
@@ -237,15 +240,6 @@ export default {
     position: relative;
     text-align: -webkit-center;
 }
-.recaptcha-size{
-    margin: 0 auto;
-    display: inline-block;
-    padding-left: 4.5rem;
-    transform:scale(0.85);
-    -webkit-transform:scale(0.85);
-    transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-}
 
 .page-sign-up {
   padding: 0;
@@ -300,6 +294,7 @@ h2 {
 #inscriptionsign {
   color: #6e934c;
   font-family: Arial, Helvetica, sans-serif;
+  transition: 0.3s;
 }
 #inscriptionsign:hover {
   color: #6e934c;
@@ -312,6 +307,7 @@ h2 {
 
 #connexionsign {
   color: #141414;
+  transition: 0.3s;
 }
 #connexionsign:hover {
   color: #141414;
@@ -380,18 +376,7 @@ label {
   font-size: 19px;
 }
 
-#nomuse {
-  margin-left: 27%;
-}
-#email {
-  margin-left: 27%;
-}
-#mdp {
-  margin-left: 27%;
-}
-#rmdp {
-  margin-left: 27%;
-}
+
 
 .textarea,
 .input {
@@ -401,6 +386,13 @@ label {
   background: white;
   background-color: white;
   border-radius: 10px;
+}
+.toutaligne{
+ width: 48%;
+margin: auto;
+}
+#btnsignup{
+  margin-top: 2%;
 }
 </style>
 
