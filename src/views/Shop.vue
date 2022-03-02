@@ -15,9 +15,16 @@
             </div>
           </div>
    
-          <section class="gridcontainer">
-            <ProductsBox             
+          <section v-if="filter == 0" class="gridcontainer">
+            <ProductsBox
               v-for="product in products"
+              v-bind:key="product.id"
+              v-bind:product="product"
+            />
+          </section>
+          <section v-else class="gridcontainer">
+            <ProductsBox
+              v-for="product in productFilterByPrice"
               v-bind:key="product.id"
               v-bind:product="product"
             />
@@ -40,6 +47,7 @@ export default {
   data() {
     return {
       products: [],
+      filter : 0,
       productFilterByPrice: [],
       price: 4000,
     };
@@ -59,15 +67,15 @@ export default {
     {
       try{
                  
-       this.price = changePrice
-      console.log(changePrice)
-      Array.prototype.forEach.call(this.products, element => {
+        this.price = changePrice
+        Array.prototype.forEach.call(this.products, element => {
           if(element['price'] < changePrice)
           {
             this.productFilterByPrice = element;
+            this.filter = 1;
           } 
         });
-
+       
       }
       catch(error)
       {
@@ -80,6 +88,7 @@ export default {
         .get("/api/v1/latest-products/")
         .then((response) => {
           this.products = response.data;
+          this.filter = 0;
         })
         .catch((error) => {
           console.log(error);
