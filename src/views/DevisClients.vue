@@ -7,14 +7,14 @@
           <aside class="menu">
             <p class="menu-label">Devis <i class="fas fa-tags"></i></p>
             <ul class="menu-list">
-              <li><span class="tag is-primary is-medium">Validé : 4</span></li>
+              <li><span class="tag is-primary is-medium">Validé : {{this.accepted}}</span></li>
               <li>
                 <br />
-                <span class="tag is-danger is-medium">Refusé : 2</span>
+                <span class="tag is-danger is-medium">Refusé : {{this.refused}}</span>
               </li>
               <br />
               <li>
-                <span class="tag is-warning is-medium">En attente : 1</span>
+                <span class="tag is-warning is-medium">En attente : {{this.waiting}}</span>
               </li>
               <br />
             </ul>
@@ -34,7 +34,7 @@
 
                 <i v-if="devis.status === 1" class="fas fa-check valide"></i>
 
-                <i v-if="devis.status === 2" class="fas fa-times error"></i>
+                <i v-if="devis.status === -1" class="fas fa-times error"></i>
 
                 <i v-if="devis.status === 0" class="fas fa-clock wait"></i>
               </div>
@@ -78,17 +78,37 @@ export default {
   data() {
     return {
       devis: [],
+      accepted : 0,
+      refused : 0,
+      waiting : 0,
+      
     };
   },
   mounted() {
     this.getLatestQuote();
   },
   methods: {
+
+
     getLatestQuote() {
       axios
         .get("/api/v1/latest-quote/")
         .then((response) => {
           this.devis = response.data;
+          this.devis.forEach(element => {
+          if(element['status'] == 1)
+          {
+            this.accepted = this.accepted + 1;
+          }
+          else if (element['status'] == -1)
+          {
+            this.refused = this.refused + 1;
+          }
+          else
+          {
+            this.waiting += 1;
+          }
+         });
         })
         .catch((error) => {
           console.log(error);
