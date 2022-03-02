@@ -214,9 +214,15 @@ export default {
   height: 150px;
   width: 150px;
 }
+.image.is-64x64 {
+  height: 64px;
+  width: 64px;
+  position: inherit;
+}
 #btntuto {
   float: right;
   margin-right: 2%;
+  position: inherit;
 }
 .overlay {
   background: rgba(63, 63, 63, 0.5);

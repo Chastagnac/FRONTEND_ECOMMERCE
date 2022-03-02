@@ -75,6 +75,7 @@ height: 86%;
 .buttonmodale{
     background: #f1f1f1;
     border: none;
+    float: right;
 }
 #btnmodale{
     display: flex;
@@ -120,7 +121,7 @@ justify-content: center;
 }
 
 .boxensvp{
-  width: 40%;
+  width: 70%;
   height: 80%;
 }
 .borderensvp{
@@ -154,10 +155,16 @@ margin: 6px;
 background: #f1f1f1;
 padding: 50px;
 position: fixed;
-top: 8%;
-width: 95%;
-height: 96%;
+top: 3%;
+width: 100%;
+
 }
+}
+
+@media only screen and (max-width: 692px) {
+  .mod {
+    height: 100%;
+  }
 }
 
 </style>
