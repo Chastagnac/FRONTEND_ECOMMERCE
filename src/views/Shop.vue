@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="columns">
-        <SideShop></SideShop>
+        <SideShop :changePrice="price" @changePrice="changePrice($event)"></SideShop>
         <div class="column is-9">
           <div class="columns">
             <div class="column is-four-fifths">
@@ -14,9 +14,9 @@
               </p>
             </div>
           </div>
-
+   
           <section class="gridcontainer">
-            <ProductsBox
+            <ProductsBox             
               v-for="product in products"
               v-bind:key="product.id"
               v-bind:product="product"
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       products: [],
+      productFilterByPrice: [],
       price: 4000,
     };
   },
@@ -50,9 +51,30 @@ export default {
 
   mounted() {
     this.getLastedProducts();
-    document.title = "Se-digitaliser";
+    document.title = "Boutique";
+
   },
   methods: {
+    changePrice(changePrice)
+    {
+      try{
+                 
+       this.price = changePrice
+      console.log(changePrice)
+      Array.prototype.forEach.call(this.products, element => {
+          if(element['price'] < changePrice)
+          {
+            this.productFilterByPrice = element;
+          } 
+        });
+
+      }
+      catch(error)
+      {
+        console.log(error)
+      }
+    },
+
     getLastedProducts() {
       axios
         .get("/api/v1/latest-products/")
@@ -62,6 +84,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+        
     },
     async getCategory() {
       this.products = [];
