@@ -16,6 +16,7 @@ import MyAccount from '../views/MyAccount.vue'
 import Shop from '../views/Shop.vue'
 import Checkout from '../views/Checkout.vue'
 import store from '../store'
+import Tuto from '../views/Tutoriel.vue'
 
 const routes = [{
         path: '/',
@@ -94,6 +95,11 @@ const routes = [{
         path: '/shop',
         name: 'Shop',
         component: Shop
+    },
+    {
+        path: '/tutoriel',
+        name: 'Tuto',
+        component: Tuto
     },
 
 ]

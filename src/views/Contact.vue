@@ -7,7 +7,7 @@
       </div>  
         <a class="tab-link active" data-ref="connexion"
           ><router-link id="connexionsign" to="/contact"
-            >Contact
+            >Contactez nous!
           </router-link></a
         >
       </h2>

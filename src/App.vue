@@ -21,17 +21,14 @@
           </a>
         </div>
         <div class="navbar-menu">
-          <div
-            class="navbar-start"
-            style="flex-grow: 1; justify-content: center"
-          >
+          <div class="navbar-start" style="flex-grow: 1; justify-content: center">
             <div class="navbar-item has-dropdown is-hoverable"></div>
+            <router-link to="/" class="navbar-item">Accueil</router-link>
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
-            <router-link to="/service" class="navbar-item">Service</router-link>
+            <router-link to="/service" class="navbar-item">Services</router-link>
             <router-link to="/contact" class="navbar-item">Contact</router-link>
-            <router-link to="/devis-clients" class="navbar-item"
-              >Devis clients</router-link
-            >
+            <router-link to="/devis-clients" class="navbar-item">Devis clients</router-link>
+            <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
           </div>
           <div class="navbar-end">
             <router-link to="/cart" class="navbar-item">
@@ -42,11 +39,7 @@
               to="my-account"
               class="navbar-item"
             >
-              <i
-                class="far fa-user"
-                href="https://www.facebook.com/profile.php?id=100074600241159"
-                data-mdb-ripple-color="dark"
-              ></i>
+              <i class="far fa-user" href="https://www.facebook.com/profile.php?id=100074600241159" data-mdb-ripple-color="dark"></i>
             </router-link>
             <router-link v-else to="/log-in" class="navbar-item">
               <i
@@ -73,6 +66,8 @@
         <router-view />
       </section>
     </div>
+    
+
 
     <Footer></Footer>
   </div>
@@ -82,6 +77,7 @@
 import axios from "axios";
 import Footer from "@/components/Footer";
 import { toast } from "bulma-toast";
+
 
 export default {
   data() {
@@ -94,6 +90,7 @@ export default {
   },
   components: {
     Footer,
+  
   },
   // On initialize le localstorage avant les injections
   beforeCreate() {
@@ -242,11 +239,7 @@ a.navbar-item.is-active,
   color: #49ae25;
 }
 
-.hero.is-dark {
-  background-image: url(/img/environnement-urbain.2d3a105e.png);
-  color: #fff;
-  height: 1171px;
-}
+
 
 .hero.is-dark .title {
   color: #151515;
