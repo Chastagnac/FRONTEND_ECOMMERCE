@@ -121,8 +121,8 @@ justify-content: center;
 }
 
 .boxensvp{
-  width: 70%;
-  height: 80%;
+  width:85%;
+  overflow: auto;
 }
 .borderensvp{
   border: black;

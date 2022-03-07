@@ -41,9 +41,9 @@ export default {
 
   position: absolute;
  top: 0px;
-right: 3px;
+right: 0px;
   width: 10%;
-  text-align: center;
+  text-align: right;
 }
 .bloc-modale {
   position: fixed;
@@ -120,8 +120,8 @@ justify-content: center;
 }
 
 .boxensvp{
-  width: 40%;
-  height: 80%;
+  width:85%;
+  overflow: auto;
 }
 .borderensvp{
   border: black;
