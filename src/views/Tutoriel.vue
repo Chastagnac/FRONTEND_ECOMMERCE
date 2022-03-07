@@ -8,17 +8,15 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64" id="imgtuto">
-                <img src="../assets/savon.png" alt="Image" />
+                <img class ="phototuto" src="../assets/savon.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Savon de qualité</strong>
+                  <strong>Savon parfumé</strong>
                   <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean efficitur sit amet massa fringilla egestas. Nullam
-                  condimentum luctus turpis.
+                 Faites chauffer l'huile de coco à feu doux, jusqu'à ce que cela soit fondu - le mieux étant de le faire au bain-marie.
                 </p>
               </div>
               <div class="mamodale">
@@ -44,17 +42,15 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64" id="imgtuto">
-                <img src="../assets/savon.png" alt="Image" />
+                <img class ="phototuto" src="../assets/coton.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Savon de qualité</strong>
+                  <strong>Faire un Tawashi</strong>
                   <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean efficitur sit amet massa fringilla egestas. Nullam
-                  condimentum luctus turpis.
+                  Vous ne savez pas quoi faire de vos chaussettes orphelines ? Ne les jetez plus, transformez-les en éponges lavables en tissu.
                 </p>
               </div>
               <div class="mamodale">
@@ -80,17 +76,16 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64" id="imgtuto">
-                <img src="../assets/savon.png" alt="Image" />
+                <img class ="phototuto" src="../assets/pink.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Savon de qualité</strong>
+                  <strong>Lessive Liquide Bio</strong>
                   <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean efficitur sit amet massa fringilla egestas. Nullam
-                  condimentum luctus turpis.
+                  Les ingrédients pour 3 litres de lessive
+40 g de savon de Marseille (de couleur variant du vert pâle au brun, il doit être cuit au chaudron et contenir au minimum 72 % d’huiles végétales ;
                 </p>
               </div>
               <div class="mamodale">
@@ -115,17 +110,16 @@
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64" id="imgtuto">
-                <img src="../assets/savon.png" alt="Image" />
+                <img class ="phototuto" src="../assets/Churros.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Savon de qualité</strong>
+                  <strong>Recette Churros</strong>
                   <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean efficitur sit amet massa fringilla egestas. Nullam
-                  condimentum luctus turpis.
+                 Dans une casserole, faites bouillir l'eau avec le beurre, le sel et 2 pincées de sucre. Tamisez la farine dans un saladier, creusez une fontaine et versez-y l'eau bouillante en remuant avec une cuillère en bois. Vous allez obtenir rapidement une pâte épaisse mais de texture homogène.
+
                 </p>
               </div>
               <div class="mamodale">
@@ -189,6 +183,9 @@ export default {
 </script>
 
 <style scoped>
+.phototuto{
+  height: 100%;
+}
 .tutoriel {
   width: 80%;
 

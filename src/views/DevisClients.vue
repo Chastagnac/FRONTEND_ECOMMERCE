@@ -24,7 +24,7 @@
         <div class="column is-9">
           <br />
           <article
-            class="post box content"
+            class="post box content boxzoom"
             v-for="devis in devis"
             :key="devis.id"
           >
@@ -127,5 +127,11 @@ export default {
 }
 .wait {
     color : #f3c64a !important;
+}
+.boxzoom:hover {
+  transform: scale(1.00);
+  border-style: groove;
+  border-color: #62ca3b3b;
+  transition: 0.3s;
 }
 </style>

@@ -26,7 +26,7 @@
             <router-link to="/" class="navbar-item">Accueil</router-link>
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Services</router-link>
-            <router-link to="/contact" class="navbar-item">Contact</router-link>
+            <router-link to="/contact" class="navbar-item">Support</router-link>
             <router-link to="/devis-clients" class="navbar-item">Devis clients</router-link>
             <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
           </div>
@@ -202,6 +202,7 @@ export default {
   height: 150px;
   margin-top: -22px;
   border-color: #49ae25;
+  z-index: 0;
 }
 
 .svg-inline--fa {
@@ -296,6 +297,7 @@ body {
   height: 30em;
   background-color: #272727;
   margin-top: 6%;
+  z-index: 0;
 }
 .footer .col {
   width: 190px;

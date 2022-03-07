@@ -8,19 +8,39 @@
         </div>
         <div class="ensvp">
           <div id="imgtuto">
-            <img src="../assets/savon.png">
+            <img class="imgmodtuto" src="../assets/Churros.png">
           </div>
           
-             <strong id="textmdpoublie"> Savon de qualiteeew </strong>
+             <strong id="textmdpoublie">Recette Churros</strong>
              
              <label id="renimdp"></label>
-             <p id ="steptostep">Étapes à suivre</p>
+             
              <div class="field borderensvp">
-            
+         
               <div id ="pad1">
-                <label id="textetuto">
-                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                 </label>
+                <div id="textetuto">
+              <div>
+                <h1 id ="textingr">Ingrédients:</h1>
+                <div class = "ingred">
+                  <div>
+                  - Eau <br />
+                  - Beurre <br />- Sel<br />- Huile de pépin<br />
+                </div>
+                <div id ="ecartext">
+                  - Sucre en poudre
+                  <br />- Farine <br />- Cannelle<br />- Oeufs battus<br />
+                </div>
+                </div>
+                <h1 id ="textingr"> Étapes à suivre:</h1>
+                <div>
+                  - Dans une casserole, faites bouillir l'eau avec le beurre, le sel et 2 pincées de sucre. <br/>- Tamisez la farine dans un saladier, creusez une fontaine et versez-y l'eau bouillante en remuant avec une cuillère en bois.<br/>
+                  - Incorporez les œufs battus, mélangez et laissez la pâte reposer 1 h au frais.<br />- Faites chauffer l'huile de friture à 180°C. Mettez la pâte dans une poche à douille cannelée n° 10.<br/>
+                  - Pressez des bandes de pâte de 10 cm de long, puis plongez-les dans la friture.<br />
+                  - Opérez en plusieurs fois pour que les beignets ne collent pas les uns aux autres. Laissez-les dorer, retournez-les dans la friture avec l'écumoire.<br/>
+                  - Retirez-les et égouttez-les sur du papier absorbant. Poudrez les churros de sucre en poudre et servez-les tièdes.
+                </div>
+              </div>
+            </div>
                 </div>
           
         </div>    
@@ -37,6 +57,20 @@ export default {
 };
 </script>
 <style scoped>
+#textingr{
+  font-size: 30px;
+  margin-bottom: 1%;
+}
+#ecartext{
+  margin-left: 15%;
+  margin-bottom: 2%;
+}
+.ingred{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
 .btnmodal {
 
   position: absolute;
@@ -54,6 +88,11 @@ right: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imgmodtuto{
+  height: 300px;
+width: 300px;
 }
 
 .overlay {

@@ -59,7 +59,7 @@
             ><li>Conditions générales</li></router-link
           >
           <router-link to="/service"><li>Services</li></router-link>
-          <router-link to="/shop"><li>Porduits</li></router-link>
+          <router-link to="/shop"><li>Produits</li></router-link>
         </ul>
       </div>
 
@@ -76,12 +76,12 @@
       <div class="col">
         <h1>Eco Service</h1>
         <ul>
-          <router-link to="/contact"><li>Contact</li></router-link>
+          <router-link to="/contact"><li>Accueil</li></router-link>
           <router-link to="/conditions-generales"
-            ><li>Conditions générales</li></router-link
+            ><li>Devis clients</li></router-link
           >
-          <router-link to="/service"><li>Services</li></router-link>
-          <router-link to="/shop"><li>Porduits</li></router-link>
+          <router-link to="/service"><li> Tutoriels</li></router-link>
+          <router-link to="/shop"><li>F.A.Q</li></router-link>
         </ul>
       </div>
 
