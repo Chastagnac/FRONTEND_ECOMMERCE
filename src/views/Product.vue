@@ -97,8 +97,9 @@ export default {
         type: "is-success",
         dismissible: true,
         pauseOnHover: true,
-        duration: 2000,
-        position: "bottom-right",
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
       });
     },
   },

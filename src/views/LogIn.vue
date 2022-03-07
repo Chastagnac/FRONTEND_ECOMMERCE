@@ -64,10 +64,6 @@
           </modale>
           <a id="mdpoublie" v-on:click="toggleModale">Mot de passe oublié ?</a>
         </div>
-
-        <div class="notification is-danger" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-        </div>
       </div>
     </div>
   </div>

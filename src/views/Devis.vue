@@ -236,7 +236,7 @@ export default {
       }
       if (this.errors.length === 0) {
         await axios
-          .post("http://127.0.0.1:8000/api/v1/latest-quote/", this.data)
+          .post("/api/v1/latest-quote/", this.data)
           .then((response) => {
             this.$router.push("/service")
             toast({
@@ -282,15 +282,6 @@ export default {
     font-size: 1rem;
     position: relative;
     text-align: -webkit-center;
-}
-.recaptcha-size{
-    margin: 0 auto;
-    display: inline-block;
-    padding-left: 4.5rem;
-    transform:scale(0.85);
-    -webkit-transform:scale(0.85);
-    transform-origin:0 0;
-    -webkit-transform-origin:0 0;
 }
 #parent {
   width: 100%;

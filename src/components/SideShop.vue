@@ -31,6 +31,7 @@
         min="10"
         max="4000"
         v-model="price"
+        @change="changePrice()"
       />
       <input
         class="slider input"
@@ -46,15 +47,25 @@
 <script>
 export default {
   name: "SideShop",
-  data() {
+
+ data() {
     return {
-      price: 4000,
+      products: [],
     };
   },
 
+  props: {
+    price : 0,
+  },
+
   mounted() {},
-  methods: {},
-};
+  methods: {
+    changePrice()
+    {
+      this.$emit('changePrice',this.price)
+    },
+  }
+} 
 </script>
 <style scoped>
 .mt {
