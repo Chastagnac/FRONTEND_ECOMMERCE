@@ -6,6 +6,7 @@ export default createStore({
             items: [],
         },
         isAuthenticated: false,
+        isAdmin: false,
         token: '',
         isLoading: false,
     },
@@ -24,6 +25,7 @@ export default createStore({
             } else {
                 state.token = ''
                 state.isAuthenticated = false
+                state.isAdmin = false
             }
         },
         addToCart(state, item) {
@@ -61,6 +63,9 @@ export default createStore({
                 state.isCookie = false
             }
             return str
+        },
+        setAdmin() {
+            this.state.isAdmin = true
         }
     },
     actions: {

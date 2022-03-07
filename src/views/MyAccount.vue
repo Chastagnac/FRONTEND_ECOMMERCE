@@ -123,6 +123,7 @@ export default {
     };
   },
   mounted(){
+      document.title = "Mon Compte";
       axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
       axios
       .get("/api/v1/users/me")

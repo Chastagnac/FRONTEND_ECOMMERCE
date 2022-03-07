@@ -60,6 +60,7 @@ export default {
     // Quand l'app est "montée" on recupère $cart du store dans this.cart
     mounted() {
         this.cart = this.$store.state.cart
+        document.title = "Cart";
     },
     methods: {
         removeFromCart(item) {
