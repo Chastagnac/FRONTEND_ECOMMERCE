@@ -1,10 +1,11 @@
 <template>
   <div class="page-checkout">
-    <div class="columns is-multiline" style="width: 85%; margin: auto">
+    <div class="columns is-multiline">
       <div class="column is-12">
-        <h1 class="title">Paiement</h1>
+        <h1 class="title">Checkout</h1>
       </div>
-      <div class="column is-12 box">
+
+      <div class="column is-12 box" style="margin: auto; width: 70%">
         <table class="table is-fullwidth">
           <thead>
             <tr>
@@ -14,14 +15,16 @@
               <th>Total</th>
             </tr>
           </thead>
+
           <tbody>
             <tr v-for="item in cart.items" v-bind:key="item.product.id">
               <td>{{ item.product.name }}</td>
-              <td>{{ item.product.price }}</td>
+              <td>${{ item.product.price }}</td>
               <td>{{ item.quantity }}</td>
               <td>${{ getItemTotal(item).toFixed(2) }}</td>
             </tr>
           </tbody>
+
           <tfoot>
             <tr>
               <td colspan="2">Total</td>
@@ -31,8 +34,13 @@
           </tfoot>
         </table>
       </div>
-      <div class="column is-12 box">
-        <h2 class="subtitle">Détails des achats</h2>
+
+      <div
+        class="column is-12 box"
+        style="margin: auto; width: 70%; margin-top: 30px"
+      >
+        <h2 class="subtitle">Details</h2>
+
         <p class="has-text-grey mb-4">* Tous les champs sont requis</p>
 
         <div class="columns is-multiline">
@@ -43,38 +51,44 @@
                 <input type="text" class="input" v-model="first_name" />
               </div>
             </div>
+
             <div class="field">
               <label>Nom*</label>
               <div class="control">
                 <input type="text" class="input" v-model="last_name" />
               </div>
             </div>
+
             <div class="field">
               <label>E-mail*</label>
               <div class="control">
                 <input type="email" class="input" v-model="email" />
               </div>
             </div>
+
             <div class="field">
-              <label>Téléphone*</label>
+              <label>Tel*</label>
               <div class="control">
                 <input type="text" class="input" v-model="phone" />
               </div>
             </div>
           </div>
+
           <div class="column is-6">
             <div class="field">
-              <label>Addresse*</label>
+              <label>Adresse*</label>
               <div class="control">
-                <input type="text" class="input" v-model="adress" />
+                <input type="text" class="input" v-model="address" />
               </div>
             </div>
+
             <div class="field">
-              <label>Zip Code*</label>
+              <label>Zip code*</label>
               <div class="control">
                 <input type="text" class="input" v-model="zipcode" />
               </div>
             </div>
+
             <div class="field">
               <label>Place*</label>
               <div class="control">
@@ -82,19 +96,24 @@
               </div>
             </div>
           </div>
-          <hr />
-          <div id="card-element" class="mb-5"></div>
-          <template v-if="cartTotalLenght">
-            <hr />
-            <button class="button is-dark" style="margin : 20px" @click="submitForm">
-              Payer avec Stripe
-            </button>
-          </template>
-          
         </div>
-      </div><div class="notification is-danger mt-4" v-if="errors.length">
-            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-          </div>
+
+        <div class="notification is-danger mt-4" v-if="errors.length">
+          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+        </div>
+
+        <hr />
+
+        <div id="card-element" class="mb-5"></div>
+
+        <template v-if="cartTotalLength">
+          <hr />
+
+          <button class="button is-dark" @click="submitForm">
+            Pay with Stripe
+          </button>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -114,15 +133,23 @@ export default {
       last_name: "",
       email: "",
       phone: "",
-      adress: "",
+      address: "",
       zipcode: "",
       place: "",
       errors: [],
     };
   },
   mounted() {
-    document.title = "Se Digitaliser | Paiement";
+    document.title = "Checkout | Djackets";
     this.cart = this.$store.state.cart;
+    if (this.cartTotalLength > 0) {
+      this.stripe = Stripe(
+        "pk_test_51KZxsnKZ4kNJDQ8mtS34sp1hcsxDol8SDlmhyJMjESS5zEzWsswEV92csfXM2LPhC4TZMlpZR8tBTeVoBttC9b8U00CZm5h04I"
+      );
+      const elements = this.stripe.elements();
+      this.card = elements.create("card", { hidePostalCode: true });
+      this.card.mount("#card-element");
+    }
   },
   methods: {
     getItemTotal(item) {
@@ -130,39 +157,86 @@ export default {
     },
     submitForm() {
       this.errors = [];
-
       if (this.first_name === "") {
-        this.errors.push("Le nom doit être rempli");
+        this.errors.push("The first name field is missing!");
       }
       if (this.last_name === "") {
-        this.errors.push("Le prénom doit être rempli");
+        this.errors.push("The last name field is missing!");
       }
       if (this.email === "") {
-        this.errors.push("L'email doit être rempli");
+        this.errors.push("The email field is missing!");
       }
       if (this.phone === "") {
-        this.errors.push("Le numéro de téléphone doit être rempli");
+        this.errors.push("The phone field is missing!");
       }
-      if (this.adress === "") {
-        this.errors.push("L'adresse doit être renseignée");
+      if (this.address === "") {
+        this.errors.push("The address field is missing!");
       }
       if (this.zipcode === "") {
-        this.errors.push("Le zip code doit être renseigné");
+        this.errors.push("The zip code field is missing!");
       }
       if (this.place === "") {
-        this.errors.push("La ville doit être renseignée");
+        this.errors.push("The place field is missing!");
       }
+      if (!this.errors.length) {
+        this.$store.commit("setIsLoading", true);
+        this.stripe.createToken(this.card).then((result) => {
+          if (result.error) {
+            this.$store.commit("setIsLoading", false);
+            this.errors.push(
+              "Something went wrong with Stripe. Please try again"
+            );
+            console.log(result.error.message);
+          } else {
+            this.stripeTokenHandler(result.token);
+          }
+        });
+      }
+    },
+    async stripeTokenHandler(token) {
+      const items = [];
+      for (let i = 0; i < this.cart.items.length; i++) {
+        const item = this.cart.items[i];
+        const obj = {
+          product: item.product.id,
+          quantity: item.quantity,
+          price: item.product.price * item.quantity,
+        };
+        items.push(obj);
+      }
+      const data = {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        address: this.address,
+        zipcode: this.zipcode,
+        place: this.place,
+        phone: this.phone,
+        items: items,
+        stripe_token: token.id,
+      };
+      await axios
+        .post("/api/v1/checkout/", data)
+        .then((response) => {
+        //   this.$store.commit("clearCart");
+          this.$router.push("/cart/success");
+        })
+        .catch((error) => {
+          this.errors.push("Something went wrong. Please try again");
+          console.log(error);
+        });
+      this.$store.commit("setIsLoading", false);
     },
   },
   computed: {
-    cartTotalLenght() {
-      return this.cart.items.reduce((acc, curVal) => {
-        return (acc += curVal.quantity);
-      }, 0);
-    },
     cartTotalPrice() {
       return this.cart.items.reduce((acc, curVal) => {
         return (acc += curVal.product.price * curVal.quantity);
+      }, 0);
+    },
+    cartTotalLength() {
+      return this.cart.items.reduce((acc, curVal) => {
+        return (acc += curVal.quantity);
       }, 0);
     },
   },

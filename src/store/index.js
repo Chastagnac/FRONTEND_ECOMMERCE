@@ -66,6 +66,11 @@ export default createStore({
         },
         setAdmin() {
             this.state.isAdmin = true
+        },
+        clearCart(state) {
+            state.cart = { items: [] }
+
+            localStorage.setItem('cart', JSON.stringify(state.cart))
         }
     },
     actions: {

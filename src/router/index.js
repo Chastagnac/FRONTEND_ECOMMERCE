@@ -17,6 +17,8 @@ import Shop from '../views/Shop.vue'
 import Checkout from '../views/Checkout.vue'
 import store from '../store'
 import Tuto from '../views/Tutoriel.vue'
+import Success from '../views/Success.vue'
+import Commandes from '../views/Commandes'
 
 const routes = [{
         path: '/',
@@ -27,6 +29,11 @@ const routes = [{
         path: '/search',
         name: 'Search',
         component: Search
+    },
+    {
+        path: '/commandes',
+        name: 'Commandes',
+        component: Commandes
     },
     {
         path: '/my-account',
@@ -45,6 +52,11 @@ const routes = [{
         path: '/devis-clients',
         name: 'DevisClients',
         component: DevisClients
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
     },
     {
         path: '/devis-clients/:id',
@@ -101,6 +113,11 @@ const routes = [{
         name: 'Tuto',
         component: Tuto
     },
+    {
+        path: '/cart/success',
+        name: 'Success',
+        component: Success
+    }
 
 ]
 
