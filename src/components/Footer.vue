@@ -3,56 +3,8 @@
     <img style="height: 150px" :src="require(`@/assets/logowhite.png`)" />
 
     <div class="contenue flexfooter">
-      <div class="faqfoot bloc">
-        <h1 id="tittlefooter">F.A.Q</h1>
-        <details class="border-2 rounded">
-          <summary>Qu'est-ce que le Lorem Ipsum?</summary>
-          <div class="reponsefoot">
-            <label id="idrep"
-              >Le Lorem Ipsum est simplement du faux texte employé dans la
-              composition et la mise en page avant impression. Le Lorem Ipsum
-              est le faux texte standard de l'imprimerie depuis les années 1500,
-              quand un imprimeur anonyme assembla ensemble des morceaux de texte
-              pour réaliser un livre spécimen de polices de texte.
-            </label>
-          </div>
-        </details>
-        <details>
-          <summary>Pourquoi l'utiliser?</summary>
-          <div class="reponsefoot">
-            <label id="idrep"
-              >On sait depuis longtemps que travailler avec du texte lisible et
-              contenant du sens est source de distractions, et empêche de se
-              concentrer sur la mise en page elle-même. L'avantage du Lorem
-              Ipsum sur un texte générique comme 'Du texte. Du texte.</label
-            >
-          </div>
-        </details>
-        <details>
-          <summary>Où puis-je m'en procurer?</summary>
-          <div class="reponsefoot">
-            <label id="idrep"
-              >Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou
-              là, mais la majeure partie d'entre elles a été altérée par
-              l'addition d'humour ou de mots aléatoires qui ne ressemblent pas
-              une seconde à du texte standard.</label
-            >
-          </div>
-        </details>
-        <details>
-          <summary>D'où vient-il?</summary>
-          <div class="reponsefoot">
-            <label id="idrep"
-              >Contrairement à une opinion répandue, le Lorem Ipsum n'est pas
-              simplement du texte aléatoire. Il trouve ses racines dans une
-              oeuvre de la littérature latine classique datant de 45 av. J.-C.,
-            </label>
-          </div>
-        </details>
-      </div>
-
       <div class="col">
-        <h1>Eco Service</h1>
+        <h1 id="tittlefooter">Eco Service</h1>
         <ul>
           <router-link to="/contact"><li>Contact</li></router-link>
           <router-link to="/conditions-generales"
@@ -64,27 +16,42 @@
       </div>
 
       <div class="col">
-        <h1>Réseaux</h1>
-        <ul>
-          <li>
-            <a href="https://www.instagram.com/eco_service13/"
-              ><i class="fab fa-instagram fa-2x white"></i
-            ></a>
-          </li>
-        </ul>
+        <h1 id="tittlefooter">Réseaux</h1>
+        <div class="myreseau">
+          <ul>
+            <li>
+              <a href="https://www.instagram.com/eco_service13/"
+                ><i class="fab fa-instagram fa-2x white"></i
+              ></a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="https://www.instagram.com/eco_service13/"
+                ><i class="fab fa-facebook fa-2x white"></i
+              ></a>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <a href="https://www.instagram.com/eco_service13/"
+                ><i class="fab fa-twitter fa-2x white"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="col">
-        <h1>Eco Service</h1>
+        <h1 id="tittlefooter">Eco Service</h1>
         <ul>
           <router-link to="/contact"><li>Accueil</li></router-link>
           <router-link to="/conditions-generales"
             ><li>Devis clients</li></router-link
           >
-          <router-link to="/service"><li> Tutoriels</li></router-link>
+          <router-link to="/service"><li>Tutoriels</li></router-link>
           <router-link to="/shop"><li>F.A.Q</li></router-link>
         </ul>
       </div>
-
     </div>
   </div>
 </template>
@@ -102,7 +69,6 @@ export default {
 </script>
 
 <style scoped>
-
 details[open] > div {
   animation: fade 0.3s ease-in-out;
 }
@@ -111,21 +77,21 @@ details[open] > div {
   0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
-
-
-
-
+.myreseau{
+  display: flex;
+  flex-direction: row;
+}
 .footer[data-v-40ab164b] {
   height: max-content;
   z-index: -1;
-  position:absolute;
+  position: absolute;
 }
 .footer {
-  padding: 0rem 2.5rem 2rem;
+  padding: 0rem 2.5rem 1rem;
 }
 .footer .col {
   width: auto;
@@ -140,7 +106,7 @@ details[open] > div {
 
 #tittlefooter {
   text-align: center;
-  font-size: 30px;
+  font-size: 21px;
 
   color: white;
 }
@@ -180,6 +146,13 @@ details[data-v-40ab164b] {
 .flexfooter {
   display: flex;
   margin-left: 0%;
+  justify-content: center;
+}
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+  margin-right: 30px;
+  margin-left: 24%;
+  color:#485fc7;
 }
 @media only screen and (max-width: 769px) {
   .flexfooter {
@@ -197,5 +170,15 @@ details[data-v-40ab164b] {
     text-align: center;
     margin: auto;
   }
+  .myreseau{
+  display: flex;
+  flex-direction: column;
+}
+svg:not(:root).svg-inline--fa[data-v-40ab164b] {
+  overflow: visible;
+  margin-right: 0px;
+  margin-left: 0%;
+  color: #485fc7;
+}
 }
 </style>

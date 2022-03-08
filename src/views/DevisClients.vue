@@ -23,6 +23,7 @@
         <br />
         <div class="column is-9">
           <br />
+                  <h1 id="titleclient">Devis clients</h1>
           <article
             class="post box content boxzoom"
             v-for="devis in devis"
@@ -119,6 +120,13 @@ export default {
 </script>
 
 <style scoped>
+#titleclient{
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 3%;
+  font-weight: bold;
+    margin-top: 1%;
+}
 .valide {
     color : #00D1B2 !important;
 }

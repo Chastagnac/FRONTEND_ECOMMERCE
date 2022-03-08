@@ -1,7 +1,7 @@
 <template>
   <div class="tutoriel">
     <div class="bloctuto">
-      <h2 class="mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Tuto</h2>
+      <h2 class="mb-4 is-size-1 is-size-3-mobile" id="titletuto">Nos tutoriels</h2>
       <div>
         
         <div class="box zoombox">
@@ -183,6 +183,7 @@ export default {
 </script>
 
 <style scoped>
+
 .phototuto{
   height: 100%;
 }
@@ -228,6 +229,9 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+}
+#titletuto{
+  margin-top: 3%;
 }
 /*.zoombox:hover {
   transform: scale(1.01);

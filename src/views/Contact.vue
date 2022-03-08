@@ -109,10 +109,12 @@
          <div class="field">
           <div class="recaptcha">
             <div class="recaptcha-size">
-              <vue-recaptcha           
+              <div class="captchacenter">
+                <vue-recaptcha           
                 sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
                 @verify="captchaVerif"
               ></vue-recaptcha>
+              </div>
             </div>
           </div>
         </div>
@@ -239,7 +241,11 @@ details[open] > div {
     opacity: 1;
   }
 }
-
+.captchacenter{
+  margin:auto;
+  display: flex;
+  justify-content: center;
+}
 .rightcont{
   background: white;
 margin-top: 3%;
@@ -363,6 +369,16 @@ margin-bottom: 1.7%;
   width: 76% !important;
   border-color: #418014;
 }
+
+@media only screen and (max-width: 864px) {
+  .endeux{
+    flex-direction: column;
+  }
+  .leftcont {
+  width: 96%;
+  }
+}
+
 
 
 @media only screen and (max-width: 793px) {
