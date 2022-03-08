@@ -173,7 +173,9 @@ font-size: 30px;
 right: 44%;
 font-size: 30px;
 }
-
+* {
+  font-family: Poppins;
+}
 #imgcarou {
  height: 46%;
 -o-object-fit: cover;
@@ -184,9 +186,6 @@ justify-content: center;
 margin: auto;
 margin-top: 8%;}
 
-body {
-  font-family: sans-serif;
-}
 .section.is-large {
   background: #d0ebdc;
   background-image: url("../assets/environnement-urbain.jpg");

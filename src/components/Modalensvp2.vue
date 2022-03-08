@@ -95,7 +95,7 @@ export default {
   margin-bottom: 2%;
 }
 #ecartexte {
-  margin-left: 19%;
+  margin-left: 13%;
   margin-bottom: 2%;
 }
 .ingred {

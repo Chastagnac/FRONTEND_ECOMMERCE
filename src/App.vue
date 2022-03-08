@@ -157,7 +157,11 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bulma";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
+*{
+  font-family: Poppins;
+}
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
@@ -246,7 +250,6 @@ a.navbar-item.is-active,
   color: #151515;
   margin-top: 47px;
   padding-top: 189px;
-  font-family: inherit;
 }
 
 .tabs:not(:last-child),
@@ -311,7 +314,6 @@ body {
 .footer .col h1 {
   margin: 0;
   padding: 0;
-  font-family: inherit;
   font-size: 12px;
   line-height: 17px;
   padding: 20px 0px 5px 0px;
@@ -328,7 +330,6 @@ body {
 .footer .col ul li {
   color: #999999;
   font-size: 14px;
-  font-family: inherit;
   font-weight: bold;
   padding: 5px 0px 5px 0px;
   cursor: pointer;

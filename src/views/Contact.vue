@@ -1,15 +1,63 @@
 <template>
   <div class="Contact">
-    <div class="container is-max-desktop">
+
+    <div class="endeux">
+       <div class = "container leftcont">
+<h1 id="titlefaq">F.A.Q</h1>
+        <div class="faqfoot bloc">
+        <details class="border-2 rounded">
+          <summary>Qu'est-ce que le Lorem Ipsum?</summary>
+          <div class="reponsefoot">
+            <label id="idrep"
+              >Le Lorem Ipsum est simplement du faux texte employé dans la
+              composition et la mise en page avant impression. Le Lorem Ipsum
+              est le faux texte standard de l'imprimerie depuis les années 1500,
+              quand un imprimeur anonyme assembla ensemble des morceaux de texte
+              pour réaliser un livre spécimen de polices de texte.
+            </label>
+          </div>
+        </details>
+        <details class="border-2 rounded">
+          <summary>Pourquoi l'utiliser?</summary>
+          <div class="reponsefoot">
+            <label id="idrep"
+              >On sait depuis longtemps que travailler avec du texte lisible et
+              contenant du sens est source de distractions, et empêche de se
+              concentrer sur la mise en page elle-même. L'avantage du Lorem
+              Ipsum sur un texte générique comme 'Du texte. Du texte.</label
+            >
+          </div>
+        </details>
+        <details class="border-2 rounded">
+          <summary>Où puis-je m'en procurer?</summary>
+          <div class="reponsefoot">
+            <label id="idrep"
+              >Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou
+              là, mais la majeure partie d'entre elles a été altérée par
+              l'addition d'humour ou de mots aléatoires qui ne ressemblent pas
+              une seconde à du texte standard.</label
+            >
+          </div>
+        </details>
+        <details class="border-2 rounded">
+          <summary>D'où vient-il?</summary>
+          <div class="reponsefoot">
+            <label id="idrep"
+              >Contrairement à une opinion répandue, le Lorem Ipsum n'est pas
+              simplement du texte aléatoire. Il trouve ses racines dans une
+              oeuvre de la littérature latine classique datant de 45 av. J.-C.,
+            </label>
+          </div>
+        </details>
+      </div>
+
+       </div>
+      <div class="container is-max-desktop rightcont">
       <h2>
         <div>
-        <br><br>
+        
       </div>  
-        <a class="tab-link active" data-ref="connexion"
-          ><router-link id="connexionsign" to="/contact"
-            >Contactez nous!
-          </router-link></a
-        >
+        <h1 id="titlefaq">Contactez nous !</h1>
       </h2>
       <form @submit.prevent="sendEmail">
       <div class="column is-12 is-11-desktop mx-auto has-text-centered">
@@ -76,8 +124,9 @@
       </form>
    </div>  
    
-
   </div>
+    </div>
+    
 </template>
 <script>
 import axios from "axios";
@@ -178,6 +227,103 @@ export default {
 </script>
 
 <style lang="scss">
+details[open] > div {
+  animation: fade 0.3s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.rightcont{
+  background: white;
+margin-top: 3%;
+border-radius: 35px;
+margin-left: 2%;
+margin-right: 2%;
+margin-bottom: 2%;
+}
+
+.rounded {
+  
+  box-shadow: 1px 0px 16px 7px rgba(0,0,0,0.66);
+  border-radius: 5PX;
+  margin: 10px;
+  padding: 7px;
+  margin-top: 4%;
+}
+#tittlefooter {
+  text-align: center;
+  font-size: 30px;
+
+  color: white;
+}
+.bloc {
+  word-wrap: break-word;
+}
+
+.faqfoot {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+}
+details[data-v-40ab164b] {
+  background: #fefefe;
+  border-radius: 7px;
+
+  margin-top: 2%;
+
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ededed;
+}
+
+.reponsefoot {
+  background: #f1f1f5;
+}
+
+#idrep {
+  text-align: center;
+  color: #333333;
+  font-size: 13px;
+  margin-left: 0%;
+  padding: 10px;
+  font-style: italic;
+}
+.flexfooter {
+  display: flex;
+  margin-left: 0%;
+}
+#titlefaq{
+ 
+font-size: 29px;
+text-align: center;
+font-family: Poppins;
+}
+.endeux {
+ display: flex;
+/*background-color: rgba(0, 2, 2, 0.1);*/
+border-radius: 66px;
+margin-top: 2%;
+margin-left: 2%;
+margin-right: 2%;
+
+}
+.leftcont{
+  width: 24%;
+  margin-left:3%;
+  background: white;
+height: 36%;
+margin-top: 2%;
+border-radius: 30px;
+padding: 5px;
+margin-bottom: 1.7%;
+}
 #msg::placeholder {
   color: gray;
   opacity: 1;

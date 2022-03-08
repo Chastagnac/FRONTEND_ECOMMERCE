@@ -121,6 +121,8 @@ details[open] > div {
 
 .footer[data-v-40ab164b] {
   height: max-content;
+  z-index: -1;
+  position:absolute;
 }
 .footer {
   padding: 0rem 2.5rem 2rem;

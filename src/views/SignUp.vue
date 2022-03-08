@@ -278,7 +278,6 @@ export default {
   color: #141414;
   margin: 0px 5%;
   font-size: 26px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .tab-link.active {
@@ -293,7 +292,6 @@ h2 {
 
 #inscriptionsign {
   color: #6e934c;
-  font-family: Arial, Helvetica, sans-serif;
   transition: 0.3s;
 }
 #inscriptionsign:hover {
