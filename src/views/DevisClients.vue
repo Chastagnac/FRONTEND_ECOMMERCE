@@ -85,7 +85,6 @@ export default {
     };
   },
   mounted() {
-    document.title = "Devis Client";
     this.getLatestQuote();
   },
   methods: {
