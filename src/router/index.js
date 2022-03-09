@@ -17,11 +17,23 @@ import Shop from '../views/Shop.vue'
 import Checkout from '../views/Checkout.vue'
 import store from '../store'
 import Tuto from '../views/Tutoriel.vue'
+import PasswordReset from '../views/passwordreset'
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/password-reset',
+        name: 'passwordreset',
+        component: PasswordReset
     },
     {
         path: '/search',

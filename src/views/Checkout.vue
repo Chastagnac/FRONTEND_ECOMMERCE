@@ -70,13 +70,13 @@
               </div>
             </div>
             <div class="field">
-              <label>Zip Code*</label>
+              <label>Code Postal*</label>
               <div class="control">
                 <input type="text" class="input" v-model="zipcode" />
               </div>
             </div>
             <div class="field">
-              <label>Place*</label>
+              <label>Ville*</label>
               <div class="control">
                 <input type="text" class="input" v-model="place" />
               </div>
@@ -86,28 +86,56 @@
           <div id="card-element" class="mb-5"></div>
           <template v-if="cartTotalLenght">
             <hr />
-            <button class="button is-dark" style="margin : 20px" @click="submitForm">
-              Payer avec Stripe
-            </button>
+            <div>
+              <stripe-checkout
+                ref="checkoutRef"
+                mode="payment"
+                :pk="publishableKey"
+                :line-items="lineItems"
+                :success-url="successURL"
+                :cancel-url="cancelURL"
+                @loading="(v) => (loading = v)"/>
+
+              <button
+                class="button is-dark"
+                style="margin: 20px"
+                @click="submitForm"
+              >
+                Payer avec Stripe
+              </button>
+            </div>
           </template>
-          
         </div>
-      </div><div class="notification is-danger mt-4" v-if="errors.length">
-            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-          </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
 export default {
   name: "Checkout",
   data() {
+    this.publishableKey =
+      "pk_test_51KZxsnKZ4kNJDQ8mtS34sp1hcsxDol8SDlmhyJMjESS5zEzWsswEV92csfXM2LPhC4TZMlpZR8tBTeVoBttC9b8U00CZm5h04I";
     return {
       cart: {
         items: [],
       },
+
+      loading: false,
+      lineItems: [
+        {
+          price: ["price_1KadjPKZ4kNJDQ8mMbZTE5fg","price_1KahIDKZ4kNJDQ8mUxxt5eum","price_1KahEyKZ4kNJDQ8mCn3nf9ok"], // The id of the one-time price you created in your Stripe dashboard
+          quantity: 1,
+        },
+      ],
+      
+      successURL: "http://localhost:8080/contact",
+      cancelURL: "http://localhost:8080/tutoriel",
+
       stripe: {},
       card: {},
       first_name: "",
@@ -117,40 +145,72 @@ export default {
       adress: "",
       zipcode: "",
       place: "",
-      errors: [],
+      errors: 0,
     };
   },
   mounted() {
-    document.title = "Se Digitaliser | Paiement";
+    document.title = "Eco-Service | Paiement";
     this.cart = this.$store.state.cart;
   },
+
+  components:{
+      StripeCheckout,
+  },
+
   methods: {
+    toast_affiche(parametre, type) {
+      toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: "fadeIn", out: "fadeOut" },
+      });
+    },
+
     getItemTotal(item) {
       return item.quantity * item.product.price;
     },
     submitForm() {
-      this.errors = [];
+      this.errors = 0;
 
       if (this.first_name === "") {
-        this.errors.push("Le nom doit être rempli");
+        this.errors = 1;
+        this.toast_affiche("Le nom doit être rempli", "is-danger");
       }
       if (this.last_name === "") {
-        this.errors.push("Le prénom doit être rempli");
+        this.errors = 1;
+        this.toast_affiche("Le prénom doit être rempli", "is-danger");
       }
       if (this.email === "") {
-        this.errors.push("L'email doit être rempli");
+        this.errors = 1;
+        this.toast_affiche("L'email doit être rempli", "is-danger");
       }
       if (this.phone === "") {
-        this.errors.push("Le numéro de téléphone doit être rempli");
+        this.errors = 1;
+        this.toast_affiche(
+          "Le numéro de téléphone doit être rempli",
+          "is-danger"
+        );
       }
       if (this.adress === "") {
-        this.errors.push("L'adresse doit être renseignée");
+        this.errors = 1;
+        this.toast_affiche("L'adresse doit être renseignée", "is-danger");
       }
       if (this.zipcode === "") {
-        this.errors.push("Le zip code doit être renseigné");
+        this.errors = 1;
+        this.toast_affiche("Le zip code doit être renseigné", "is-danger");
       }
       if (this.place === "") {
-        this.errors.push("La ville doit être renseignée");
+        this.errors = 1;
+        this.toast_affiche("La ville doit être renseignée", "is-danger");
+      }
+      if (!this.errors) {
+        this.toast_affiche("Chargement...", "is-info");
+        // You will be redirected to Stripe's secure checkout page
+        this.$refs.checkoutRef.redirectToCheckout();
       }
     },
   },

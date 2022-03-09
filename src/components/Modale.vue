@@ -68,7 +68,7 @@ data(){
           email: this.email, 
         }
         axios
-          .post("/api/password_reset/", formData)
+          .post("api/v1/users/reset_password/", formData)
           .then((response) => {
             this.toast_affiche("Lien de réinitialisation envoyé !","is-success");
             console.log(response)
