@@ -122,7 +122,7 @@ export default {
   },
   mounted() {
     this.getLastedProducts();
-    document.title = "Eco-Service";
+    document.title = "Se-digitaliser";
   },
   methods: {
     getLastedProducts() {

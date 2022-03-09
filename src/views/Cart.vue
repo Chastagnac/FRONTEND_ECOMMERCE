@@ -90,11 +90,6 @@ export default {
         return (acc += curVal.quantity);
       }, 0);
     },
-    // Quand l'app est "montée" on recupère $cart du store dans this.cart
-    mounted() {
-        this.cart = this.$store.state.cart
-        document.title = "Cart";
-        
     cartTotalPrice() {
       return this.cart.items.reduce((acc, curVal) => {
         return (acc += curVal.product.price * curVal.quantity);

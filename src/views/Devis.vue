@@ -197,7 +197,6 @@ export default {
   methods: {
 
     mounted(){
-        document.title = "Devis";
         axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
         axios
         .get("/api/v1/users/me")
