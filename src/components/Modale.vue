@@ -1,7 +1,7 @@
 <template>
   <div class="bloc-modale" v-if="revele">
-    <div v-on:click="toggleModale" class="overlay"></div>
-      <div class="box mod">
+    <div v-on:click="toggleModale" class="overlay "></div>
+      <div class="box mod" id="modmdp">
         <div class="btnmodal">
           <div class = "button buttonmodale" v-on:click="toggleModale">X</div>
         </div>
@@ -43,6 +43,8 @@ export default {
 right: 3px;
   width: 10%;
   text-align: center;
+  float: right;
+
 }
 .bloc-modale {
   position: fixed;
@@ -62,7 +64,9 @@ right: 3px;
   bottom: 0;
   left: 0;
   right: 0;
-  border-radius: 30px;
+}
+.modmdp{
+  height:40%;
 }
 .mod {
 background: #f1f1f1;
@@ -70,7 +74,7 @@ padding: 50px;
 position: fixed;
 top: 8%;
 width: 85%;
-height: 86%;
+/*height: 86%;*/
 }
 .buttonmodale{
     background: #f1f1f1;

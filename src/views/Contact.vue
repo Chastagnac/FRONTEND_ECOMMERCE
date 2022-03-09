@@ -244,7 +244,7 @@ details[open] > div {
 #titleSupport{
   text-align: center;
   font-size: 45px;
-  margin-top: 1%;
+  margin-top: 2%;
 }
 .captchacenter{
   margin:auto;

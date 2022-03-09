@@ -40,7 +40,7 @@
                 <i v-if="devis.status === 0" class="fas fa-clock wait"></i>
               </div>
               <div class="column is-10">
-                <h4><router-link :to="{ name: 'DevisView', params: { id: devis.id }}">{{ devis.object }}</router-link></h4>
+                <h4 ><router-link id ="colortitle" :to="{ name: 'DevisView', params: { id: devis.id }}">{{ devis.object }}</router-link></h4>
                 <div class="media">
                   <div class="media-left">
                     <p class="image is-32x32">
@@ -50,7 +50,7 @@
                   <div class="media-content">
                     <div class="content">
                       <p>
-                        <a href="#">@ {{ devis.email }}</a> &nbsp;
+                        <a id ="colormail" href="#">@ {{ devis.email }}</a> &nbsp;
                         <span class="tag">{{ devis.category }}</span>
                       </p>
                     </div>
@@ -120,6 +120,12 @@ export default {
 </script>
 
 <style scoped>
+#colormail{
+  color:gray;
+}
+#colortitle{
+  color:#4a4a4a;
+}
 #titleclient{
   font-size: 50px;
   text-align: center;

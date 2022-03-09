@@ -73,4 +73,7 @@ export default {
 .has-background-primary {
   background-color: #418014 !important;
 }
+#verde{
+  border-radius: 30px;
+}
 </style>
