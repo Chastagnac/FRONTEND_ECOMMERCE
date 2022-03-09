@@ -136,10 +136,15 @@ export default {
 .wait {
     color : #f3c64a !important;
 }
+
+.boxzoom {
+  transition: 0.3s;
+  border-style: groove;
+  border-color: #1d3d113b;
+}
 .boxzoom:hover {
-  transform: scale(1.00);
+  transform: scale(1.03);
   border-style: groove;
   border-color: #62ca3b3b;
-  transition: 0.3s;
 }
 </style>

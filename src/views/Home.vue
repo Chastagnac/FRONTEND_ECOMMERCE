@@ -263,6 +263,8 @@ margin-top: 8%;}
   text-align: center;
   border-radius: 10px;
   font-size: 20px;
+      box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
+
 }
 .containeuri {
   width: 80%;
@@ -279,7 +281,7 @@ margin-top: 8%;}
   width: 48%;
   border-radius: 3%;
   margin: auto;
-  top: 16%;
+  top: 24%;
   position: relative;
   height: auto;
 }

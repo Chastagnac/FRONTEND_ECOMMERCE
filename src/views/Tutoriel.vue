@@ -4,9 +4,9 @@
       <h2 class="mb-4 is-size-1 is-size-3-mobile" id="titletuto">Nos tutoriels</h2>
       <div>
         
-        <div class="box zoombox">
+        <div class="box ">
           <article class="media">
-            <div class="media-left">
+            <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
                 <img class ="phototuto" src="../assets/savon.png" alt="Image" />
               </figure>
@@ -38,9 +38,9 @@
         </div>
 
         
-         <div class="box zoombox">
+         <div class="box ">
           <article class="media">
-            <div class="media-left">
+            <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
                 <img class ="phototuto" src="../assets/coton.png" alt="Image" />
               </figure>
@@ -72,9 +72,9 @@
         </div>
 
 
-      <div class="box zoombox">
+      <div class="box ">
           <article class="media">
-            <div class="media-left">
+            <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
                 <img class ="phototuto" src="../assets/pink.png" alt="Image" />
               </figure>
@@ -106,9 +106,9 @@
           </article>
         </div>
         
-        <div class="box zoombox">
+        <div class="box">
           <article class="media">
-            <div class="media-left">
+            <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
                 <img class ="phototuto" src="../assets/Churros.png" alt="Image" />
               </figure>
@@ -233,11 +233,15 @@ export default {
 #titletuto{
   margin-top: 3%;
 }
-/*.zoombox:hover {
+.zoombox:hover {
   transform: scale(1.01);
   border-style: groove;
   border-color: #62ca3b3b;
-  transition: 0.3s;
+  
 }
-*/
+.zoombox{
+  transition: 0.3s;
+    border-style: groove;
+  border-color: #62ca3b3b;
+}
 </style>

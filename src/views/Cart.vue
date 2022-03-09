@@ -80,3 +80,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.title{
+    padding-top:0%;
+}
+</style>

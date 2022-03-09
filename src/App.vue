@@ -13,7 +13,7 @@
             role="button"
             class="navbar-burger"
             aria-label="menu"
-            aria-expanded="false"
+            aria-expanded="true"
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -186,6 +186,7 @@ export default {
     transform: rotate(360deg);
   }
 }
+
 
 .is-loading-bar {
   height: 0;

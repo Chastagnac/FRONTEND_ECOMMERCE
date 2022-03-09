@@ -304,7 +304,6 @@ export default {
 #mytitle {
   font-size: 40px;
   margin-bottom: 5%;
-  color: black;
   font-weight: bold;
 }
 #lbnds {
@@ -541,6 +540,8 @@ export default {
   resize: vertical;
   left: 12%;
   border-color: #418014;
+  box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
+
 }
 #pn {
   text-align: left;

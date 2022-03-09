@@ -1,6 +1,6 @@
 <template>
   <div class="Contact">
-
+<h1 id ="titleSupport">Support</h1>
     <div class="endeux">
        <div class = "container leftcont">
 <h1 id="titlefaq">F.A.Q</h1>
@@ -241,6 +241,11 @@ details[open] > div {
     opacity: 1;
   }
 }
+#titleSupport{
+  text-align: center;
+  font-size: 45px;
+  margin-top: 1%;
+}
 .captchacenter{
   margin:auto;
   display: flex;
@@ -256,12 +261,15 @@ margin-bottom: 2%;
 }
 
 .rounded {
-  
-  box-shadow: 1px 0px 16px 7px rgba(0,0,0,0.66);
+  box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
   border-radius: 5PX;
   margin: 10px;
+    margin-top: 10px;
   padding: 7px;
   margin-top: 4%;
+  border-color: #418014;
+  border-style: solid;
+  border-width: 1px;
 }
 #tittlefooter {
   text-align: center;
@@ -346,6 +354,8 @@ margin-bottom: 1.7%;
   resize: vertical;
   left: 22%;
   border-color: #418014;
+    box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
+
 }
 #pnc {
   text-align: center;
@@ -368,6 +378,8 @@ margin-bottom: 1.7%;
 #npcontact {
   width: 76% !important;
   border-color: #418014;
+    box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
+
 }
 
 @media only screen and (max-width: 864px) {

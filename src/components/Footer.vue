@@ -1,17 +1,21 @@
 <template>
   <div class="footer">
-    <img style="height: 150px" :src="require(`@/assets/logowhite.png`)" />
+    <div class="alignfooter">
+      <div class="imgfoot">
+        <img style="height: 70px" :src="require(`@/assets/logowhitefooter.png`)" />
+      </div>
+ 
 
     <div class="contenue flexfooter">
       <div class="col">
         <h1 id="tittlefooter">Eco Service</h1>
         <ul>
-          <router-link to="/contact"><li>Contact</li></router-link>
+          <router-link to="/contact"><li>Accueil</li></router-link>
           <router-link to="/conditions-generales"
-            ><li>Conditions générales</li></router-link
+            ><li>Produits</li></router-link
           >
           <router-link to="/service"><li>Services</li></router-link>
-          <router-link to="/shop"><li>Produits</li></router-link>
+          <router-link to="/shop"><li>Devis clients</li></router-link>
         </ul>
       </div>
 
@@ -42,17 +46,19 @@
         </div>
       </div>
       <div class="col">
-        <h1 id="tittlefooter">Eco Service</h1>
+        <h1 id="tittlefooter">Aide & Contact</h1>
         <ul>
-          <router-link to="/contact"><li>Accueil</li></router-link>
+          <router-link to="/contact"><li>Contact</li></router-link>
           <router-link to="/conditions-generales"
-            ><li>Devis clients</li></router-link
+            ><li>Conditions générales</li></router-link
           >
           <router-link to="/service"><li>Tutoriels</li></router-link>
           <router-link to="/shop"><li>F.A.Q</li></router-link>
         </ul>
       </div>
     </div>
+    </div>
+   
   </div>
 </template>
 
@@ -81,6 +87,12 @@ details[open] > div {
     opacity: 1;
   }
 }
+.imgfoot{
+  margin-top:3%;
+}
+.alignfooter{
+  display: flex;
+}
 .myreseau{
   display: flex;
   flex-direction: row;
@@ -91,7 +103,7 @@ details[open] > div {
   position: absolute;
 }
 .footer {
-  padding: 0rem 2.5rem 1rem;
+padding: 0.5rem 0.5em 0rem;
 }
 .footer .col {
   width: auto;
@@ -147,6 +159,8 @@ details[data-v-40ab164b] {
   display: flex;
   margin-left: 0%;
   justify-content: center;
+  margin:auto;
+  width: 100%;
 }
 svg:not(:root).svg-inline--fa {
   overflow: visible;
