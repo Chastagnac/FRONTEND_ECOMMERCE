@@ -6,8 +6,8 @@
           <div class = "button buttonmodale" v-on:click="toggleModale">X</div>
         </div>
         <div>
-             <strong id="textmdpoublie"> Mot de passe oublié ? </strong>
-             
+          <form @submit.prevent="submitForm">
+             <strong id="textmdpoublie"> Mot de passe oublié ? </strong>  
              <label id="renimdp"></label>
              <p style="white-space: normal; width: 100%; margin: auto; font-size: 14px;">Veuillez saisir votre email de connexion afin de recevoir le lien de réinitialisation de votre mot de passe.     </p>
              <div class="field">
@@ -22,7 +22,8 @@
               >
             </div>
             <button class="button" id="btnmodale">Envoyer</button>
-        </div>    
+        </div>
+          </form>    
         </div>
        
         
@@ -30,9 +31,66 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import { toast } from "bulma-toast";
+
 export default {
   name: "Modale",
   props: ["revele", "toggleModale"],
+data(){
+  return {
+     email: "",
+  }
+},
+
+ methods: {
+    
+    toast_affiche(parametre,type){
+       toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
+
+    submitForm() {
+
+      if (this.email === "") {
+        this.toast_affiche(`Veuillez entrer un email`,'is-danger');
+      }
+      else{
+        const formData = {
+          email: this.email, 
+        }
+        axios
+          .post("api/v1/users/reset_password/", formData)
+          .then((response) => {
+            this.toast_affiche("Lien de réinitialisation envoyé !","is-success");
+            console.log(response)
+            //this.$router.push("/log-in");
+          })
+          .catch((error) => {
+            if (error.response) {
+              for (const property in error.response.data) {
+                this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
+              };
+                         
+              console.log(JSON.stringify(error.response.data));
+            } else if (error.message) {
+              this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
+              console.log(JSON.stringify(error));
+            }
+          });
+      }
+
+    },
+ },
+
 };
 </script>
 <style scoped>

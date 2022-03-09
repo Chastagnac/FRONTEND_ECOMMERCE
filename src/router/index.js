@@ -19,11 +19,23 @@ import store from '../store'
 import Tuto from '../views/Tutoriel.vue'
 import Success from '../views/Success.vue'
 import Commandes from '../views/Commandes'
+import PasswordReset from '../views/passwordreset'
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'Home',
         component: Home
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/password-reset',
+        name: 'passwordreset',
+        component: PasswordReset
     },
     {
         path: '/search',
