@@ -205,7 +205,7 @@ export default {
   height: 150px;
   margin-top: -22px;
   border-color: #49ae25;
-  z-index: 0;
+  z-index: 1;
 }
 
 .svg-inline--fa {
@@ -369,6 +369,16 @@ body {
   .social h1 {
     margin: 0px;
   }
+  
+@media only screen and (max-width: 1024px) {
+  .navbar-start, .navbar-end {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  margin:auto;
+  align-items: center;
+}
+}
 }
 @media only screen and (max-width: 950px) {
   .footer .col {
