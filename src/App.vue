@@ -9,24 +9,20 @@
               :src="require(`@/assets/logoblack.png`)"
           /></router-link>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-          >
+            <a :aria-expanded="isActive" :class="{ 'is-active': isActive }" role="button" class="navbar-burger" aria-label="menu" data-target="collapse" @click="isActive = !isActive" >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
-        <div class="navbar-menu">
+        <div id="collapse" :class="{ 'is-active': isActive }" class="navbar-menu is-paddingless">
           <div class="navbar-start" style="flex-grow: 1; justify-content: center">
             <div class="navbar-item has-dropdown is-hoverable"></div>
             <router-link to="/" class="navbar-item">Accueil</router-link>
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Services</router-link>
-            <router-link to="/contact" class="navbar-item">Contact</router-link>
+            <router-link to="/contact" class="navbar-item">Support</router-link>
+            <router-link to="/devis-clients" class="navbar-item">Devis clients</router-link>
             <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
 
           </div>
@@ -84,6 +80,8 @@ export default {
   data() {
     return {
       showMobileMenu: false,
+      isActive:false,
+      showNavbar:true,
       cart: {
         items: [],
       },
@@ -158,7 +156,11 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bulma";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
+*{
+  font-family: Poppins;
+}
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
@@ -184,6 +186,7 @@ export default {
   }
 }
 
+
 .is-loading-bar {
   height: 0;
   overflow: hidden;
@@ -203,6 +206,7 @@ export default {
   height: 150px;
   margin-top: -22px;
   border-color: #49ae25;
+  z-index: 0;
 }
 
 .svg-inline--fa {
@@ -246,7 +250,6 @@ a.navbar-item.is-active,
   color: #151515;
   margin-top: 47px;
   padding-top: 189px;
-  font-family: inherit;
 }
 
 .tabs:not(:last-child),
@@ -297,6 +300,7 @@ body {
   height: 30em;
   background-color: #272727;
   margin-top: 6%;
+  z-index: 0;
 }
 .footer .col {
   width: 190px;
@@ -310,7 +314,6 @@ body {
 .footer .col h1 {
   margin: 0;
   padding: 0;
-  font-family: inherit;
   font-size: 12px;
   line-height: 17px;
   padding: 20px 0px 5px 0px;
@@ -327,7 +330,6 @@ body {
 .footer .col ul li {
   color: #999999;
   font-size: 14px;
-  font-family: inherit;
   font-weight: bold;
   padding: 5px 0px 5px 0px;
   cursor: pointer;

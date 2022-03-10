@@ -6,7 +6,7 @@
         <div class="column is-9">
           <div class="columns">
             <div class="column is-four-fifths">
-              <h1 class="title">Nos produits</h1>
+              <h1 id ="titleproduit">Nos produits</h1>
             </div>
             <div class="column">
               <p class="hover-text">
@@ -117,6 +117,13 @@ export default {
   text-align-last: center;
   margin: 20px;
   grid-template-columns: 33% 33% 33%;
+}
+
+#titleproduit{
+  font-size: 45px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 3%;
 }
 @media only screen and (max-width: 592px) {
 .gridcontainer {

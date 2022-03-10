@@ -173,7 +173,9 @@ font-size: 30px;
 right: 44%;
 font-size: 30px;
 }
-
+* {
+  font-family: Poppins;
+}
 #imgcarou {
  height: 46%;
 -o-object-fit: cover;
@@ -184,9 +186,6 @@ justify-content: center;
 margin: auto;
 margin-top: 8%;}
 
-body {
-  font-family: sans-serif;
-}
 .section.is-large {
   background: #d0ebdc;
   background-image: url("../assets/environnement-urbain.jpg");
@@ -264,6 +263,8 @@ body {
   text-align: center;
   border-radius: 10px;
   font-size: 20px;
+      box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
+
 }
 .containeuri {
   width: 80%;
@@ -280,7 +281,7 @@ body {
   width: 48%;
   border-radius: 3%;
   margin: auto;
-  top: 16%;
+  top: 24%;
   position: relative;
   height: auto;
 }
@@ -302,7 +303,14 @@ p {
 .input {
   width: 300px !important;
 }
-@media only screen and (max-width: 1280px) {
+@media only screen and (min-width: 1520px) {
+  .responsive {
+  margin:auto;
+  display: flex;
+  max-height: 62%;
+  height: auto;
+  float:none;
+}
   
 }
 @media only screen and (max-width: 600px) {

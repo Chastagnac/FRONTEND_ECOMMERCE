@@ -8,19 +8,37 @@
         </div>
         <div class="ensvp">
           <div id="imgtuto">
-            <img src="../assets/savon.png">
+            <img class="imgmodtuto" src="../assets/gel.png">
           </div>
           
-             <strong id="textmdpoublie"> Savon de qualiteeew </strong>
+             <strong id="textmdpoublie">gel hydroalcoolique </strong>
              
              <label id="renimdp"></label>
-             <p id ="steptostep">Étapes à suivre</p>
+             
              <div class="field borderensvp">
-            
+         
               <div id ="pad1">
-                <label id="textetuto">
-                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                 </label>
+                <div id="textetuto">
+              <div>
+                <h1 id ="textingr">Ingrédients:</h1>
+                <div class = "ingred">
+                  <div>
+                  -  Une bouteille de 500 ml <br />
+                  - 40 cl d’alcool à 90°C <br />- 10 cl de gel d’aloe vera<br />- 1 cuillère à café d’huile végétale <br />
+                </div>
+                <div id ="ecartext">
+                  - Récipient gradué propre et désinfecté
+                  <br />- Une petite fiole <br />- Un entonnoir<br />
+                </div>
+                </div>
+                <h1 id ="textingr"> Étapes à suivre:</h1>
+                <div>
+                  - Versez respectivement dans votre récipient gradué l’alcool, la glycérine ou le gel d’aloe vera et les gouttes d’huile essentielle.<br/>
+                  - Mélangez délicatement à l’aide d’une spatule.<br/>
+                  -  Transvasez dans votre petit récipient à l’aide d’un entonnoir pour stocker votre solution hydroalcoolique. Secouez pour mélanger.<br/>
+                </div>
+              </div>
+            </div>
                 </div>
           
         </div>    
@@ -37,13 +55,27 @@ export default {
 };
 </script>
 <style scoped>
+#textingr{
+  font-size: 30px;
+  margin-bottom: 1%;
+}
+#ecartext{
+  margin-left: 15%;
+  margin-bottom: 2%;
+}
+.ingred{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
 .btnmodal {
 
   position: absolute;
  top: 0px;
-right: 3px;
+right: 0px;
   width: 10%;
-  text-align: center;
+  text-align: right;
 }
 .bloc-modale {
   position: fixed;
@@ -54,6 +86,11 @@ right: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imgmodtuto{
+  height: 300px;
+width: 300px;
 }
 
 .overlay {
@@ -120,8 +157,8 @@ justify-content: center;
 }
 
 .boxensvp{
-  width: 40%;
-  height: 80%;
+  width:85%;
+  overflow: auto;
 }
 .borderensvp{
   border: black;

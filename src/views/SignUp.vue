@@ -82,10 +82,13 @@
         <div class="field">
           <div class="recaptcha" style="margin-top : 10px">
             <div class="recaptcha-size">
-              <vue-recaptcha           
+              <div class="captchacenter">
+                 <vue-recaptcha           
                 sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
                 @verify="captchaVerif"
               ></vue-recaptcha>
+              </div>
+             
             </div>
           </div>
         </div>
@@ -240,6 +243,11 @@ export default {
     position: relative;
     text-align: -webkit-center;
 }
+.captchacenter{
+  margin:auto;
+  display: flex;
+  justify-content: center;
+}
 
 .page-sign-up {
   padding: 0;
@@ -278,7 +286,6 @@ export default {
   color: #141414;
   margin: 0px 5%;
   font-size: 26px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .tab-link.active {
@@ -293,7 +300,6 @@ h2 {
 
 #inscriptionsign {
   color: #6e934c;
-  font-family: Arial, Helvetica, sans-serif;
   transition: 0.3s;
 }
 #inscriptionsign:hover {
