@@ -195,7 +195,12 @@ svg:not(:root).svg-inline--fa[data-v-40ab164b] {
   color: #485fc7;
 }
 #logofooter{
-  width:225px;
+  margin: auto;
+display: flex;
+}
+.alignfooter{
+  display: flex;
+  flex-direction: column;
 }
 }
 </style>
