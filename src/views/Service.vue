@@ -64,9 +64,7 @@ export default {
     };
   },
   components: { ServiceDesign },
-  mounted() {
-          document.title = "Service";
-  },
+  mounted() {},
   methods: {},
 };
 </script>

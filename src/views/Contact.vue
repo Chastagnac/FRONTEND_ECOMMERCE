@@ -153,7 +153,6 @@ export default {
   components: { VueRecaptcha },
 
    mounted(){
-        document.title = "Contact";
         axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
         axios
         .get("/api/v1/users/me")

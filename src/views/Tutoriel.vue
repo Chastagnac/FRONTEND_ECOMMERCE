@@ -158,9 +158,6 @@ export default {
       re: false,
     };
   },
-  mounted() {
-    document.title = "Tutoriels";
-  },
   components: {
     modale: Modalensvp4,
     mod: Modalensvp3,
