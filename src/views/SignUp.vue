@@ -210,7 +210,7 @@ export default {
         axios
           .post("/api/v1/users/", formData)
           .then((response) => {
-            this.toast_affiche("Compte créé, veuillez vous connecter !","is-success");
+            this.toast_affiche("Compte créé, veuillez l'activer par email !","is-success");
             this.$router.push("/log-in");
           })
           .catch((error) => {

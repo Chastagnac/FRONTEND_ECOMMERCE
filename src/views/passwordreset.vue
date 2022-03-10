@@ -58,7 +58,7 @@
 
           <div class="field">
             <div class="control">
-              <button class="button is-dark" id="btnsignup">S'inscrire</button>
+              <button class="button is-dark" id="btnsignup">Valider</button>
             </div>
           </div>
         </form> 
@@ -307,7 +307,7 @@ h2 {
 .input {
   box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
   max-width: 100%;
-  width: 50%;
+  width: 100%;
 }
 
 #holderi::placeholder {
