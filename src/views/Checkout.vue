@@ -39,7 +39,7 @@
         class="column is-12 box"
         style="margin: auto; width: 70%; margin-top: 30px"
       >
-        <h2 class="subtitle">Details</h2>
+        <h2 class="subtitle">Informations</h2>
 
         <p class="has-text-grey mb-4">* Tous les champs sont requis</p>
 
@@ -62,14 +62,14 @@
             <div class="field">
               <label>E-mail*</label>
               <div class="control">
-                <input type="email" class="input" v-model="email" />
+                <input type="email" class="input" v-model="email" readonly="readonly" />
               </div>
             </div>
 
             <div class="field">
               <label>Tel*</label>
               <div class="control">
-                <input type="text" class="input" v-model="phone" />
+                <input type="text" class="input" v-model="phone"  @keypress="isNumber($event)"  maxlength="10"/>
               </div>
             </div>
           </div>
@@ -83,23 +83,19 @@
             </div>
 
             <div class="field">
-              <label>Zip code*</label>
+              <label>Code Postal*</label>
               <div class="control">
-                <input type="text" class="input" v-model="zipcode" />
+                <input type="text" class="input" v-model="zipcode"  @keypress="isNumber($event)"  maxlength="10"/>
               </div>
             </div>
 
             <div class="field">
-              <label>Place*</label>
+              <label>Ville*</label>
               <div class="control">
                 <input type="text" class="input" v-model="place" />
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="notification is-danger mt-4" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
         </div>
 
         <hr />
@@ -110,7 +106,7 @@
           <hr />
 
           <button class="button is-dark" @click="submitForm">
-            Pay with Stripe
+            Payer avec Stripe
           </button>
         </template>
       </div>
@@ -120,6 +116,8 @@
 
 <script>
 import axios from "axios";
+import emailjs from 'emailjs-com';
+import { toast } from "bulma-toast";
 export default {
   name: "Checkout",
   data() {
@@ -136,7 +134,7 @@ export default {
       address: "",
       zipcode: "",
       place: "",
-      errors: [],
+      errors: 0,
     };
   },
   mounted() {
@@ -150,43 +148,82 @@ export default {
       this.card = elements.create("card", { hidePostalCode: true });
       this.card.mount("#card-element");
     }
+    axios.defaults.headers.common["Authorization"] =  "Token " + localStorage.getItem("token");
+     axios
+      .get("/api/v1/users/me")
+      .then((response) => {
+        this.info = response.data;
+        this.email = this.info.email;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   },
   methods: {
+
+     isNumber: function(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
+
+    toast_affiche(parametre,type){
+       toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+
     getItemTotal(item) {
       return item.quantity * item.product.price;
     },
     submitForm() {
-      this.errors = [];
+      this.errors = 0;
       if (this.first_name === "") {
-        this.errors.push("The first name field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque le prénom !","is-danger");
       }
       if (this.last_name === "") {
-        this.errors.push("The last name field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque le nom !","is-danger");
       }
       if (this.email === "") {
-        this.errors.push("The email field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque l'email !","is-danger");
       }
       if (this.phone === "") {
-        this.errors.push("The phone field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque le numéro de télephone!","is-danger");
       }
       if (this.address === "") {
-        this.errors.push("The address field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque l'adresse !","is-danger");
       }
       if (this.zipcode === "") {
-        this.errors.push("The zip code field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque le code postal !","is-danger");
       }
       if (this.place === "") {
-        this.errors.push("The place field is missing!");
+        this.errors = 1,
+        this.toast_affiche("Il manque la ville !","is-danger");
       }
-      if (!this.errors.length) {
+      if (!this.errors) {
+        this.toast_affiche("Chargement...",'is-info')
         this.$store.commit("setIsLoading", true);
         this.stripe.createToken(this.card).then((result) => {
           if (result.error) {
             this.$store.commit("setIsLoading", false);
-            this.errors.push(
-              "Something went wrong with Stripe. Please try again"
-            );
-            console.log(result.error.message);
+            this.toast_affiche("Désolé. Un problème est survenu avec le moyen de paiement. Veuillez réessayer plus tard.",'is-danger');
           } else {
             this.stripeTokenHandler(result.token);
           }
@@ -215,14 +252,22 @@ export default {
         items: items,
         stripe_token: token.id,
       };
+
+      var templateParams = {
+          from_name: this.first_name + " " + this.last_name,
+          message: this.adress + ", " + this.zipcode + " " + this.place,
+          reply_to: this.email, 
+      };
+
       await axios
         .post("/api/v1/checkout/", data)
         .then((response) => {
+          emailjs.send("service_6qlvzj7","template_6a7rtqd",templateParams,"user_p5FbC98Zv7d6YKahXNvTf")
           this.$store.commit("clearCart");
           this.$router.push("/cart/success");
         })
         .catch((error) => {
-          this.errors.push("Something went wrong. Please try again");
+          this.toast_affiche("Désolé. Un problème est survenu avec le paiement. Veuillez réessayer plus tard.",'is-danger');
           console.log(error);
         });
       this.$store.commit("setIsLoading", false);
