@@ -8,7 +8,7 @@ import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
 import Conditions from '../views/Conditions.vue'
-import DevisClients from '../views/DevisClients.vue'
+import Admin from '../views/Admin.vue'
 import DevisView from '../views/DevisView.vue'
 import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
@@ -18,6 +18,8 @@ import Checkout from '../views/Checkout.vue'
 import store from '../store'
 import Tuto from '../views/Tutoriel.vue'
 import PasswordReset from '../views/passwordreset'
+import Success from '../views/Success.vue'
+import Commandes from '../views/Commandes'
 import SuccessActive from '../views/SuccessActive'
 
 const routes = [
@@ -50,9 +52,21 @@ const routes = [
         path: '/my-account',
         name: 'MyAccount',
         component: MyAccount,
-        meta: {
-            requireLogin: false
-        }
+    },
+    {
+        path: '/commandes',
+        name: 'Commandes',
+        component: Commandes
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/cart/success',
+        name: 'Success',
+        component: Success
     },
     {
         path: '/cart',
@@ -60,12 +74,12 @@ const routes = [
         component: Cart
     },
     {
-        path: '/devis-clients',
-        name: 'DevisClients',
-        component: DevisClients
+        path: '/admin',
+        name: 'Admin',
+        component: Admin
     },
     {
-        path: '/devis-clients/:id',
+        path: '/admin/devis-clients/:id',
         name: 'DevisView',
         component: DevisView
     },

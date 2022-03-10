@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="alignfooter">
       <div class="imgfoot">
-        <img style="height: 70px" :src="require(`@/assets/logowhitefooter.png`)" />
+        <img id ="logofooter" style="height: 70px" :src="require(`@/assets/logowhitefooter.png`)" />
       </div>
  
 
@@ -15,7 +15,7 @@
             ><li>Produits</li></router-link
           >
           <router-link to="/service"><li>Services</li></router-link>
-          <router-link to="/devis-clients"><li>Devis clients</li></router-link>
+          <router-link to="/admin"><li>Admin</li></router-link>
         </ul>
       </div>
 
@@ -31,14 +31,14 @@
           </ul>
           <ul>
             <li>
-              <a href="https://www.instagram.com/eco_service13/"
+              <a href="https://www.facebook.com/EcoServices-102014302399347"
                 ><i class="fab fa-facebook fa-2x white"></i
               ></a>
             </li>
           </ul>
           <ul>
             <li>
-              <a href="https://www.instagram.com/eco_service13/"
+              <a href="https://twitter.com/EcoService9"
                 ><i class="fab fa-twitter fa-2x white"></i
               ></a>
             </li>
@@ -193,6 +193,14 @@ svg:not(:root).svg-inline--fa[data-v-40ab164b] {
   margin-right: 0px;
   margin-left: 0%;
   color: #485fc7;
+}
+#logofooter{
+  margin: auto;
+display: flex;
+}
+.alignfooter{
+  display: flex;
+  flex-direction: column;
 }
 }
 </style>

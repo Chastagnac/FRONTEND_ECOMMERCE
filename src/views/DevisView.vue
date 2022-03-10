@@ -87,7 +87,7 @@ export default {
         .then((response) => {
           this.devis = response.data[0];
           this.toast_affiche("Devis Refusé","is-success");
-           this.$router.push("/devis-clients")
+           this.$router.push("/admin")
         })
         .catch((error) => {
           this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")

@@ -25,13 +25,13 @@
             <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
           </div>
           <div class="navbar-end">
-              <router-link v-if="$store.state.isAdmin" to="/devis-clients" class="navbar-item">Devis clients</router-link>
+              <router-link v-if="$store.state.isAdmin" to="/admin" class="navbar-item">Admin</router-link>
             <router-link to="/cart" class="navbar-item">
               <i class="fas fa-shopping-cart"></i
             ></router-link>
             <router-link
               v-if="$store.state.isAuthenticated"
-              to="my-account"
+              to="/my-account"
               class="navbar-item"
             >
               <i class="far fa-user " v-bind:class="{ admin: $store.state.isAuthenticated }" href="https://www.facebook.com/profile.php?id=100074600241159" data-mdb-ripple-color="dark"></i>
@@ -205,7 +205,7 @@ export default {
   height: 150px;
   margin-top: -22px;
   border-color: #49ae25;
-  z-index: 0;
+  z-index: 1;
 }
 
 .svg-inline--fa {
@@ -369,6 +369,16 @@ body {
   .social h1 {
     margin: 0px;
   }
+  
+@media only screen and (max-width: 1024px) {
+  .navbar-start, .navbar-end {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  margin:auto;
+  align-items: center;
+}
+}
 }
 @media only screen and (max-width: 950px) {
   .footer .col {

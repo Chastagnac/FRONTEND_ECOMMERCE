@@ -98,7 +98,7 @@ export default {
   mounted() {
     document.title = "Connexion";
     if (!this.infoCookie()) {
-      toast_affiche(
+      this.toast_affiche(
         "Veuillez acceptez les cookies pour pouvoir vous connecter",
         "is-warning"
       );
@@ -114,7 +114,6 @@ export default {
         return false;
       }
     },
-
     toast_affiche(parametre, type) {
       toast({
         message: parametre,

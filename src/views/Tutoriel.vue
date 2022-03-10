@@ -81,10 +81,7 @@
                 <p>
                   <strong>Lessive Liquide Bio</strong>
                   <br />
-                  Les ingrédients pour 3 litres de lessive 40 g de savon de
-                  Marseille (de couleur variant du vert pâle au brun, il doit
-                  être cuit au chaudron et contenir au minimum 72 % d’huiles
-                  végétales ;
+                  Faire votre propre lessive maison en quelques étapes faciles n'hésitez surtout pas à suivre ce tutoriel pour en apprendre plus !
                 </p>
               </div>
               <div class="mamodale">
@@ -241,4 +238,13 @@ export default {
   border-style: groove;
   border-color: #62ca3b3b;
 }
+
+@media only screen and (max-width: 400px) {
+  .tutoriel {
+  width: 80%;
+  margin: initial;
+  height: 100%;
+}
+}
+
 </style>
