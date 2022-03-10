@@ -83,14 +83,16 @@
             </div>
 
             <div class="field">
+
               <label>Zip code*</label>
+              <label>Code Postal*</label>
               <div class="control">
                 <input type="text" class="input" v-model="zipcode" />
               </div>
             </div>
 
             <div class="field">
-              <label>Place*</label>
+              <label>Ville*</label>
               <div class="control">
                 <input type="text" class="input" v-model="place" />
               </div>
@@ -113,6 +115,30 @@
             Pay with Stripe
           </button>
         </template>
+          <hr />
+          <div id="card-element" class="mb-5"></div>
+          <template v-if="cartTotalLenght">
+            <hr />
+            <div>
+              <stripe-checkout
+                ref="checkoutRef"
+                mode="payment"
+                :pk="publishableKey"
+                :line-items="lineItems"
+                :success-url="successURL"
+                :cancel-url="cancelURL"
+                @loading="(v) => (loading = v)"/>
+
+              <button
+                class="button is-dark"
+                style="margin: 20px"
+                @click="submitForm"
+              >
+                Payer avec Stripe
+              </button>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
   </div>
@@ -120,13 +146,29 @@
 
 <script>
 import axios from "axios";
+import { toast } from "bulma-toast";
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
 export default {
   name: "Checkout",
   data() {
+    this.publishableKey =
+      "pk_test_51KZxsnKZ4kNJDQ8mtS34sp1hcsxDol8SDlmhyJMjESS5zEzWsswEV92csfXM2LPhC4TZMlpZR8tBTeVoBttC9b8U00CZm5h04I";
     return {
       cart: {
         items: [],
       },
+
+      loading: false,
+      lineItems: [
+        {
+          price: ["price_1KadjPKZ4kNJDQ8mMbZTE5fg","price_1KahIDKZ4kNJDQ8mUxxt5eum","price_1KahEyKZ4kNJDQ8mCn3nf9ok"], // The id of the one-time price you created in your Stripe dashboard
+          quantity: 1,
+        },
+      ],
+      
+      successURL: "http://localhost:8080/contact",
+      cancelURL: "http://localhost:8080/tutoriel",
+
       stripe: {},
       card: {},
       first_name: "",
@@ -136,11 +178,11 @@ export default {
       address: "",
       zipcode: "",
       place: "",
-      errors: [],
+      errors: 0,
     };
   },
   mounted() {
-    document.title = "Checkout | Djackets";
+    document.title = "Eco-Service | Paiement";
     this.cart = this.$store.state.cart;
     if (this.cartTotalLength > 0) {
       this.stripe = Stripe(
@@ -151,35 +193,61 @@ export default {
       this.card.mount("#card-element");
     }
   },
+
+  components:{
+      StripeCheckout,
+  },
+
   methods: {
+    toast_affiche(parametre, type) {
+      toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: "fadeIn", out: "fadeOut" },
+      });
+    },
+
     getItemTotal(item) {
       return item.quantity * item.product.price;
     },
     submitForm() {
-      this.errors = [];
+      this.errors = 0;
+
       if (this.first_name === "") {
-        this.errors.push("The first name field is missing!");
+        this.errors = 1;
+        this.toast_affiche("Le nom doit être rempli", "is-danger");
       }
       if (this.last_name === "") {
-        this.errors.push("The last name field is missing!");
+        this.errors = 1;
+        this.toast_affiche("Le prénom doit être rempli", "is-danger");
       }
       if (this.email === "") {
-        this.errors.push("The email field is missing!");
+        this.errors = 1;
+        this.toast_affiche("L'email doit être rempli", "is-danger");
       }
       if (this.phone === "") {
-        this.errors.push("The phone field is missing!");
+        this.errors = 1;
+        this.toast_affiche("Le numéro de téléphone doit être rempli","is-danger");
       }
-      if (this.address === "") {
-        this.errors.push("The address field is missing!");
+      if (this.adress === "") {
+        this.errors = 1;
+        this.toast_affiche("L'adresse doit être renseignée", "is-danger");
       }
       if (this.zipcode === "") {
-        this.errors.push("The zip code field is missing!");
+        this.errors = 1;
+        this.toast_affiche("Le zip code doit être renseigné", "is-danger");
       }
       if (this.place === "") {
-        this.errors.push("The place field is missing!");
+        this.errors = 1;
+        this.toast_affiche("La ville doit être renseignée", "is-danger");
       }
-      if (!this.errors.length) {
-        this.$store.commit("setIsLoading", true);
+      if (!this.errors) {
+        this.toast_affiche("Chargement...", "is-info");
+         this.$store.commit("setIsLoading", true);
         this.stripe.createToken(this.card).then((result) => {
           if (result.error) {
             this.$store.commit("setIsLoading", false);
@@ -190,10 +258,7 @@ export default {
           } else {
             this.stripeTokenHandler(result.token);
           }
-        });
-      }
-    },
-    async stripeTokenHandler(token) {
+           async stripeTokenHandler(token) {
       const items = [];
       for (let i = 0; i < this.cart.items.length; i++) {
         const item = this.cart.items[i];
@@ -227,6 +292,9 @@ export default {
         });
       this.$store.commit("setIsLoading", false);
     },
+      }
+    },
+   
   },
   computed: {
     cartTotalPrice() {
