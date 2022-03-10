@@ -30,8 +30,13 @@ export default {
     return {};
   },
   mounted() {
-    setTimeout(this.$router.push("/shop"), 100000)
     document.title = "Eco-Service";
+    this.goHome()
+  },
+  method: {
+    goHome() {
+      setTimeout(this.$router.push("/shop"), 100000);
+    },
   },
 };
 </script>
