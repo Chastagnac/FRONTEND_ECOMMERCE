@@ -77,9 +77,15 @@ data(){
           .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
-                this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
-              };
-                         
+                if(error.response.data[property] == "Token non valide.")
+                {
+                  this.toast_affiche("Email introuvable","is-danger");   
+                }
+                else
+                {
+                  this.toast_affiche(`${error.response.data[property]}`,"is-danger");  
+                }           
+              };    
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
               this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
@@ -122,6 +128,7 @@ right: 3px;
   bottom: 0;
   left: 0;
   right: 0;
+  border-radius: 30px;
 }
 .modmdp{
   height:40%;
@@ -132,7 +139,7 @@ padding: 50px;
 position: fixed;
 top: 8%;
 width: 85%;
-/*height: 86%;*/
+height: 86%;
 }
 .buttonmodale{
     background: #f1f1f1;

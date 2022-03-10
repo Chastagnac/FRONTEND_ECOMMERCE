@@ -20,6 +20,7 @@ import Tuto from '../views/Tutoriel.vue'
 import PasswordReset from '../views/passwordreset'
 import Success from '../views/Success.vue'
 import Commandes from '../views/Commandes'
+import SuccessActive from '../views/SuccessActive'
 
 const routes = [
     {
@@ -31,6 +32,11 @@ const routes = [
         path: '/checkout',
         name: 'Checkout',
         component: Checkout
+    },
+    {
+        path: '/activate',
+        name: 'successactive',
+        component: SuccessActive
     },
     {
         path: '/password-reset',
