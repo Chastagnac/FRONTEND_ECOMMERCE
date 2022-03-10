@@ -124,7 +124,7 @@ export default {
       password2: "",
 
       captcha_response: "",
-      errors: [],
+      errors: 0,
       disabled: false,
 
       toasterrors: [],
@@ -175,36 +175,42 @@ export default {
       }
     },
     submitForm() {
-      this.errors = [];
+      this.errors = 0;
       if (this.disabled === true) {
-        this.errors.push(`Veuillez accepter les cookies`);
+        this.errors = 1,
+        this.toast_affiche(`Veuillez accepter les cookies`,'is-warning');
       }
-      if (this.username === "") {
-        this.errors.push(`Le nom d'utilisateur doit être renseigné`);
-      }
-
-      if (this.email === "") {
-        this.errors.push(`Le mail doit être rempli`);
+      if (this.username == "") {
+        this.errors = 1,
+        this.toast_affiche(`Le nom d'utilisateur doit être renseigné`,'is-danger');
       }
 
-      if (this.password === "") {
-        this.errors.push(`Le mot de passe doit être renseigné`);
+      if (this.email == "") {
+        this.errors = 1,
+        this.toast_affiche(`Le mail doit être renseigné`,'is-danger');
       }
 
-      if (this.password2 !== this.password) {
-        this.errors.push(`Les mots de passe doivent être identiques`);
+      if (this.password == "") {
+        this.errors = 1,
+        this.toast_affiche(`Le mot de passe doit être renseigné`,'is-danger');
+      }
+
+      if (this.password2 != this.password) {
+        this.errors = 1,
+        this.toast_affiche(`Les mots de passes ne sont pas identiques`,'is-danger');
       }
 
       if(this.captcha_response == "")
       {
-        this.errors.push("Veuillez cocher le captcha");
+        this.errors = 1,
+        this.toast_affiche("Veuillez cocher le captcha",'is-danger');
       }
 
-      if (!this.errors.lenght) {
+      if (!this.errors) {
         const formData = {
-          username: this.username,
-          email: this.email,
-          password: this.password,
+            username: this.username,
+            email: this.email,
+            password: this.password,
         };
 
         axios
@@ -217,8 +223,7 @@ export default {
             if (error.response) {
               for (const property in error.response.data) {
                 this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
-              };
-                         
+              };            
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
               this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
