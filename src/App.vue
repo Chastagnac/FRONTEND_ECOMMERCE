@@ -22,10 +22,10 @@
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
             <router-link to="/service" class="navbar-item">Services</router-link>
             <router-link to="/contact" class="navbar-item">Contact</router-link>
-            <router-link to="/devis-clients" class="navbar-item">Devis clients</router-link>
             <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
           </div>
           <div class="navbar-end">
+              <router-link v-if="$store.state.isAdmin" to="/devis-clients" class="navbar-item">Devis clients</router-link>
             <router-link to="/cart" class="navbar-item">
               <i class="fas fa-shopping-cart"></i
             ></router-link>
@@ -34,11 +34,12 @@
               to="my-account"
               class="navbar-item"
             >
-              <i class="far fa-user" href="https://www.facebook.com/profile.php?id=100074600241159" data-mdb-ripple-color="dark"></i>
+              <i class="far fa-user " v-bind:class="{ admin: $store.state.isAuthenticated }" href="https://www.facebook.com/profile.php?id=100074600241159" data-mdb-ripple-color="dark"></i>
             </router-link>
             <router-link v-else to="/log-in" class="navbar-item">
               <i
-                class="far fa-user"
+                class="far fa-user "
+            
                 href="https://www.facebook.com/profile.php?id=100074600241159"
                 data-mdb-ripple-color="dark"
               ></i>
@@ -132,7 +133,7 @@ export default {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         localStorage.removeItem("userid");
-  
+    
         this.$store.commit("removeToken");       
         this.$router.push("/");
         
@@ -395,5 +396,9 @@ body {
   .footer .col {
     width: 100%;
   }
+}
+
+.admin {
+    color: red !important;
 }
 </style>
