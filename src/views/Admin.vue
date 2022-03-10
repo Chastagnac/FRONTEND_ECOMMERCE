@@ -106,14 +106,14 @@
         <section class="modal-card-body">
           <div class="field" style="margin: auto">
             <div class="control">
-              <div class="select">
+              <div class="select" type="number">
                 <select v-model="data.category">
-                  <option>Categorie</option>
-                  <option>Alimentation</option>
-                  <option>Électronique</option>
-                  <option>Jouets</option>
-                  <option>maison</option>
-                  <option>Textile</option>
+                  <option value="0">Categorie</option>
+                  <option value="1">Alimentation</option>
+                  <option value="2">Électronique</option>
+                  <option value="3">Jouets</option>
+                  <option value="4">maison</option>
+                  <option value="5">Textile</option>
                 </select>
               </div>
             </div>
@@ -167,14 +167,14 @@
                 <input
                   class="input"
                   id="tejbo"
-                  type="int"
+                  type="number"
                   placeholder="Définir l'objet"
                   v-model="data.price"
                 />
               </div>
             </div>
           </div>
-          data {{ data }}
+          <!-- data {{ data }} -->
         </section>
         <footer class="modal-card-foot">
           <button class="button is-success" @click="trigerPost()">
@@ -197,7 +197,7 @@ export default {
     return {
       devis: [],
       data: {
-        category: "",
+        category: 0,
         name: "",
         slug: "",
         description: "",
@@ -238,8 +238,15 @@ export default {
       this.showModal = true;
     },
     async trigerPost() {
+      const formData = {
+        category: parseInt(this.data.category),
+        name: this.data.name,
+        slug: this.data.slug,
+        description: this.data.description,
+        price: this.data.price,
+      };
       await axios
-        .post("/api/v1/latest-products/", this.data)
+        .post("/api/v1/latest-products/", formData)
         .then((response) => {
           this.$router.push("/service");
           toast({
