@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="box" style="width: 50%; margin: auto">
-        
       <article class="message is-success">
         <div class="message-header">
           <p>Félicitation !</p>
@@ -9,7 +8,9 @@
         <div class="message-body">
           Votre achat à bien été prit en compte.
           <strong>Eco Service </strong>s'occupe de tout !
-          <img src="../assets/logoblack.png" class="logo" alt="">
+          <br />
+          Vous allez être redirigé ...
+          <img src="../assets/logoblack.png" class="logo" alt="" />
         </div>
       </article>
     </div>
@@ -29,10 +30,7 @@ export default {
     return {};
   },
   mounted() {
-    instance.showLoading({
-      type: "line",
-    });
-    this.getLastedProducts();
+    setTimeout(this.$router.push("/shop"), 100000)
     document.title = "Eco-Service";
   },
 };

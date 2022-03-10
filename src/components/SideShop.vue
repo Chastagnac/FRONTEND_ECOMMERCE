@@ -22,24 +22,6 @@
           <router-link to="/shop/textile">Textile</router-link>
         </li>
       </ul>
-      <p class="menu-label">Prix maximum</p>
-
-      <input
-        type="range"
-        class="form-control-range"
-        id="formControlRange"
-        min="10"
-        max="4000"
-        v-model="price"
-        @change="changePrice()"
-      />
-      <input
-        class="slider input"
-        type="text"
-        v-model="price"
-        style="width: 60px !important; height: 23px; border-radius: 2px; margin-left: 5px"
-      />
-      €
     </aside>
   </div>
 </template>

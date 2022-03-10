@@ -17,6 +17,7 @@
                     </thead>
 
                     <tbody>
+                        
                         <CartItem
                         v-for="item in cart.items"
                         v-bind:key="item.product.id"

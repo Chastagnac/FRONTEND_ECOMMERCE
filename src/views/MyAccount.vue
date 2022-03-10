@@ -4,7 +4,6 @@
       <div>
         <h1 id="mytitleee">Mon espace</h1>
       </div>
-
       <div class="boxemya">
         <div class="avatarrond">
           <img id="imavatar" src="../assets/avatarmodified.png" />
@@ -14,37 +13,43 @@
             class="tab-link active"
             data-ref="connexion"
             href="javascript:void(0)"
+            @click="showInfos"
             ><router-link id="connexionmya" to="/my-account"
               >Mes infos
             </router-link></a
           >
           <a
             class="tab-link active"
+            id="connexionmya2"
             data-ref="inscription"
             href="javascript:void(0)"
-            ><router-link id="inscriptionmya" to="shop"
-              >Mes commandes
-            </router-link></a
+            @click="showOrders"
           >
+            Mes commandes
+          </a>
         </h2>
-        <div class="column is-12 is-11-desktop mx-auto has-text-centered">
-            <div class="field">
-              <label class="label" id="nommya">Nom d'utilisateur</label>
-              <div class="control">
-                <input
-                  class="input"
-                  id="npmya"
-                  type="text"
-                  v-model="input.username"/>
-              </div>
+        <div
+          class="column is-12 is-11-desktop mx-auto has-text-centered"
+          id="infos"
+        >
+          <div class="field">
+            <label class="label" id="nommya">Nom d'utilisateur</label>
+            <div class="control">
+              <input
+                class="input"
+                id="npmya"
+                type="text"
+                v-model="input.username"
+              />
             </div>
-          
-        <form @submit.prevent="updateUser">
+          </div>
+
+          <form @submit.prevent="updateUser">
             <div class="field">
               <label class="label" id="yourmailnma">Adresse email</label>
               <div class="control">
                 <input
-                readonly="readonly"
+                  readonly="readonly"
                   class="input"
                   id="npmya"
                   type="email"
@@ -52,47 +57,75 @@
                 />
               </div>
             </div>
-            
+
             <div class="field">
-                <label class="label" id="pnmya">Mot de Passe Actuel</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    id="npmya"
-                    type="password"
-                    placeholder="Entrez votre mot de passe"
-                    v-model="password_actuel"/>        
-                </div>
+              <label class="label" id="pnmya">Mot de Passe Actuel</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="npmya"
+                  type="password"
+                  placeholder="Entrez votre mot de passe"
+                  v-model="password_actuel"
+                />
+              </div>
             </div>
 
             <div class="field">
-                <label class="label" id="pnmya">Nouveau Mot de Passe</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    id="npmya"
-                    type="password"
-                    placeholder="Entrez un nouveau mot de passe"
-                    v-model="password_change"/>        
-                </div>
+              <label class="label" id="pnmya">Nouveau Mot de Passe</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="npmya"
+                  type="password"
+                  placeholder="Entrez un nouveau mot de passe"
+                  v-model="password_change"
+                />
+              </div>
             </div>
 
             <div class="field">
-                <label class="label" id="pnmya">Confirmation Mot de Passe</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    id="npmya"
-                    type="password"
-                    placeholder="Confirmez le mot de passe"
-                    v-model="password_change2"/>
-                </div>
+              <label class="label" id="pnmya">Confirmation Mot de Passe</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="npmya"
+                  type="password"
+                  placeholder="Confirmez le mot de passe"
+                  v-model="password_change2"
+                />
+              </div>
             </div>
 
-            <button class="button2" id="bmya">
-                    Valider
-            </button>
-        </form>
+            <button class="button2" id="bmya">Valider</button>
+          </form>
+        </div>
+        <div id="orders" style="display: none">
+          <div class="field cardorder" v-for="order in orders" :key="order.id">
+            <div class="box mb-4">
+              <h3 class="is-size-4 mb-6">Commande #{{ order.id }}</h3>
+              <h4 class="is-size-5">Products</h4>
+              <table class="table is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr v-for="item in order.items" v-bind:key="item.product.id">
+                    <td>{{ item.product.name }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ order.paid_amount }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -107,25 +140,28 @@ export default {
   name: "MyAccount",
   data() {
     return {
-      
       input: {
-        username: '',
-        email: '',
+        username: "",
+        email: "",
       },
 
-      username_actuel: '',
-      password_actuel: '',
-      password_change: '',
-      password_change2: '',
+      username_actuel: "",
+      password_actuel: "",
+      password_change: "",
+      password_change2: "",
 
       errors: 0,
       info: [],
+      orders: [],
     };
   },
-  mounted(){
-      document.title = "Mon Compte";
-      axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
-      axios
+  mounted() {
+    document.title = "Mon Compte";
+
+    axios.defaults.headers.common["Authorization"] =
+      "Token " + localStorage.getItem("token");
+    this.getMyOrders();
+    axios
       .get("/api/v1/users/me")
       .then((response) => {
         this.info = response.data;
@@ -139,54 +175,92 @@ export default {
       });
   },
   methods: {
-
-    toast_affiche(parametre,type){
-       toast({
+    async getMyOrders() {
+      this.$store.commit("setIsLoading", true);
+      await axios
+        .get("/api/v1/orders/")
+        .then((response) => {
+          this.orders = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.$store.commit("setIsLoading", false);
+    },
+    showOrders() {
+      document.getElementById("infos").style.display = "none";
+      document.getElementById("orders").style.display = "block";
+      document.getElementById("connexionmya").style.color = "black";
+      document.getElementById("connexionmya2").style.color = "#6e934c";
+    },
+    showInfos() {
+      document.getElementById("infos").style.display = "block";
+      document.getElementById("orders").style.display = "none";
+      document.getElementById("connexionmya2").style.color = "black";
+      document.getElementById("connexionmya").style.color = "#6e934c";
+    },
+    toast_affiche(parametre, type) {
+      toast({
         message: parametre,
         type: type,
         dismissible: true,
         pauseOnHover: true,
         duration: 3000,
         position: "top-right",
-        animate: { in: 'fadeIn', out: 'fadeOut' },
+        animate: { in: "fadeIn", out: "fadeOut" },
       });
     },
 
-    updateUser(){
-
-      axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem("token");
+    updateUser() {
+      axios.defaults.headers.common["Authorization"] =
+        "Token " + localStorage.getItem("token");
 
       this.errors = 0;
-      if(this.password_actuel == "")
-      {
+      if (this.password_actuel == "") {
         this.errors = 1;
-        this.toast_affiche(`Afin de valider les modifications le mot de passe doit être renseigné`,"is-danger");
+        this.toast_affiche(
+          `Afin de valider les modifications le mot de passe doit être renseigné`,
+          "is-danger"
+        );
       }
       if (this.input.username == "") {
         this.errors = 1;
-        this.toast_affiche(`Le nom d'utilisateur doit être renseigné`,'is-danger');
-      }
-      else if(this.errors == 0 && this.input.username != this.username_actuel)
-      {
+        this.toast_affiche(
+          `Le nom d'utilisateur doit être renseigné`,
+          "is-danger"
+        );
+      } else if (
+        this.errors == 0 &&
+        this.input.username != this.username_actuel
+      ) {
         this.errors = 1;
         const data = {
           current_password: this.password_actuel,
-          new_username: this.input.username
-        }
+          new_username: this.input.username,
+        };
         axios
-        .post("/api/v1/users/set_username/",data)
-        .then(response => {
-            this.toast_affiche("Votre nom d'utilisateur à bien été modifié !","is-success");
-        })
-        .catch((error) => {
+          .post("/api/v1/users/set_username/", data)
+          .then((response) => {
+            this.toast_affiche(
+              "Votre nom d'utilisateur à bien été modifié !",
+              "is-success"
+            );
+          })
+          .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
                 this.errors = 0;
-                this.toast_affiche(`${error.response.data[property]}`,"is-danger");
+                this.toast_affiche(
+                  `${error.response.data[property]}`,
+                  "is-danger"
+                );
               }
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
-              this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger");
+              this.toast_affiche(
+                "Désolé. Un problème est survenu. Veuillez réessayer plus tard.",
+                "is-danger"
+              );
               this.errors = 0;
               console.log(JSON.stringify(error));
             }
@@ -194,49 +268,61 @@ export default {
       }
 
       if (this.password_change != "") {
-
-        if (this.input.password2 != this.input.password) 
-        {
+        if (this.input.password2 != this.input.password) {
           this.errors = 1;
-          this.toast_affiche(`Les mots de passe doivent être identiques`,'is-danger');
-        }
-        else if (this.errors == 0 && this.password_change != this.password_actuel && this.password_change2 !== this.password_actuel)
-        {
+          this.toast_affiche(
+            `Les mots de passe doivent être identiques`,
+            "is-danger"
+          );
+        } else if (
+          this.errors == 0 &&
+          this.password_change != this.password_actuel &&
+          this.password_change2 !== this.password_actuel
+        ) {
           this.errors = 1;
-          const data = { 
-          new_password: this.password_change,
-          current_password: this.password_actuel,
-          }
+          const data = {
+            new_password: this.password_change,
+            current_password: this.password_actuel,
+          };
           axios
-          .post("/api/v1/users/set_password/",data)
-          .then(response => {
-              this.toast_affiche("Votre mot de passe à bien été modifié !","is-success");
+            .post("/api/v1/users/set_password/", data)
+            .then((response) => {
+              this.toast_affiche(
+                "Votre mot de passe à bien été modifié !",
+                "is-success"
+              );
             })
-          .catch((error) => {
+            .catch((error) => {
               if (error.response) {
                 for (const property in error.response.data) {
-                 this.toast_affiche(`${error.response.data[property]}`,"is-danger");
-                this.errors = 0;
+                  this.toast_affiche(
+                    `${error.response.data[property]}`,
+                    "is-danger"
+                  );
+                  this.errors = 0;
                 }
                 console.log(JSON.stringify(error.response.data));
               } else if (error.message) {
-                 this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger");
-                 this.errors = 0;
+                this.toast_affiche(
+                  "Désolé. Un problème est survenu. Veuillez réessayer plus tard.",
+                  "is-danger"
+                );
+                this.errors = 0;
                 console.log(JSON.stringify(error));
               }
             });
-        }
-        else
-        {
+        } else {
           this.errors = 1;
-          this.toast_affiche(`Votre mot de passe est identique au mot de passe actuel`,'is-danger');
+          this.toast_affiche(
+            `Votre mot de passe est identique au mot de passe actuel`,
+            "is-danger"
+          );
         }
       }
 
-      if(this.errors == 0)
-      {
+      if (this.errors == 0) {
         this.errors = 0;
-        this.toast_affiche("Aucune information n'a été modifiée","is-info")
+        this.toast_affiche("Aucune information n'a été modifiée", "is-info");
       }
     },
   },
@@ -244,9 +330,15 @@ export default {
 </script>
 
 <style lang="scss">
-
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css);
 
+.cardorder {
+  width: 80%;
+  margin: auto;
+  margin-top: 61px;
+  margin-bottom: 10px;
+  padding: 1px;
+}
 .boxemya {
   width: 74%;
   text-align: center;
@@ -262,7 +354,7 @@ export default {
 }
 #imavatar {
   position: absolute;
-  top: 10%;
+  top: 51px;
 }
 #connexionmya {
   float: left;
@@ -282,11 +374,11 @@ export default {
   text-align: center;
 }
 
-.labmya{
+.labmya {
   text-align: left;
-  margin-left:17%;
+  margin-left: 17%;
 }
-.nmya{
+.nmya {
   margin-top: 1.3%;
 }
 
@@ -316,26 +408,25 @@ input::placeholder {
   margin-left: 28%;
 }
 @media only screen and (max-width: 840px) {
-#imavatar {
-  position: initial;
-  top: 0%;
-  margin-top: 1%;
-}
-
+  #imavatar {
+    position: initial;
+    top: 0%;
+    margin-top: 1%;
+  }
 }
 @media only screen and (max-width: 706px) {
- #inscriptionmya {
-  float: right;
-  color: #141414;
-  margin-right: 31%;
-  margin-bottom: 3%;
-  margin-left: 18%;
-}
-#connexionmya {
-  float: initial;
-  margin-left: 8%;
-  color: #6e934c;
-}
+  #inscriptionmya {
+    float: right;
+    color: #141414;
+    margin-right: 31%;
+    margin-bottom: 3%;
+    margin-left: 18%;
+  }
+  #connexionmya {
+    float: initial;
+    margin-left: 8%;
+    color: #6e934c;
+  }
 }
 @media only screen and (max-width: 592px) {
   #nommya {
@@ -350,21 +441,21 @@ input::placeholder {
     text-align: center;
     margin-left: 0%;
   }
- #inscriptionmya {
-  float: right;
-  color: #141414;
-  margin-right: 31%;
-  margin-bottom: 3%;
-  margin-left: 18%;
-}
-.buttmya{
-  font-size: 14px;
-}
+  #inscriptionmya {
+    float: right;
+    color: #141414;
+    margin-right: 31%;
+    margin-bottom: 3%;
+    margin-left: 18%;
+  }
+  .buttmya {
+    font-size: 14px;
+  }
 }
 @media only screen and (max-width: 592px) {
   #npmya {
-  width: 100% !important;
-  border-color: #418014;
-}
+    width: 100% !important;
+    border-color: #418014;
+  }
 }
 </style>

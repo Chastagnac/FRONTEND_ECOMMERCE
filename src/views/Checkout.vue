@@ -2,7 +2,7 @@
   <div class="page-checkout">
     <div class="columns is-multiline">
       <div class="column is-12">
-        <h1 class="title">Checkout</h1>
+        <h1 class="title">Récapitulatif</h1>
       </div>
 
       <div class="column is-12 box" style="margin: auto; width: 70%">
@@ -218,7 +218,7 @@ export default {
       await axios
         .post("/api/v1/checkout/", data)
         .then((response) => {
-        //   this.$store.commit("clearCart");
+          this.$store.commit("clearCart");
           this.$router.push("/cart/success");
         })
         .catch((error) => {
