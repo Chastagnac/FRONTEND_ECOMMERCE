@@ -303,7 +303,14 @@ p {
 .input {
   width: 300px !important;
 }
-@media only screen and (max-width: 1280px) {
+@media only screen and (min-width: 1520px) {
+  .responsive {
+  margin:auto;
+  display: flex;
+  max-height: 62%;
+  height: auto;
+  float:none;
+}
   
 }
 @media only screen and (max-width: 600px) {

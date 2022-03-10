@@ -8,10 +8,10 @@
         </div>
         <div class="ensvp">
           <div id="imgtuto">
-            <img class="imgmodtuto" src="../assets/Churros.png">
+            <img class="imgmodtuto" src="../assets/gel.png">
           </div>
           
-             <strong id="textmdpoublie">Recette Churros</strong>
+             <strong id="textmdpoublie">gel hydroalcoolique </strong>
              
              <label id="renimdp"></label>
              
@@ -23,21 +23,19 @@
                 <h1 id ="textingr">Ingrédients:</h1>
                 <div class = "ingred">
                   <div>
-                  - Eau <br />
-                  - Beurre <br />- Sel<br />- Huile de pépin<br />
+                  -  Une bouteille de 500 ml <br />
+                  - 40 cl d’alcool à 90°C <br />- 10 cl de gel d’aloe vera<br />- 1 cuillère à café d’huile végétale <br />
                 </div>
                 <div id ="ecartext">
-                  - Sucre en poudre
-                  <br />- Farine <br />- Cannelle<br />- Oeufs battus<br />
+                  - Récipient gradué propre et désinfecté
+                  <br />- Une petite fiole <br />- Un entonnoir<br />
                 </div>
                 </div>
                 <h1 id ="textingr"> Étapes à suivre:</h1>
                 <div>
-                  - Dans une casserole, faites bouillir l'eau avec le beurre, le sel et 2 pincées de sucre. <br/>- Tamisez la farine dans un saladier, creusez une fontaine et versez-y l'eau bouillante en remuant avec une cuillère en bois.<br/>
-                  - Incorporez les œufs battus, mélangez et laissez la pâte reposer 1 h au frais.<br />- Faites chauffer l'huile de friture à 180°C. Mettez la pâte dans une poche à douille cannelée n° 10.<br/>
-                  - Pressez des bandes de pâte de 10 cm de long, puis plongez-les dans la friture.<br />
-                  - Opérez en plusieurs fois pour que les beignets ne collent pas les uns aux autres. Laissez-les dorer, retournez-les dans la friture avec l'écumoire.<br/>
-                  - Retirez-les et égouttez-les sur du papier absorbant. Poudrez les churros de sucre en poudre et servez-les tièdes.
+                  - Versez respectivement dans votre récipient gradué l’alcool, la glycérine ou le gel d’aloe vera et les gouttes d’huile essentielle.<br/>
+                  - Mélangez délicatement à l’aide d’une spatule.<br/>
+                  -  Transvasez dans votre petit récipient à l’aide d’un entonnoir pour stocker votre solution hydroalcoolique. Secouez pour mélanger.<br/>
                 </div>
               </div>
             </div>

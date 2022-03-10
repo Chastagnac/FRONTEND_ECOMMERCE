@@ -9,18 +9,13 @@
               :src="require(`@/assets/logoblack.png`)"
           /></router-link>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="true"
-          >
+            <a :aria-expanded="isActive" :class="{ 'is-active': isActive }" role="button" class="navbar-burger" aria-label="menu" data-target="collapse" @click="isActive = !isActive" >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
-        <div class="navbar-menu">
+        <div id="collapse" :class="{ 'is-active': isActive }" class="navbar-menu is-paddingless">
           <div class="navbar-start" style="flex-grow: 1; justify-content: center">
             <div class="navbar-item has-dropdown is-hoverable"></div>
             <router-link to="/" class="navbar-item">Accueil</router-link>
@@ -83,6 +78,8 @@ export default {
   data() {
     return {
       showMobileMenu: false,
+      isActive:false,
+      showNavbar:true,
       cart: {
         items: [],
       },

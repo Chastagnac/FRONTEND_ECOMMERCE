@@ -1,14 +1,15 @@
 <template>
   <div class="tutoriel">
     <div class="bloctuto">
-      <h2 class="mb-4 is-size-1 is-size-3-mobile" id="titletuto">Nos tutoriels</h2>
+      <h2 class="mb-4 is-size-1 is-size-3-mobile" id="titletuto">
+        Nos tutoriels
+      </h2>
       <div>
-        
-        <div class="box ">
+        <div class="box">
           <article class="media">
             <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
-                <img class ="phototuto" src="../assets/savon.png" alt="Image" />
+                <img class="phototuto" src="../assets/savon.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -16,15 +17,11 @@
                 <p>
                   <strong>Savon parfumé</strong>
                   <br />
-                 Faites chauffer l'huile de coco à feu doux, jusqu'à ce que cela soit fondu - le mieux étant de le faire au bain-marie.
+                 Savoir faire du  savon de Marseille de couleur variant du vert pâle au brun.
                 </p>
               </div>
               <div class="mamodale">
-                <mo
-                  v-bind:re="re"
-                  v-bind:displayModale="displayModale"
-                >
-                </mo>
+                <mo v-bind:re="re" v-bind:displayModale="displayModale"> </mo>
                 <button
                   v-on:click="displayModale"
                   class="button is-success"
@@ -37,12 +34,11 @@
           </article>
         </div>
 
-        
-         <div class="box ">
+        <div class="box">
           <article class="media">
             <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
-                <img class ="phototuto" src="../assets/coton.png" alt="Image" />
+                <img class="phototuto" src="../assets/coton.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -50,7 +46,9 @@
                 <p>
                   <strong>Faire un Tawashi</strong>
                   <br />
-                  Vous ne savez pas quoi faire de vos chaussettes orphelines ? Ne les jetez plus, transformez-les en éponges lavables en tissu.
+                  Vous ne savez pas quoi faire de vos chaussettes orphelines ?
+                  Ne les jetez plus, transformez-les en éponges lavables en
+                  tissu.
                 </p>
               </div>
               <div class="mamodale">
@@ -71,12 +69,11 @@
           </article>
         </div>
 
-
-      <div class="box ">
+        <div class="box">
           <article class="media">
             <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
-                <img class ="phototuto" src="../assets/pink.png" alt="Image" />
+                <img class="phototuto" src="../assets/pink.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -84,15 +81,14 @@
                 <p>
                   <strong>Lessive Liquide Bio</strong>
                   <br />
-                  Les ingrédients pour 3 litres de lessive
-40 g de savon de Marseille (de couleur variant du vert pâle au brun, il doit être cuit au chaudron et contenir au minimum 72 % d’huiles végétales ;
+                  Les ingrédients pour 3 litres de lessive 40 g de savon de
+                  Marseille (de couleur variant du vert pâle au brun, il doit
+                  être cuit au chaudron et contenir au minimum 72 % d’huiles
+                  végétales ;
                 </p>
               </div>
               <div class="mamodale">
-                <moda
-                  v-bind:reveleuh="reveleuh"
-                  v-bind:openModale="openModale"
-                >
+                <moda v-bind:reveleuh="reveleuh" v-bind:openModale="openModale">
                 </moda>
                 <button
                   v-on:click="openModale"
@@ -105,28 +101,31 @@
             </div>
           </article>
         </div>
-        
+
         <div class="box">
           <article class="media">
             <div class="media-left zoombox">
               <figure class="image is-64x64" id="imgtuto">
-                <img class ="phototuto" src="../assets/Churros.png" alt="Image" />
+                <img
+                  class="phototuto"
+                  src="../assets/gel.png"
+                  alt="Image"
+                />
               </figure>
             </div>
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>Recette Churros</strong>
+                  <strong>Une recette de gel hydroalcoolique </strong>
                   <br />
-                 Dans une casserole, faites bouillir l'eau avec le beurre, le sel et 2 pincées de sucre. Tamisez la farine dans un saladier, creusez une fontaine et versez-y l'eau bouillante en remuant avec une cuillère en bois. Vous allez obtenir rapidement une pâte épaisse mais de texture homogène.
-
+                  Cette recette de solution antibactérienne pour les mains
+                  s’utilise occasionnellement pour lutter contre les bactéries,
+                  quand vous n’avez pas la possibilité de vous laver les mains à
+                  l’eau courante et au savon.
                 </p>
               </div>
               <div class="mamodale">
-                <mod
-                  v-bind:reve="reve"
-                  v-bind:ouvrirModale="ouvrirModale"
-                >
+                <mod v-bind:reve="reve" v-bind:ouvrirModale="ouvrirModale">
                 </mod>
                 <button
                   v-on:click="ouvrirModale"
@@ -154,14 +153,14 @@ export default {
   data() {
     return {
       revele: false,
-      reve:false,
-      reveleuh:false,
-      re:false,
+      reve: false,
+      reveleuh: false,
+      re: false,
     };
   },
   components: {
     modale: Modalensvp4,
-    mod:Modalensvp3,
+    mod: Modalensvp3,
     moda: Modalensvp2,
     mo: Modalensvp1,
   },
@@ -183,8 +182,7 @@ export default {
 </script>
 
 <style scoped>
-
-.phototuto{
+.phototuto {
   height: 100%;
 }
 .tutoriel {
@@ -230,18 +228,17 @@ export default {
   left: 0;
   right: 0;
 }
-#titletuto{
+#titletuto {
   margin-top: 3%;
 }
 .zoombox:hover {
   transform: scale(1.01);
   border-style: groove;
   border-color: #62ca3b3b;
-  
 }
-.zoombox{
+.zoombox {
   transition: 0.3s;
-    border-style: groove;
+  border-style: groove;
   border-color: #62ca3b3b;
 }
 </style>

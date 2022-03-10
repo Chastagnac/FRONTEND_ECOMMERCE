@@ -16,13 +16,6 @@
         <label id="renimdp"></label>
         <div class="field borderensvp">
           <div id="pad1">
-            <label id="textetuto">
-              Vous ne savez pas quoi faire de vos chaussettes orphelines ? Ne
-              les jetez plus, transformez-les en éponges lavables en tissu.
-              <br />
-              Pour suivre étape par étape ce tutoriel, munissez-vous des outils
-              et objets suivants :
-            </label>
             <div>
             <div>
               <h1 id ="textingr">Outils & Objets:</h1>

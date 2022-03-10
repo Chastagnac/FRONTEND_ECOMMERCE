@@ -10,12 +10,12 @@
       <div class="col">
         <h1 id="tittlefooter">Eco Service</h1>
         <ul>
-          <router-link to="/contact"><li>Accueil</li></router-link>
-          <router-link to="/conditions-generales"
+          <router-link to="/"><li>Accueil</li></router-link>
+          <router-link to="/shop"
             ><li>Produits</li></router-link
           >
           <router-link to="/service"><li>Services</li></router-link>
-          <router-link to="/shop"><li>Devis clients</li></router-link>
+          <router-link to="/devis-clients"><li>Devis clients</li></router-link>
         </ul>
       </div>
 
@@ -52,8 +52,8 @@
           <router-link to="/conditions-generales"
             ><li>Conditions générales</li></router-link
           >
-          <router-link to="/service"><li>Tutoriels</li></router-link>
-          <router-link to="/shop"><li>F.A.Q</li></router-link>
+          <router-link to="/tutoriel"><li>Tutoriels</li></router-link>
+          <router-link to="/contact"><li>F.A.Q</li></router-link>
         </ul>
       </div>
     </div>
