@@ -69,7 +69,7 @@
             <div class="field">
               <label>Tel*</label>
               <div class="control">
-                <input type="text" class="input" v-model="phone"  @keypress="isNumber($event)"  maxlength="10"/>
+                <input type="text" class="input" v-model="phone"  @keypress="isNumber($event)"  maxlength="5"/>
               </div>
             </div>
           </div>
