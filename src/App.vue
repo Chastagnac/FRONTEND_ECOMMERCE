@@ -31,7 +31,7 @@
             ></router-link>
             <router-link
               v-if="$store.state.isAuthenticated"
-              to="my-account"
+              to="/my-account"
               class="navbar-item"
             >
               <i class="far fa-user " v-bind:class="{ admin: $store.state.isAuthenticated }" href="https://www.facebook.com/profile.php?id=100074600241159" data-mdb-ripple-color="dark"></i>

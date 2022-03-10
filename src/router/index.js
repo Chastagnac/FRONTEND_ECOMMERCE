@@ -18,6 +18,8 @@ import Checkout from '../views/Checkout.vue'
 import store from '../store'
 import Tuto from '../views/Tutoriel.vue'
 import PasswordReset from '../views/passwordreset'
+import Success from '../views/Success.vue'
+import Commandes from '../views/Commandes'
 
 const routes = [
     {
@@ -44,9 +46,21 @@ const routes = [
         path: '/my-account',
         name: 'MyAccount',
         component: MyAccount,
-        meta: {
-            requireLogin: false
-        }
+    },
+    {
+        path: '/commandes',
+        name: 'Commandes',
+        component: Commandes
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/cart/success',
+        name: 'Success',
+        component: Success
     },
     {
         path: '/cart',
