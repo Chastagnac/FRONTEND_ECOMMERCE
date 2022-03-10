@@ -7,70 +7,36 @@
           <a
             class="tab-link active"
             data-ref="connexion"
-            href="javascript:void(0)"
-            ><router-link id="connexionsign" to="/log-in"
-              >Connexion
-            </router-link></a
-          >
-          <a
-            class="tab-link active"
-            data-ref="inscription"
-            href="javascript:void(0)"
-            ><router-link id="inscriptionsign" to="sign-up"
-              >Inscription
-            </router-link></a
+            href="javascript:void(1)"
+            ><label id="connexionsign" to=""
+              >Réinitialisation du mot de passe
+            </label></a
           >
         </h2>
 
         <form @submit.prevent="submitForm">
           <div class="toutaligne" style="margin-top : 10px">
-               <div class="field">
-            <label id="nomuse" for="nomuse">Nom d'utilisateur</label>
-            <div class="control">
-              <input
-                type="text"
-                id="holderi"
-                class="input"
-                placeholder="Nom d'utilisateur"
-                v-model="username"
-                :disabled="disabled"
-              />
-            </div>
-          </div>
           <div class="field">
-            <label id="email">E-mail</label>
-            <div class="control">
-              <input
-                type="email"
-                class="input"
-                id="holderi"
-                placeholder="Adresse email"
-                v-model="email"
-                :disabled="disabled"
-              />
-            </div>
-          </div>
-          <div class="field">
-            <label id="mdp">Mot de passe</label>
+            <label id="mdp">Nouveau Mot de passe</label>
             <div class="control">
               <input
                 type="password"
                 class="input"
                 id="holderi"
-                placeholder="Mot de Passe"
+                placeholder="*********"
                 v-model="password"
                 :disabled="disabled"
               />
             </div>
           </div>
           <div class="field">
-            <label id="rmdp">Confirmer mot de passe</label>
+            <label id="rmdp">Confirmez le mot de passe</label>
             <div class="control">
               <input
                 type="password"
                 class="input"
                 id="holderi"
-                placeholder="Mot de Passe"
+                placeholder="*********"
                 v-model="password2"
                 :disabled="disabled"
               />
@@ -82,20 +48,17 @@
         <div class="field">
           <div class="recaptcha" style="margin-top : 10px">
             <div class="recaptcha-size">
-              <div class="captchacenter">
-                 <vue-recaptcha           
+              <vue-recaptcha           
                 sitekey="6LejPlkeAAAAAEUqvF89i7wbLnS0QcC8UcNIr56e"
                 @verify="captchaVerif"
               ></vue-recaptcha>
-              </div>
-             
             </div>
           </div>
         </div>
 
           <div class="field">
             <div class="control">
-              <button class="button is-dark" id="btnsignup">S'inscrire</button>
+              <button class="button is-dark" id="btnsignup">Valider</button>
             </div>
           </div>
         </form> 
@@ -115,11 +78,9 @@ import { toast } from "bulma-toast";
 import { VueRecaptcha } from 'vue-recaptcha';
 
 export default {
-  name: "SignUp",
+  name: "passwordreset",
   data() {
     return {
-      username: "",
-      email: "",
       password: "",
       password2: "",
 
@@ -177,53 +138,45 @@ export default {
     submitForm() {
       this.errors = 0;
       if (this.disabled === true) {
-        this.errors = 1,
-        this.toast_affiche(`Veuillez accepter les cookies`,'is-warning');
-      }
-      if (this.username == "") {
-        this.errors = 1,
-        this.toast_affiche(`Le nom d'utilisateur doit être renseigné`,'is-danger');
+        this.errors = 1
+        this.toast_affiche(`Veuillez accepter les cookies`,'is-danger');
       }
 
-      if (this.email == "") {
-        this.errors = 1,
-        this.toast_affiche(`Le mail doit être renseigné`,'is-danger');
-      }
-
-      if (this.password == "") {
-        this.errors = 1,
+      if (this.password === "") {
+        this.errors = 1
         this.toast_affiche(`Le mot de passe doit être renseigné`,'is-danger');
       }
 
-      if (this.password2 != this.password) {
-        this.errors = 1,
-        this.toast_affiche(`Les mots de passes ne sont pas identiques`,'is-danger');
+      if (this.password2 !== this.password) {
+        this.errors = 1
+        this.toast_affiche(`Les mots de passe doivent être identiques`,'is-danger');
       }
 
       if(this.captcha_response == "")
       {
-        this.errors = 1,
+        this.errors = 1
         this.toast_affiche("Veuillez cocher le captcha",'is-danger');
       }
 
       if (!this.errors) {
-        const formData = {
-            username: this.username,
-            email: this.email,
-            password: this.password,
-        };
 
+        const formData = {
+          uid: this.$route.query.uid,
+          token: this.$route.query.token,
+          new_password: this.password,
+        };
         axios
-          .post("/api/v1/users/", formData)
+          .post("api/v1/users/reset_password_confirm/", formData)
           .then((response) => {
-            this.toast_affiche("Compte créé, veuillez l'activer par email !","is-success");
+            this.toast_affiche("Votre mot de passe à bien été modifié !","is-success");
             this.$router.push("/log-in");
           })
           .catch((error) => {
             if (error.response) {
               for (const property in error.response.data) {
                 this.toast_affiche(`${error.response.data[property]}`,"is-danger");             
-              };            
+              };
+                         
               console.log(JSON.stringify(error.response.data));
             } else if (error.message) {
               this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")
@@ -247,11 +200,6 @@ export default {
     font-size: 1rem;
     position: relative;
     text-align: -webkit-center;
-}
-.captchacenter{
-  margin:auto;
-  display: flex;
-  justify-content: center;
 }
 
 .page-sign-up {
@@ -291,6 +239,7 @@ export default {
   color: #141414;
   margin: 0px 5%;
   font-size: 26px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .tab-link.active {
@@ -305,6 +254,7 @@ h2 {
 
 #inscriptionsign {
   color: #6e934c;
+  font-family: Arial, Helvetica, sans-serif;
   transition: 0.3s;
 }
 #inscriptionsign:hover {
@@ -357,7 +307,7 @@ h2 {
 .input {
   box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
   max-width: 100%;
-  width: 50%;
+  width: 100%;
 }
 
 #holderi::placeholder {

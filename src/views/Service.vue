@@ -38,6 +38,7 @@
                     alt=""
                   />
                 </p>
+                <br />
                 <div class="card">
                   <router-link class="is-primary" to="/service/devis"
                     >Commencer le devis</router-link
@@ -72,5 +73,7 @@ export default {
 .has-background-primary {
   background-color: #418014 !important;
 }
-
+#verde{
+  border-radius: 30px;
+}
 </style>

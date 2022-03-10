@@ -3,7 +3,7 @@
     <div class="container">
       <div class="mb-6 pb-3 columns is-multiline">
         <div class="column is-12 is-6-desktop mx-auto has-text-centered">
-          <h2 class="mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">
+          <h2 class="mb-4 is-size-1 is-size-3-mobile has-text-weight-bold" id ="titleservice">
             Besoin d'un service ?
           </h2>
           <p class="subtitle has-text-grey mb-5">
@@ -190,5 +190,8 @@ export default {
 <style>
 p {
   line-height: 25px !important;
+}
+#titleservice{
+  margin-top:4%;
 }
 </style>

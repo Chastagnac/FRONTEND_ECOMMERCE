@@ -9,49 +9,51 @@
               :src="require(`@/assets/logoblack.png`)"
           /></router-link>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-          >
+            <a :aria-expanded="isActive" :class="{ 'is-active': isActive }" role="button" class="navbar-burger" aria-label="menu" data-target="collapse" @click="isActive = !isActive" >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
-        <div class="navbar-menu">
-          <div
-            class="navbar-start"
-            style="flex-grow: 1; justify-content: center"
-          >
+        <div id="collapse" :class="{ 'is-active': isActive }" class="navbar-menu is-paddingless">
+          <div class="navbar-start" style="flex-grow: 1; justify-content: center">
             <div class="navbar-item has-dropdown is-hoverable"></div>
+            <router-link to="/" class="navbar-item">Accueil</router-link>
             <router-link to="/shop" class="navbar-item">Boutique</router-link>
-            <router-link to="/service" class="navbar-item">Service</router-link>
+            <router-link to="/service" class="navbar-item">Services</router-link>
             <router-link to="/contact" class="navbar-item">Contact</router-link>
+            <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
           </div>
           <div class="navbar-end">
-            <router-link
-              v-if="$store.state.isAuthenticated"
-              to="my-account"
-              class="navbar-item"
-            >
-              <i
-                class="far fa-user"
-                href="https://www.facebook.com/profile.php?id=100074600241159"
-                data-mdb-ripple-color="dark"
-              ></i>
-            </router-link>
-            <router-link v-else to="/log-in" class="navbar-item">
-              <i
-                class="far fa-user"
-                href="https://www.facebook.com/profile.php?id=100074600241159"
-                data-mdb-ripple-color="dark"
-              ></i>
-            </router-link>
+              <router-link v-if="$store.state.isAdmin" to="/admin" class="navbar-item">Admin</router-link>
             <router-link to="/cart" class="navbar-item">
               <i class="fas fa-shopping-cart"></i
             ></router-link>
+            <router-link
+              v-if="$store.state.isAuthenticated"
+              to="/my-account"
+              class="navbar-item"
+            >
+              <i class="far fa-user " v-bind:class="{ admin: $store.state.isAuthenticated }" href="https://www.facebook.com/profile.php?id=100074600241159" data-mdb-ripple-color="dark"></i>
+            </router-link>
+            <router-link v-else to="/log-in" class="navbar-item">
+              <i
+                class="far fa-user "
+            
+                href="https://www.facebook.com/profile.php?id=100074600241159"
+                data-mdb-ripple-color="dark"
+              ></i>
+            </router-link>
+
+
+            <router-link v-if="$store.state.isAuthenticated" v-on:click.native="logout()"  to="/" class="navbar-item">
+              <i
+                class="fas fa-sign-out-alt"
+                v-on:click.native="logout()"
+                href="https://www.facebook.com/profile.php?id=100074600241159"
+                data-mdb-ripple-color="dark"
+              ></i>
+             </router-link>
           </div>
         </div>
       </nav>
@@ -60,6 +62,8 @@
         <router-view />
       </section>
     </div>
+    
+
 
     <Footer></Footer>
   </div>
@@ -68,10 +72,15 @@
    <script>
 import axios from "axios";
 import Footer from "@/components/Footer";
+import { toast } from "bulma-toast";
+
+
 export default {
   data() {
     return {
       showMobileMenu: false,
+      isActive:false,
+      showNavbar:true,
       cart: {
         items: [],
       },
@@ -79,6 +88,7 @@ export default {
   },
   components: {
     Footer,
+  
   },
   // On initialize le localstorage avant les injections
   beforeCreate() {
@@ -95,6 +105,15 @@ export default {
   // Quand l'app est "montée" on recupère $cart du store dans this.cart
   mounted() {
     this.cart = this.$store.state.cart;
+    let recaptchaScript = document.createElement("script");
+    let recaptchaScript2 = document.createElement("script");
+    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
+    recaptchaScript2.setAttribute(
+      "src",
+      "//cdn.cookie-script.com/s/b001f3b1be1e28435196e1181691cec7.js"
+    );
+    document.head.appendChild(recaptchaScript);
+    document.head.appendChild(recaptchaScript2);
   },
   // Lorsque l'app tourne, si un produit viens s'add au panier,
   //  il incrémente et retoure le total
@@ -108,6 +127,27 @@ export default {
       return totalLenght;
     },
   },
+  methods: {
+       logout() {
+        axios.defaults.headers.common["Authorization"] = "";
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("userid");
+    
+        this.$store.commit("removeToken");       
+        this.$router.push("/");
+        
+        toast({
+            message: `Vous êtes déconnecté`,
+            type: "is-info",
+            dismissible: true,
+            pauseOnHover: true,
+            duration: 1000,
+            position: "top-right",
+            animate: { in: 'fadeIn', out: 'fadeOut' },
+      });
+    },
+  }
 };
 </script>
 
@@ -115,7 +155,11 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bulma";
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 
+*{
+  font-family: Poppins;
+}
 .lds-dual-ring {
   display: inline-block;
   width: 80px;
@@ -141,6 +185,7 @@ export default {
   }
 }
 
+
 .is-loading-bar {
   height: 0;
   overflow: hidden;
@@ -160,6 +205,7 @@ export default {
   height: 150px;
   margin-top: -22px;
   border-color: #49ae25;
+  z-index: 1;
 }
 
 .svg-inline--fa {
@@ -197,17 +243,12 @@ a.navbar-item.is-active,
   color: #49ae25;
 }
 
-.hero.is-dark {
-  background-image: url(/img/environnement-urbain.2d3a105e.png);
-  color: #fff;
-  height: 1171px;
-}
+
 
 .hero.is-dark .title {
   color: #151515;
   margin-top: 47px;
   padding-top: 189px;
-  font-family: inherit;
 }
 
 .tabs:not(:last-child),
@@ -258,6 +299,7 @@ body {
   height: 30em;
   background-color: #272727;
   margin-top: 6%;
+  z-index: 0;
 }
 .footer .col {
   width: 190px;
@@ -271,7 +313,6 @@ body {
 .footer .col h1 {
   margin: 0;
   padding: 0;
-  font-family: inherit;
   font-size: 12px;
   line-height: 17px;
   padding: 20px 0px 5px 0px;
@@ -288,7 +329,6 @@ body {
 .footer .col ul li {
   color: #999999;
   font-size: 14px;
-  font-family: inherit;
   font-weight: bold;
   padding: 5px 0px 5px 0px;
   cursor: pointer;
@@ -329,6 +369,16 @@ body {
   .social h1 {
     margin: 0px;
   }
+  
+@media only screen and (max-width: 1024px) {
+  .navbar-start, .navbar-end {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  margin:auto;
+  align-items: center;
+}
+}
 }
 @media only screen and (max-width: 950px) {
   .footer .col {
@@ -356,5 +406,9 @@ body {
   .footer .col {
     width: 100%;
   }
+}
+
+.admin {
+    color: red !important;
 }
 </style>

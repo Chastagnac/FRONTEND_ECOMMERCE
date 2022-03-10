@@ -8,22 +8,25 @@ import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
 import Conditions from '../views/Conditions.vue'
+import Admin from '../views/Admin.vue'
+import DevisView from '../views/DevisView.vue'
 import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Shop from '../views/Shop.vue'
 import Checkout from '../views/Checkout.vue'
 import store from '../store'
+import Tuto from '../views/Tutoriel.vue'
+import PasswordReset from '../views/passwordreset'
+import Success from '../views/Success.vue'
+import Commandes from '../views/Commandes'
+import SuccessActive from '../views/SuccessActive'
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'Home',
         component: Home
-    },
-    {
-        path: '/search',
-        name: 'Search',
-        component: Search
     },
     {
         path: '/checkout',
@@ -31,17 +34,54 @@ const routes = [{
         component: Checkout
     },
     {
+        path: '/activate',
+        name: 'successactive',
+        component: SuccessActive
+    },
+    {
+        path: '/password-reset',
+        name: 'passwordreset',
+        component: PasswordReset
+    },
+    {
+        path: '/search',
+        name: 'Search',
+        component: Search
+    },
+    {
         path: '/my-account',
         name: 'MyAccount',
         component: MyAccount,
-        meta: {
-            requireLogin: false
-        }
+    },
+    {
+        path: '/commandes',
+        name: 'Commandes',
+        component: Commandes
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout
+    },
+    {
+        path: '/cart/success',
+        name: 'Success',
+        component: Success
     },
     {
         path: '/cart',
         name: 'Cart',
         component: Cart
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: Admin
+    },
+    {
+        path: '/admin/devis-clients/:id',
+        name: 'DevisView',
+        component: DevisView
     },
     {
         path: '/sign-up',
@@ -87,6 +127,11 @@ const routes = [{
         path: '/shop',
         name: 'Shop',
         component: Shop
+    },
+    {
+        path: '/tutoriel',
+        name: 'Tuto',
+        component: Tuto
     },
 
 ]

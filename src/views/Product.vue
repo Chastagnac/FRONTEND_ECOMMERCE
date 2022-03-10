@@ -72,8 +72,6 @@ export default {
         .get(`/api/v1/products/${category_slug}/${product_slug}`)
         .then((response) => {
           this.product = response.data;
-
-          document.title = this.product.name + " | Ilios Shop";
         })
         .catch((error) => {
           console.log(error);
@@ -99,8 +97,9 @@ export default {
         type: "is-success",
         dismissible: true,
         pauseOnHover: true,
-        duration: 2000,
-        position: "bottom-right",
+        duration: 3000,
+        position: "top-right",
+        animate: { in: 'fadeIn', out: 'fadeOut' },
       });
     },
   },

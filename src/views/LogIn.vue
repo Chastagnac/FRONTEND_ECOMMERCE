@@ -21,45 +21,48 @@
           >
         </h2>
         <br />
-
         <form @submit.prevent="submitForm">
-          <div class="field">
-            <label id="nuse">Nom d'utilisateur</label>
-            <div class="control">
-              <input
-                type="text"
-                id="holderi"
-                placeholder="Nom d'utilisateur"
-                class="input"
-                v-model="username"
-              />
+          <div class="toutaligne">
+            <div class="field">
+              <label id="nuse">Nom d'utilisateur</label>
+              <div class="control">
+                <input
+                  type="text"
+                  id="holderi"
+                  placeholder="Nom d'utilisateur"
+                  class="input"
+                  v-model="username"
+                  :disabled="disabled"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label id="nmdp">Mot de passe</label>
+              <div class="control">
+                <input
+                  type="password"
+                  id="holderi"
+                  placeholder="Mot de Passe"
+                  class="input"
+                  v-model="password"
+                  :disabled="disabled"
+                />
+              </div>
             </div>
           </div>
           <div class="field">
-            <label id="nmdp">Mot de passe</label>
             <div class="control">
-              <input
-                type="password"
-                id="holderi"
-                placeholder="Mot de Passe"
-                class="input"
-                v-model="password"
-              />
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <button class="button is-dark">Connexion</button>
-            </div>
-            <div class="control">
-              <router-link style="color : black" to="/forget-password"
-                >Mot de passe oublié ?
-              </router-link>
+              <button class="button is-dark" style="margin-top: 2%">
+                Connexion
+              </button>
             </div>
           </div>
         </form>
-        <div class="notification is-danger" v-if="errors.length">
-          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+
+        <div class="mamodale">
+          <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale">
+          </modale>
+          <a id="mdpoublie" v-on:click="toggleModale">Mot de passe oublié ?</a>
         </div>
       </div>
     </div>
@@ -69,6 +72,7 @@
 <script>
 import axios from "axios";
 import { toast } from "bulma-toast";
+import Modale from "@/components/Modale.vue";
 
 export default {
   name: "Log-in",
@@ -78,17 +82,63 @@ export default {
       password: "",
       errors: [],
       isconnection: true,
+      disabled: false,
+      toasterrors: [],
+      revele: false,
+      adminToken: [
+        "d30b3bd63f777bebd358d1025235f2f83d9d843f",
+        "aaf102be4e3dec5b4f50706ae67ff17084795378",
+        "9b1a2415ab5b223939673764bc45487708528033",
+      ],
     };
   },
+  components: {
+    modale: Modale,
+  },
   mounted() {
-    document.title = "Connection |`Ilios Shop ";
+    document.title = "Connexion";
+    if (!this.infoCookie()) {
+      this.toast_affiche(
+        "Veuillez acceptez les cookies pour pouvoir vous connecter",
+        "is-warning"
+      );
+    }
   },
   methods: {
+    infoCookie() {
+      if (document.cookie[31] === "a") {
+        this.disabled = false;
+        return true;
+      } else {
+        this.disabled = true;
+        return false;
+      }
+    },
+    toast_affiche(parametre, type) {
+      toast({
+        message: parametre,
+        type: type,
+        dismissible: true,
+        pauseOnHover: true,
+        duration: 3000,
+        position: "top-right",
+        animate: { in: "fadeIn", out: "fadeOut" },
+      });
+    },
+
     async submitForm() {
+      if (this.username == "") {
+        this.toast_affiche("Veuillez entrer un nom d'utilisateur", "is-danger");
+      }
+      if (this.password == "") {
+        this.toast_affiche("Veuillez entrer un mot de passe", "is-danger");
+      }
       axios.defaults.headers.common["Authorization"] = "";
 
       localStorage.removeItem("token");
-
+      if (this.disabled === true) {
+        this.toast_affiche(`Veuillez accepter les cookies`, "is-danger");
+      }
       const fromData = {
         username: this.username,
         password: this.password,
@@ -101,22 +151,36 @@ export default {
           this.$store.commit("setToken", token);
           this.$store.commit("addAccount", fromData);
           axios.defaults.headers.common["Authorization"] = "Token " + token;
+          this.adminToken.forEach((element) => {
+            if (element === token) {
+              this.$store.commit("setAdmin");
+            }
+          });
 
           localStorage.setItem("token", token);
-
-          const toPath = this.$route.query.to || "/cart";
+          this.toast_affiche("Vous êtes connecté", "is-info");
+          const toPath = this.$route.query.to || "/";
           this.$router.push(toPath);
         })
         .catch((error) => {
           if (error.response) {
             for (const property in error.response.data) {
-              this.errors.push(`${property}: ${error.response.data[property]}`);
+              this.toast_affiche(
+                `${error.response.data[property]}`,
+                "is-danger"
+              );
             }
           } else {
-            this.errors.push("Something went wrong. Please try again");
+            this.toast_affiche(
+              "Désolé. Un problème est survenu. Veuillez réessayer plus tard.",
+              "is-danger"
+            );
             console.log(JSON.stringify(error));
           }
         });
+    },
+    toggleModale: function () {
+      this.revele = !this.revele;
     },
   },
 };
@@ -133,6 +197,7 @@ export default {
 
 #inscriptionlog {
   color: #141414;
+  transition: 0.3s;
 }
 #inscriptionlog:hover {
   color: #141414;
@@ -140,6 +205,7 @@ export default {
 }
 #connexionlog {
   color: #6e934c;
+  transition: 0.3s;
 }
 #connexionlog:hover {
   color: #6e934c;
@@ -155,10 +221,49 @@ export default {
   background-color: #464646;
   height: 44em;
 }
-#nuse {
-  margin-left: 27%;
+
+#mdpoublie {
+  display: flex;
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+  justify-content: center;
+  text-decoration: underline;
 }
-#nmdp {
-  margin-left: 27%;
+
+@media only screen and (max-width: 1200px) {
+}
+@media only screen and (max-width: 769px) {
+  #blure {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    margin-left: 0%;
+  }
+  #blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    margin-left: 0%;
+    position: sticky;
+    top: 9%;
+  }
+}
+@media only screen and (max-width: 452px) {
+}
+@media only screen and (max-width: 300px) {
+  #mdpoublie {
+    display: flex;
+    color: black;
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+    text-decoration: underline;
+  }
+  #blur {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
+    margin-left: 0%;
+    position: sticky;
+    top: 9%;
+  }
 }
 </style>

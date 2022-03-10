@@ -2,11 +2,11 @@
   <div>
     <div class="container">
       <div class="columns">
-        <SideShop></SideShop>
+        <SideShop :changePrice="price" @changePrice="changePrice($event)"></SideShop>
         <div class="column is-9">
           <div class="columns">
             <div class="column is-four-fifths">
-              <h1 class="title">Nos produits</h1>
+              <h1 id ="titleproduit">Nos produits</h1>
             </div>
             <div class="column">
               <p class="hover-text">
@@ -14,10 +14,17 @@
               </p>
             </div>
           </div>
-
-          <section class="gridcontainer">
+   
+          <section v-if="filter == 0" class="gridcontainer">
             <ProductsBox
               v-for="product in products"
+              v-bind:key="product.id"
+              v-bind:product="product"
+            />
+          </section>
+          <section v-else class="gridcontainer">
+            <ProductsBox
+              v-for="product in productFilterByPrice"
               v-bind:key="product.id"
               v-bind:product="product"
             />
@@ -40,6 +47,8 @@ export default {
   data() {
     return {
       products: [],
+      filter : 0,
+      productFilterByPrice: [],
       price: 4000,
     };
   },
@@ -50,18 +59,41 @@ export default {
 
   mounted() {
     this.getLastedProducts();
-    document.title = "Se-digitaliser";
+    document.title = "Boutique";
+
   },
   methods: {
+    changePrice(changePrice)
+    {
+      try{
+                 
+        this.price = changePrice
+        Array.prototype.forEach.call(this.products, element => {
+          if(element['price'] < changePrice)
+          {
+            this.productFilterByPrice = element;
+            this.filter = 1;
+          } 
+        });
+       
+      }
+      catch(error)
+      {
+        console.log(error)
+      }
+    },
+
     getLastedProducts() {
       axios
         .get("/api/v1/latest-products/")
         .then((response) => {
           this.products = response.data;
+          this.filter = 0;
         })
         .catch((error) => {
           console.log(error);
         });
+        
     },
     async getCategory() {
       this.products = [];
@@ -85,5 +117,22 @@ export default {
   text-align-last: center;
   margin: 20px;
   grid-template-columns: 33% 33% 33%;
+}
+
+#titleproduit{
+  font-size: 45px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 3%;
+}
+@media only screen and (max-width: 592px) {
+.gridcontainer {
+  display: flex;
+  -moz-text-align-last: center;
+  text-align-last: center;
+  margin: 20px;
+  grid-template-columns: 33% 33% 33%;
+  flex-direction: column;
+}
 }
 </style>

@@ -1,28 +1,42 @@
 <template>
   <div>
     <section class="section is-large">
-      <br />
-      <br />
       <div class="boxe" id="bluraccueil">
-        <h1 class="title">
-          <strong> La démarche zéro déchet, zéro gaspillage </strong
-          ><br /><br />
-        </h1>
-        <h2 class="subtitle">
-          Le “zéro déchet, zéro gaspillage” est une démarche pour réduire notre
-          impact sur l’environnement, en diminuant la quantité de déchets que
-          nous produisons et leurs impacts négatifs sur la planète.<br />Le zéro
-          déchet est une démarche progressive et positive, qu’on peut suivre à
-          titre individuel et collectif.
-        </h2>
-
-        <div class="boxeInto">
-          <router-link to="/service">
-            <button class="button2">Découvrez nos services</button></router-link
+        <div class="home">
+          <Carousel
+            :navigation="true"
+            :pagination="true"
+            :startAutoPlay="true"
+            :timeout="5000"
+            class="carousel"
+            v-slot="{ currentSlide }"
           >
+            <Slide v-for="(slide, index) in carouselSlides" :key="index">
+              <div v-show="currentSlide === index + 1" class="slide-info">
+                <img
+                  id="imgcarou"
+                  :src="require(`../assets/${slide}.png`)"
+                  alt=""
+                />
+                <div id ="titleservices" v-if="index === 0">
+                  <router-link to="/service" class ="titlecarousel">
+                  <div>
+                     Services
+                  </div>
+                 
+                  </router-link>
+                </div>
+                <div id ="titleboutique" v-else>
+                  <router-link to="/shop" class ="titlecarousel">Boutique</router-link>
+                </div>
+                
+              </div>
+            </Slide>
+          </Carousel>
         </div>
       </div>
     </section>
+
     <section class="section is-medium">
       <div class="cont">
         <div class="columns">
@@ -52,7 +66,6 @@
         </div>
       </div>
     </section>
-
     <div class="section" id="sect">
       <h1 class="title">Découvrez nos derniers produits !</h1>
       <h2 class="subtitle">
@@ -65,26 +78,22 @@
             :key="product.value"
             class="column is-one-third"
           >
-            <div class="card">
-              <div class="card-image">
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                      <figure class="image mb-6 is-128x128">
-                        <img :src="product.get_image" />
-                      </figure>
+            <div class="card box2">
+              <router-link v-bind:to="product.get_absolute_url">
+                <div class="card-image">
+                  <div class="card-content">
+                    <div class="media">
+                      <div class="media-left">
+                        <figure class="image mb-6 is-128x128">
+                          <img :src="product.get_image" />
+                        </figure>
+                      </div>
+                      <div class="media-content"></div>
                     </div>
-                    <div class="media-content">
-                      <router-link
-                        v-bind:to="product.get_absolute_url"
-                        class="button is-dark mt-4"
-                        >Voir détails</router-link
-                      >
-                    </div>
+                    <p>{{ product.name }}</p>
                   </div>
-                  <p>{{ product.name }}</p>
                 </div>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
@@ -94,9 +103,18 @@
 </template>
 
 <script>
+import Carousel from "../components/Carousel.vue";
+import Slide from "../components/Slide.vue";
+
 import axios from "axios";
 export default {
   name: "Home",
+  components: { Carousel, Slide },
+  setup() {
+    const carouselSlides = ["logo_services","boutique"];
+    return { carouselSlides };
+  },
+
   data() {
     return {
       lastestProducts: [],
@@ -105,9 +123,6 @@ export default {
   mounted() {
     this.getLastedProducts();
     document.title = "Se-digitaliser";
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute("src", "//js-eu1.hs-scripts.com/25492966.js");
-    document.head.appendChild(recaptchaScript);
   },
   methods: {
     getLastedProducts() {
@@ -127,6 +142,50 @@ export default {
 </script>
 
 <style>
+.mycarousel {
+  width: 50%;
+  margin: auto;
+}
+.titlecarousel{
+  color:#464646;
+  transition: 0.3s;
+}
+.carousel {
+  position: relative;
+  max-height: 100vh;
+  height: 44vh;
+}
+.slide-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+}
+#titleboutique{
+position: absolute;
+right: 43%;
+font-size: 30px;
+}
+#titleservices{
+  position: absolute;
+right: 44%;
+font-size: 30px;
+}
+* {
+  font-family: Poppins;
+}
+#imgcarou {
+ height: 46%;
+-o-object-fit: cover;
+object-fit: cover;
+align-content: center;
+display: flex;
+justify-content: center;
+margin: auto;
+margin-top: 8%;}
+
 .section.is-large {
   background: #d0ebdc;
   background-image: url("../assets/environnement-urbain.jpg");
@@ -140,13 +199,13 @@ export default {
 }
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   #bluraccueil {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(4px);
   }
 }
 .responsive {
   float: right;
-  max-height: 82%;
+  max-height: 100%;
   height: auto;
 }
 .title {
@@ -172,7 +231,16 @@ export default {
   background: #fff;
   height: 46em;
 }
-
+.box2 {
+  transition: 0.3s;
+  border-style: groove;
+  border-color: #1d3d113b;
+}
+.box2:hover {
+  transform: scale(1.05);
+  border-style: groove;
+  border-color: #62ca3b3b;
+}
 .cont {
   background: #fff;
 }
@@ -195,6 +263,8 @@ export default {
   text-align: center;
   border-radius: 10px;
   font-size: 20px;
+      box-shadow: 1px 0px 16px 7px rgba(0, 0, 0, 0.15);
+
 }
 .containeuri {
   width: 80%;
@@ -207,12 +277,14 @@ export default {
 }
 
 .boxe {
-  background-color: rgba(182, 182, 182, 0.6);
-  height: 27em;
+  background-color: rgba(229,230,228,0.6);
   width: 48%;
-  margin: 7px auto;
+  border-radius: 3%;
+  margin: auto;
+  top: 24%;
+  position: relative;
+  height: auto;
 }
-
 .boxeInto {
   display: grid;
   width: 50%;
@@ -231,16 +303,19 @@ p {
 .input {
   width: 300px !important;
 }
-@media only screen and (max-width: 1280px) {
-  .boxe {
-    width: 100%;
-    height: 35em;
-  }
+@media only screen and (min-width: 1520px) {
+  .responsive {
+  margin:auto;
+  display: flex;
+  max-height: 62%;
+  height: auto;
+  float:none;
+}
+  
 }
 @media only screen and (max-width: 600px) {
   .boxe {
     width: 100%;
-    height: 45em;
   }
   .title p {
     width: 96%;

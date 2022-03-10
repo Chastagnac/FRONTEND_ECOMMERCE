@@ -6,6 +6,7 @@ export default createStore({
             items: [],
         },
         isAuthenticated: false,
+        isAdmin: false,
         token: '',
         isLoading: false,
     },
@@ -24,6 +25,7 @@ export default createStore({
             } else {
                 state.token = ''
                 state.isAuthenticated = false
+                state.isAdmin = false
             }
         },
         addToCart(state, item) {
@@ -44,14 +46,27 @@ export default createStore({
         },
         setToken(state, token) {
             state.token = token
-            state.isAuthenticated = true 
+            state.isAuthenticated = true
         },
         removeToken(state) {
             state.token = ''
             state.isAuthenticated = false
+            state.isAdmin = false
         },
         isAuthenticated() {
             return state.isAuthenticated
+        },
+        isCookie() {
+            const str = document.cookie[31]
+            if(str === "a") {    
+                state.isCookie = true
+            } else {
+                state.isCookie = false
+            }
+            return str
+        },
+        setAdmin() {
+            this.state.isAdmin = true
         }
     },
     actions: {
