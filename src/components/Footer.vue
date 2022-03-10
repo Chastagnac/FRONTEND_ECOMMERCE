@@ -15,7 +15,7 @@
             ><li>Produits</li></router-link
           >
           <router-link to="/service"><li>Services</li></router-link>
-          <router-link to="/devis-clients"><li>Devis clients</li></router-link>
+          <router-link to="/admin"><li>Admin</li></router-link>
         </ul>
       </div>
 

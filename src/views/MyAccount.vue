@@ -344,7 +344,7 @@ export default {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(182, 182, 182, 0.6);
+  background-color: rgb(217 255 204 / 61%);
   border-radius: 30px;
 }
 .avatarrond {

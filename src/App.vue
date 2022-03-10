@@ -25,7 +25,7 @@
             <router-link to="/tutoriel" class="navbar-item">Tutoriels</router-link>
           </div>
           <div class="navbar-end">
-              <router-link v-if="$store.state.isAdmin" to="/devis-clients" class="navbar-item">Devis clients</router-link>
+              <router-link v-if="$store.state.isAdmin" to="/admin" class="navbar-item">Admin</router-link>
             <router-link to="/cart" class="navbar-item">
               <i class="fas fa-shopping-cart"></i
             ></router-link>

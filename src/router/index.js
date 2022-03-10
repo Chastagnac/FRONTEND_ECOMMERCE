@@ -8,7 +8,7 @@ import Search from '../views/Search.vue'
 import Cart from '../views/Cart.vue'
 import SignUp from '../views/SignUp.vue'
 import Conditions from '../views/Conditions.vue'
-import DevisClients from '../views/DevisClients.vue'
+import Admin from '../views/Admin.vue'
 import DevisView from '../views/DevisView.vue'
 import Contact from '../views/Contact.vue'
 import LogIn from '../views/LogIn.vue'
@@ -74,12 +74,12 @@ const routes = [
         component: Cart
     },
     {
-        path: '/devis-clients',
-        name: 'DevisClients',
-        component: DevisClients
+        path: '/admin',
+        name: 'Admin',
+        component: Admin
     },
     {
-        path: '/devis-clients/:id',
+        path: '/admin/devis-clients/:id',
         name: 'DevisView',
         component: DevisView
     },
