@@ -7,7 +7,7 @@
             Besoin d'un service ?
           </h2>
           <p class="subtitle has-text-grey mb-5">
-            Eco Service propose aux entreprises ainsi qu'aux particuliers,
+            Eco Service propose aux entreprises,<br/>
             différents <strong> services 0 déchets ! </strong>
           </p>
           <div class="buttons is-centered">
@@ -39,7 +39,7 @@
             ></span>
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">
-                Substances dangereuses Identifier
+                Substances dangereuses Identifiées
               </h4>
               <p class="subtitle has-text-grey">
                 Mettez en place les meilleures stratégies de traitement.
@@ -66,7 +66,7 @@
                 Ramassage sur Place
               </h4>
               <p class="subtitle has-text-grey">
-                Un agent eco service viendra récupérer le matériel dont vous
+                Un agent Eco-Service viendra récupérer le matériel dont vous
                 souhaitez vous débarrasser.
               </p>
             </div>
@@ -89,7 +89,7 @@
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">Tutoriels</h4>
               <p class="subtitle has-text-grey">
-                Eco service propose divers tutoriels pour simplifier
+                Eco-Service propose divers tutoriels pour simplifier
                 l’expérience utilisateur.
               </p>
             </div>
@@ -147,7 +147,7 @@
                 Gestion énergétique
               </h4>
               <p class="subtitle has-text-grey">
-                Eco service conseille ses clients sur la meilleure option
+                Eco-Service conseille ses clients sur la meilleure option
                 énergétique possible.
               </p>
             </div>
@@ -170,7 +170,7 @@
             <div class="ml-3">
               <h4 class="is-size-4 has-text-weight-bold mb-2">Communauté</h4>
               <p class="subtitle has-text-grey">
-                Eco Service, souhaité communiquer sur les bonnes pratiques
+                Eco-Service, souhaite communiquer sur les bonnes pratiques
                 environnementales.
               </p>
             </div>
