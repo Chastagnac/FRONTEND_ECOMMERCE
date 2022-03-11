@@ -58,7 +58,6 @@ export default {
           .post("api/v1/users/activation/", formData)
           .then((response) => {
             this.toast_affiche("Votre compte à bien été activé !","is-success");
-            setTimeout(() => this.isHidden = false, 800);
             this.$router.push("/log-in");
           })
           .catch((error) => {
@@ -67,16 +66,17 @@ export default {
                 if(error.response.data[property] == "Token non valide.")
                 {
                   this.toast_affiche("Votre lien est incorrect","is-danger"); 
+                  this.$router.push("/log-in")
                 }
                 if(error.response.data[property] == "Le jeton pour cet utilisateur est expiré.")
                 {
                   this.toast_affiche("Votre lien à expiré","is-danger"); 
+                  this.$router.push("/log-in")
                 }            
               };                     
-              setTimeout(() => this.isHidden = false, 800);
-              this.$router.push("/contact")
+              
             } else if (error.message) {
-              this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")                  
+              this.toast_affiche("Désolé. Un problème est survenu. Veuillez réessayer plus tard.","is-danger")                 
               this.$router.push("/contact")
             }
           });

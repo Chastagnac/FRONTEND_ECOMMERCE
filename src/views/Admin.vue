@@ -99,7 +99,7 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Modal title</p>
+          <p class="modal-card-title">Ajouter un Produit</p>
           <button class="delete" aria-label="close"></button>
         </header>
 
@@ -126,21 +126,21 @@
                   class="input"
                   id="tejbo"
                   type="text"
-                  placeholder="Définir l'objet"
+                  placeholder="Trottinette électrique"
                   v-model="data.name"
                 />
               </div>
             </div>
           </div>
           <div class="field">
-            <label class="label" id="yourobject">Slug</label>
+            <label class="label" id="yourobject">Url</label>
             <div class="control">
               <div class="control">
                 <input
                   class="input"
                   id="tejbo"
                   type="text"
-                  placeholder="Définir l'objet"
+                  placeholder="trotinette-electrique"
                   v-model="data.slug"
                 />
               </div>
@@ -154,7 +154,7 @@
                   class="input"
                   id="tejbo"
                   type="text"
-                  placeholder="Définir l'objet"
+                  placeholder="Cette trotinette à une puissance de 350W"
                   v-model="data.description"
                 />
               </div>
@@ -168,7 +168,7 @@
                   class="input"
                   id="tejbo"
                   type="number"
-                  placeholder="Définir l'objet"
+                  placeholder="100€"
                   v-model="data.price"
                 />
               </div>

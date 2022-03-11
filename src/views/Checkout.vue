@@ -69,7 +69,7 @@
             <div class="field">
               <label>Tel*</label>
               <div class="control">
-                <input type="text" class="input" v-model="phone"  @keypress="isNumber($event)"  maxlength="5"/>
+                <input type="text" class="input" v-model="phone"  @keypress="isNumber($event)"  maxlength="10"/>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
             <div class="field">
               <label>Code Postal*</label>
               <div class="control">
-                <input type="text" class="input" v-model="zipcode"  @keypress="isNumber($event)"  maxlength="10"/>
+                <input type="text" class="input" v-model="zipcode"  @keypress="isNumber($event)"  maxlength="5"/>
               </div>
             </div>
 
@@ -255,7 +255,7 @@ export default {
 
       var templateParams = {
           from_name: this.first_name + " " + this.last_name,
-          message: this.adress + ", " + this.zipcode + " " + this.place,
+          message: this.address + ", " + this.zipcode + " " + this.place,
           reply_to: this.email, 
       };
 
