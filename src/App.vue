@@ -152,7 +152,7 @@ export default {
 </script>
 
 
-
+ 
 <style lang="scss">
 @import "../node_modules/bulma";
 @import url('https://fonts.googleapis.com/css?family=Poppins');
@@ -391,6 +391,7 @@ body {
     font-size: 13px;
   }
 }
+
 @media only screen and (max-width: 500px) {
   .footer .col {
     width: 50%;

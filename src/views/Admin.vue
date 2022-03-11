@@ -27,7 +27,7 @@
 
               <br />
             </ul>
-            <p class="menu-label">Porduits <i class="fas fa-tags"></i></p>
+            <p class="menu-label">Produits <i class="fas fa-tags"></i></p>
             <ul class="menu-list">
               <li>
                 <button
